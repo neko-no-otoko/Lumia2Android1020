@@ -121,7 +121,7 @@ def validate(facts):
             or display['embedded_external_precedence'] != 'unresolved'):
         raise ValueError('Conditional panel dispatch is not observed selection')
     pep = facts['pep']
-    if pep['power_units'] != 'unverified' or pep['clock_opcode_semantics'] != 'unresolved':
+    if pep['power_units'] != 'strongly_supported_inference' or pep['clock_opcode_semantics'] != 'static_operations_resolved_policy_subenum_unresolved':
         raise ValueError('Raw PEP numbers cannot acquire inferred units/opcodes')
     if set(pep['display']) != {'on_rail_order', 'off_rail_order', 'raw_smps4_level', 'raw_load_fields'}:
         raise ValueError('Unreviewed interpreted power fields')
@@ -133,7 +133,10 @@ def validate(facts):
     if install['actual_product_dat_read'] is not False or install['general_aml_fixups_proven'] is not False:
         raise ValueError('Do not infer runtime ACPI selection or general fixups')
     layouts = facts['shared_data_layouts']
+    # Import here so pep_facts can reuse uint without a module initialization cycle.
+    import pep_facts
     return dict(result='PASS', runtime_enablement='none',
+                pep=pep_facts.validate(facts),
                 display_io=decode_io_pin(schema, 234), dsm_irq=decode_irq(schema, 51),
                 gpio192_io=decode_io_pin(schema, 192), irq192=decode_irq(schema, 192),
                 shared_rails=sorted(set(pep['display']['on_rail_order']) & set(pep['touch']['rails'])),

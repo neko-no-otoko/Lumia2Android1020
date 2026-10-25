@@ -394,7 +394,7 @@
     "embedded_rule": "ID low byte0xc2 selects Tanya if supplied to embedded dispatcher; external XML caller precedence and physical panel unresolved"
   },
   "power": {
-    "semantics": "PEP literal order/values parsed; consumer opcode flags, physical units and shared-rail vote semantics unresolved",
+    "semantics": "Static PEP operations and per-client voting decoded; microvolt/microamp units remain strongly supported inference; other flags/runtime behavior unresolved",
     "touch": [
       "SMPS4",
       "LVS4",
@@ -426,7 +426,7 @@
     "Linux controller bindings and runtime pin/power behavior after operation-specific Windows namespace decoding",
     "controller IRQ trigger/polarity and GIC interpretation",
     "GSBI mode, clocks, rates, pinctrl electrical configuration",
-    "regulator voltage/sequence and dependencies",
+    "Remaining regulator mode flags, clock policy sub-enum, Linux shared-vote correspondence and runtime dependencies",
     "Actual product.dat inputs, external/embedded panel precedence, and installed template/shared-data chain",
     "Linux device compatible identities and actual silicon/function table, despite stock Synaptics3400_EOS configuration",
     "charging/storage/thermal/modem/camera safety"
@@ -631,6 +631,10 @@
         "SynapticsTouch.sys": {
           "bytes": 507392,
           "sha256": "2b3907b0402783ce18ba1048f2efbf7504e86387a3cc346e32ed99fdafb82b5a"
+        },
+        "QCpep8960.sys": {
+          "bytes": 900896,
+          "sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642"
         }
       }
     },
@@ -715,7 +719,23 @@
       "platform_value5": "Performs three DSI reads and constructs ID",
       "external_xml": "GetPanelConfig fallback with low-byte record matching and first-record fallback",
       "embedded_external_precedence": "unresolved",
-      "physical_panel_observed": false
+      "physical_panel_observed": false,
+      "traced_branch": {
+        "operation": 0,
+        "platform": 5,
+        "sequence": "GetProductInfo; three DSI reads; compiled XML dispatch",
+        "calls_GetPanelConfig": false,
+        "scope": "Bounded branch only; no general external-file override established"
+      },
+      "productcfg_guid_scan": {
+        "guid": "6357e21c-f8d6-438a-8b8d-af0c1d9476ac",
+        "selected_pe_count": 14,
+        "occurrences": [
+          "ProductCfgDxe",
+          "DisplayDxe"
+        ],
+        "scope": "Selected files only, not universal absence"
+      }
     },
     "shared_data_layouts": {
       "productcfg": {
@@ -733,7 +753,18 @@
         "product_id_offset": 2,
         "panel_id_offset": 6
       },
-      "runtime_or_alternate_consumer_chain": "unresolved; no address/layout patch justified"
+      "runtime_or_alternate_consumer_chain": "unresolved; no address/layout patch justified",
+      "boot_loader_search": {
+        "modules": [
+          "BOOTARM.EFI",
+          "winload.efi"
+        ],
+        "nokia_cdpi_edit_observed": false,
+        "winload_optional_acpitabl_dat_option": "0x16000049",
+        "bcd_read_or_changed": false,
+        "acpitabl_dat_found_in_three_checked_mainos_directories": false,
+        "scope": "Exact remaining directory and alternate/fixup consumers unresolved"
+      }
     },
     "pep": {
       "device_packages": 35,
@@ -750,8 +781,8 @@
         10,
         11
       ],
-      "clock_opcode_semantics": "unresolved",
-      "power_units": "unverified",
+      "clock_opcode_semantics": "static_operations_resolved_policy_subenum_unresolved",
+      "power_units": "strongly_supported_inference",
       "display": {
         "on_rail_order": [
           "SMPS4",
@@ -776,7 +807,65 @@
         "raw_ldo9_level": 2850000,
         "gio0_pin": 50
       },
-      "consumer_semantics": "unresolved; shared votes/loads/opcode flags are not a Linux regulator sequence"
+      "consumer_semantics": "Clock operation map and per-client PMIC vote aggregation decoded statically; clock policy sub-enum, other regulator flags and runtime state unresolved",
+      "clock_operations": {
+        "1": "enable",
+        "2": "disable",
+        "3": "set_frequency",
+        "4": "invert_with_argument_1",
+        "5": "assert_then_deassert_reset",
+        "6": "external_source_selection",
+        "7": "set_divider_when_nonzero",
+        "8": "enable_then_set_frequency",
+        "9": "configuration_policy_subenum_unresolved",
+        "10": "assert_reset",
+        "11": "deassert_reset"
+      },
+      "clock_policy_subenum": "unresolved",
+      "frequency_selectors": {
+        "1-4": "Hz",
+        "5-8": "kHz",
+        "9-12": "MHz",
+        "within_each_group": [
+          "at_least",
+          "at_most",
+          "closest",
+          "exact"
+        ],
+        "closest_tie": "lower",
+        "runtime_rates_observed": false
+      },
+      "tlmm_tuple_order": [
+        "pin",
+        "output",
+        "function",
+        "direction",
+        "pull",
+        "drive"
+      ],
+      "vreg_votes": {
+        "second_item": "resource_type; not enable/disable",
+        "parameter_counts_after_type": {
+          "1": 7,
+          "2": 10,
+          "7": 1
+        },
+        "transport_bytes": 60,
+        "transport_ioctl": "0x80060fd4",
+        "aggregation_types1_2": {
+          "first_field": "maximum per-client value",
+          "next_two_fields": "independently sum; round (sum+500)//1000; clamp1023",
+          "packed_widths": [
+            23,
+            10,
+            10
+          ]
+        },
+        "units_status": "strongly_supported_inference",
+        "units_inference": "microvolt/microamp strongly supported; not proven",
+        "other_mode_flags": "literal; unresolved",
+        "type7": "CXO_CLOCK one-bit client OR vote; clearing one client does not prove physical oscillator off"
+      }
     },
     "touch_configuration": {
       "package": "Synaptics3400_EOS",
@@ -875,5 +964,13 @@
       ],
       "electrical_semantics": "unverified; new4-bit drive high bit overlaps direction9 in writer; do not repair/mask or use for pin writes"
     }
+  },
+  "variant_gate": {
+    "source_rm": "RM-876",
+    "source_product_code": "059T3B3",
+    "intended_target_rm": "RM-875",
+    "actual_handset_rm_product_code_verified": false,
+    "board_equivalence": "unverified",
+    "target_configuration_emitted": false
   }
 }

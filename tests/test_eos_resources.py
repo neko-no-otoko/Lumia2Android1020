@@ -35,6 +35,14 @@ class EosResourceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no runtime enablement'):
             eos.validate(self.data)
 
+    def test_rm876_facts_do_not_establish_rm875_target_equivalence(self):
+        for key, value in [('board_equivalence', 'verified'), ('source_rm', 'RM-875'),
+                           ('target_configuration_emitted', True)]:
+            data = copy.deepcopy(self.data)
+            data['variant_gate'][key] = value
+            with self.assertRaisesRegex(ValueError, 'board equivalence'):
+                eos.validate(data)
+
     def test_static_pointers_and_ram_are_not_promoted_to_reservations(self):
         self.data['template_memory']['unsized_pointers'][0]['length'] = 4096
         with self.assertRaisesRegex(ValueError, 'invent RAM'):
