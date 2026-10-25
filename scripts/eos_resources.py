@@ -11,10 +11,12 @@ import re
 import struct
 import subprocess
 import lumia
+import firmware_facts
 from verify_dtbs import tree
 
 
 def validate(data):
+    firmware_facts.validate(data['verified_static'])
     if data['schema'] != 1 or data['runtime_enablement'] != 'none':
         raise ValueError('This inventory authorizes no runtime enablement')
     buses = {c['name']: c for c in data['i2c_controllers']}
@@ -168,6 +170,7 @@ def main():
     validate(data)
     report = dict(result='PASS', scope='Host resource audit only; no EOS DTS emitted or hardware enabled',
                   source_ffu=data['provenance']['ffu_sha256'],
+                  static_decoders=firmware_facts.validate(data['verified_static']),
                   shared_addresses=shared_addresses(data), runtime_enablement='none')
     if args.check_kernel:
         report['kernel_check'] = kernel_check(data)

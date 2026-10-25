@@ -31,6 +31,7 @@ jobs:
           persist-credentials: false
       - run: python3 -m unittest discover -s tests -v
       - run: python3 scripts/lumia.py check
+      - run: python3 scripts/firmware_facts.py
   reference-compile:
     needs: safety
     runs-on: ubuntu-24.04

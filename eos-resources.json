@@ -390,10 +390,11 @@
         234
       ]
     },
-    "reset_resource_association": "GPU0.RESI ordered structural alignment associates DSI_PANEL_RESET with PM01 pin234; not a Linux pin mapping"
+    "reset_resource_association": "GPU0.RESI ordered structural alignment associates DSI_PANEL_RESET with PM01 pin234; not a Linux pin mapping",
+    "embedded_rule": "ID low byte0xc2 selects Tanya if supplied to embedded dispatcher; external XML caller precedence and physical panel unresolved"
   },
   "power": {
-    "semantics": "literal tuple names only; no Linux supply mapping, voltages or sequencing established",
+    "semantics": "PEP literal order/values parsed; consumer opcode flags, physical units and shared-rail vote semantics unresolved",
     "touch": [
       "SMPS4",
       "LVS4",
@@ -417,16 +418,17 @@
       "display dependencies PEP0/PRXY/HWN0/PMIC/GPU0",
       "thermal TZ11 NOKIA_THERMAL"
     ],
-    "selected_at_boot": "unresolved"
+    "selected_at_boot": "unresolved: actual product.dat not retrieved",
+    "selection_rule": "AcpiPlatform product.dat TYPE/HWID comparison branches to2SDT or defaultDSDT using parsed value lengths; actual inputs absent."
   },
   "unknowns": [
     "usable/reserved memory and boot handoff",
-    "GIO0/PM01 controller-pin translation",
+    "Linux controller bindings and runtime pin/power behavior after operation-specific Windows namespace decoding",
     "controller IRQ trigger/polarity and GIC interpretation",
     "GSBI mode, clocks, rates, pinctrl electrical configuration",
     "regulator voltage/sequence and dependencies",
-    "Tanya/Jessica and DSDT/2SDT boot selection",
-    "Linux device compatible identities, including touch address 0x4b",
+    "Actual product.dat inputs, external/embedded panel precedence, and installed template/shared-data chain",
+    "Linux device compatible identities and actual silicon/function table, despite stock Synaptics3400_EOS configuration",
     "charging/storage/thermal/modem/camera safety"
   ],
   "gpio_namespaces": {
@@ -434,7 +436,7 @@
       "hid": "QCOM0500",
       "uid": 0,
       "ofni_bytes": "98 00",
-      "line_count_interpretation": "152 is a hypothesis; property schema absent"
+      "line_count_interpretation": "OFNI schema still unverified; independently verified DALTLMM accepts indices0..151 and rejects152+"
     },
     "PM01": {
       "hid": "QCOM2038",
@@ -460,8 +462,8 @@
         0,
         0
       ],
-      "mapping_status": "Unresolved; PM8921 and GPIO192..235/MPP128..139 are hypotheses. Never globally subtract192.",
-      "dsm_function1": "0x33 ActiveBoth polarity override, not pin count"
+      "mapping_status": "Stock decoder confirms operation-specific GPIO192..235=>Windows0..43, MPP128..139=>0..11, IRQ0..255 distinct. No automatic Linux binding.",
+      "dsm_function1": "Confirmed standard GUID and Package{51}: controller-relative ActiveBoth logic-high override; no pin count or physical mapping. Arg1/Arg3 ignored."
     }
   },
   "template_memory": {
@@ -504,7 +506,7 @@
       }
     ],
     "ram_banks": "unknown",
-    "runtime_fixups": "unknown"
+    "runtime_fixups": "ACPI checksum-byte fixup before installation confirmed; memory/shared-data fixup chain unresolved"
   },
   "boot_template": {
     "madt_gicc_length": 40,
@@ -525,7 +527,7 @@
     "psci_advertised": false,
     "facs_dsdt_pointers": 0,
     "cpu_enable_method": "unresolved",
-    "checksum_warning": "ACPI templates have zero checksum fields and nonzero sums; runtime fixups unknown. Not runtime-installed tables.",
+    "checksum_warning": "Raw templates have zero checksums/nonzero sums; AcpiPlatform recomputes byte9 before installation. Actual installed tables not captured; general AML fixups unproven.",
     "parser_warning": "Modern iasl reads fields beyond these legacy40-byte GICC records before warning; only bounded legacy fields are evidence."
   },
   "camera_declarations": {
@@ -616,5 +618,262 @@
   "selection_search": {
     "CDPI": "SSDT SystemMemory0x015ff000+0x1000, VMAJ/VMIN/PRID/DPAN/TST2 fields; not referenced elsewhere in inspected tables",
     "result": "No Load operations, _STA, _INI, complete RAM map or panel/table selector found in inspected tables; external/runtime selection remains unresolved"
+  },
+  "verified_static": {
+    "provenance": {
+      "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+      "method": "Original factual findings reported by authorized Mac Mini static inspection of this FFU; no firmware/driver execution; binaries and disassembly private; cloud independently checks arithmetic only",
+      "driver_files": {
+        "qcpmicgpio8960.sys": {
+          "bytes": 107008,
+          "sha256": "6b21dc1c1bd884cd95751140c7db5c5526a1e613f6fb9609cfd26ac14362892c"
+        },
+        "SynapticsTouch.sys": {
+          "bytes": 507392,
+          "sha256": "2b3907b0402783ce18ba1048f2efbf7504e86387a3cc346e32ed99fdafb82b5a"
+        }
+      }
+    },
+    "pmio": {
+      "arguments": [
+        0,
+        8921,
+        44,
+        192,
+        0,
+        0,
+        272,
+        64,
+        0,
+        256,
+        0,
+        0,
+        0,
+        12,
+        128,
+        0,
+        0
+      ],
+      "schema_argument_count": 17,
+      "field_indices": {
+        "pmic_selector": 0,
+        "model_value": 1,
+        "physical_gpio_count": 2,
+        "physical_gpio_base": 3,
+        "slot_count": 6,
+        "bank_width": 7,
+        "irq_count": 9,
+        "mpp_count": 13,
+        "mpp_base": 14
+      },
+      "ignored_by_this_parser": [
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16
+      ],
+      "linear_pin_rule": "bank * bank_width + pin",
+      "operation_namespaces": "GPIO/MPP I/O ranges and IRQ0..255 are distinct; no global subtraction",
+      "linux_binding_status": "unresolved"
+    },
+    "gpio_dsm": {
+      "guid": "4f248f40-d5e2-499f-834c-27758ea1cd3f",
+      "function0_buffer": [
+        3
+      ],
+      "function1_package": [
+        51
+      ],
+      "arg1_checked": false,
+      "arg3_checked": false,
+      "meaning": "Controller-relative ActiveBoth pins initially asserted logic high; no physical pin mapping"
+    },
+    "acpi_install": {
+      "product_path": "fs0:\\Nokia\\product.dat",
+      "type_literal": "RM-877",
+      "hwid_literals": [
+        "2000",
+        "2100",
+        "2005",
+        "2110"
+      ],
+      "match_branch": "2SDT",
+      "default_branch": "DSDT",
+      "comparison": "Uses parsed value length; not proven strict exact matching",
+      "actual_product_dat_read": false,
+      "checksum_byte_recomputed": 9,
+      "tpm2_control_area_adjustment": true,
+      "general_aml_fixups_proven": false
+    },
+    "display_dispatch": {
+      "embedded_tanya_id_low_byte": 194,
+      "other_id_bits_ignored": true,
+      "platform_value5": "Performs three DSI reads and constructs ID",
+      "external_xml": "GetPanelConfig fallback with low-byte record matching and first-record fallback",
+      "embedded_external_precedence": "unresolved",
+      "physical_panel_observed": false
+    },
+    "shared_data_layouts": {
+      "productcfg": {
+        "base": 2220883968,
+        "version_byte_offsets": [
+          0,
+          1
+        ],
+        "product_id_offset": 4,
+        "panel_id_offset": 8,
+        "detection_result_offset": 128
+      },
+      "ssdt_cdpi": {
+        "base": 23064576,
+        "product_id_offset": 2,
+        "panel_id_offset": 6
+      },
+      "runtime_or_alternate_consumer_chain": "unresolved; no address/layout patch justified"
+    },
+    "pep": {
+      "device_packages": 35,
+      "action_groups": 418,
+      "clock_names": 72,
+      "clock_opcodes": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "clock_opcode_semantics": "unresolved",
+      "power_units": "unverified",
+      "display": {
+        "on_rail_order": [
+          "SMPS4",
+          "LVS4"
+        ],
+        "off_rail_order": [
+          "LVS4",
+          "SMPS4"
+        ],
+        "raw_smps4_level": 1800000,
+        "raw_load_fields": [
+          40000,
+          20000
+        ]
+      },
+      "touch": {
+        "rails": [
+          "SMPS4",
+          "LVS4",
+          "LDO9"
+        ],
+        "raw_ldo9_level": 2850000,
+        "gio0_pin": 50
+      },
+      "consumer_semantics": "unresolved; shared votes/loads/opcode flags are not a Linux regulator sequence"
+    },
+    "touch_configuration": {
+      "package": "Synaptics3400_EOS",
+      "binds_hid": "NOKIA_TOUCH",
+      "configured_vendors": [
+        3,
+        8
+      ],
+      "configured_products": [
+        "PLG0150-01",
+        "PLG0150-02"
+      ],
+      "function_labels": [
+        "F01",
+        "F11",
+        "F51",
+        "F54"
+      ],
+      "observed_silicon": false,
+      "observed_function_table": false,
+      "linux_compatible": "unassigned"
+    },
+    "tlmm": {
+      "pin_count": 152,
+      "config_base": 8392704,
+      "register_stride": 16,
+      "io_offset": 4,
+      "input_bit": 0,
+      "output_bit": 1,
+      "new_format_selector_bit": 29,
+      "new_fields": {
+        "function": [
+          0,
+          4
+        ],
+        "pin": [
+          4,
+          10
+        ],
+        "direction": [
+          14,
+          1
+        ],
+        "pull": [
+          15,
+          2
+        ],
+        "drive": [
+          17,
+          4
+        ],
+        "output": [
+          21,
+          4
+        ]
+      },
+      "legacy_fields": {
+        "function": [
+          0,
+          4
+        ],
+        "pin": [
+          8,
+          8
+        ],
+        "direction": [
+          16,
+          1
+        ],
+        "pull": [
+          17,
+          2
+        ],
+        "drive": [
+          19,
+          3
+        ],
+        "output": [
+          4,
+          4
+        ]
+      },
+      "output_nibble_actions": {
+        "2": "clear",
+        "3": "set"
+      },
+      "writer_positions": {
+        "pull": 0,
+        "function": 2,
+        "drive": 6,
+        "direction": 9
+      },
+      "readback_drive_bits": [
+        6,
+        3
+      ],
+      "electrical_semantics": "unverified; new4-bit drive high bit overlaps direction9 in writer; do not repair/mask or use for pin writes"
+    }
   }
 }
