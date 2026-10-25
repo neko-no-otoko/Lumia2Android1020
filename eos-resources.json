@@ -8,7 +8,7 @@
     "ffu_crc32": "41ae158c",
     "platform": "Nokia.MSM8960.P5217",
     "variant": "RM-876 / 059T3B3 / 3051.50009.1424.0004",
-    "provider": "Trusted parent reports from local static task 01a17107-27c0-70d5-8ca9-d9b240197023; raw bundle not materialized in cloud",
+    "provider": "Parent-provided findings from the user's authorized local static inspection; raw bundle not materialized in cloud",
     "static_checks_reported": "13934 embedded SHA256 chunks and GPT CRCs pass; DSDT/2SDT/SSDT checksums/lengths pass; ACPICA 20260930 iasl exits 0; no AML execution",
     "vendor_trust_chain": "unverified",
     "license_policy": "No firmware/disassembly redistribution; only original factual summaries and host code"
