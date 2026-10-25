@@ -1,0 +1,183 @@
+{
+  "schema": 1,
+  "host": "Debian 13 x86_64 / glibc 2.41",
+  "discovery": "Signed Debian trixie InRelease / Packages, 2026-10-25; binary hashes verified against Packages metadata",
+  "packages": [
+    {
+      "package": "bc",
+      "version": "1.07.1-4",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/b/bc/bc_1.07.1-4_amd64.deb",
+      "sha256": "d055a11f0f9c5f8fe78b31d502c01dfe46ddf9c24f753aaddadaaff95fcc75ad",
+      "filename": "bc_1.07.1-4_amd64.deb"
+    },
+    {
+      "package": "binutils-arm-linux-gnueabihf",
+      "version": "2.44-3",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/b/binutils/binutils-arm-linux-gnueabihf_2.44-3_amd64.deb",
+      "sha256": "9733b7a7a320da0ca637d71e69ab663c64f550ad542a848e5755c8170c8caf09",
+      "filename": "binutils-arm-linux-gnueabihf_2.44-3_amd64.deb"
+    },
+    {
+      "package": "bison",
+      "version": "2:3.8.2+dfsg-1+b2",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/b/bison/bison_3.8.2+dfsg-1+b2_amd64.deb",
+      "sha256": "ce6eb1f7aad18850e32d223a68f54bcbe756d74f138c8ec5460ad9d220f4d335",
+      "filename": "bison_2%3a3.8.2+dfsg-1+b2_amd64.deb"
+    },
+    {
+      "package": "cpp-14-arm-linux-gnueabihf",
+      "version": "14.2.0-19cross1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/cpp-14-arm-linux-gnueabihf_14.2.0-19cross1_amd64.deb",
+      "sha256": "e503180c7e7bb8451b33acd124872c7a43f45903913e8c96467e5ed386f7e434",
+      "filename": "cpp-14-arm-linux-gnueabihf_14.2.0-19cross1_amd64.deb"
+    },
+    {
+      "package": "cpp-arm-linux-gnueabihf",
+      "version": "4:14.2.0-1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-defaults/cpp-arm-linux-gnueabihf_14.2.0-1_amd64.deb",
+      "sha256": "1074bbf9da9a7e957b0e85103d6bf4ac125c6e485be8ad2b54224f551ac70642",
+      "filename": "cpp-arm-linux-gnueabihf_4%3a14.2.0-1_amd64.deb"
+    },
+    {
+      "package": "device-tree-compiler",
+      "version": "1.7.2-2+b1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/d/device-tree-compiler/device-tree-compiler_1.7.2-2+b1_amd64.deb",
+      "sha256": "1d2ee77671eb76db21ad455a0e0211ece67f57c6d12b7501b92876bbcea390d6",
+      "filename": "device-tree-compiler_1.7.2-2+b1_amd64.deb"
+    },
+    {
+      "package": "flex",
+      "version": "2.6.4-8.2+b4",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/f/flex/flex_2.6.4-8.2+b4_amd64.deb",
+      "sha256": "75f963765232c356d0a2fb70e780dfa9de2425aca036ec60eefb7fc98a2c905b",
+      "filename": "flex_2.6.4-8.2+b4_amd64.deb"
+    },
+    {
+      "package": "gcc-14-arm-linux-gnueabihf-base",
+      "version": "14.2.0-19cross1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/gcc-14-arm-linux-gnueabihf-base_14.2.0-19cross1_amd64.deb",
+      "sha256": "b7c87242d5ed79e0a789cf1ed5b790e69adce6eebf94291c34540c13c9af6107",
+      "filename": "gcc-14-arm-linux-gnueabihf-base_14.2.0-19cross1_amd64.deb"
+    },
+    {
+      "package": "gcc-14-arm-linux-gnueabihf",
+      "version": "14.2.0-19cross1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/gcc-14-arm-linux-gnueabihf_14.2.0-19cross1_amd64.deb",
+      "sha256": "2caeee6eee62b44503939ba93fc75ade0f018e839cfc3207a5e2350864c2d147",
+      "filename": "gcc-14-arm-linux-gnueabihf_14.2.0-19cross1_amd64.deb"
+    },
+    {
+      "package": "gcc-14-cross-base",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/gcc-14-cross-base_14.2.0-19cross1_all.deb",
+      "sha256": "a6c277ad0961c1e69bebd2509151733961ea49bb53ff64aa1dac72b5929babf0",
+      "filename": "gcc-14-cross-base_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "gcc-arm-linux-gnueabihf",
+      "version": "4:14.2.0-1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-defaults/gcc-arm-linux-gnueabihf_14.2.0-1_amd64.deb",
+      "sha256": "f8a83d14d0d973a9d7a670ba9496cbc31a09940235974a426054754b36dd7588",
+      "filename": "gcc-arm-linux-gnueabihf_4%3a14.2.0-1_amd64.deb"
+    },
+    {
+      "package": "libasan8-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libasan8-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "05c8ac4ea02a35eb9751a569eaaf47cb9583fbf267b8e9e1d9955390813a8514",
+      "filename": "libasan8-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libatomic1-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libatomic1-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "111fa95ee5b5f699b24631a2366c49f07ec445bf8a4559393581d1ebf26b7db6",
+      "filename": "libatomic1-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libc6-armhf-cross",
+      "version": "2.41-11cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/c/cross-toolchain-base/libc6-armhf-cross_2.41-11cross1_all.deb",
+      "sha256": "fa9bcf96a12d15a2e47396c31b3203e107a04baf25e324ecf008931c09320074",
+      "filename": "libc6-armhf-cross_2.41-11cross1_all.deb"
+    },
+    {
+      "package": "libelf-dev",
+      "version": "0.192-4",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/e/elfutils/libelf-dev_0.192-4_amd64.deb",
+      "sha256": "7a67f944281523d6e3c55c1797449bab223b08665cc6ad8b51293056b65d9bd6",
+      "filename": "libelf-dev_0.192-4_amd64.deb"
+    },
+    {
+      "package": "libfdt1",
+      "version": "1.7.2-2+b1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/d/device-tree-compiler/libfdt1_1.7.2-2+b1_amd64.deb",
+      "sha256": "8e37034d7864807ae2063efcc82fc79aad59069546212e6e0908ed67f9f7e107",
+      "filename": "libfdt1_1.7.2-2+b1_amd64.deb"
+    },
+    {
+      "package": "libgcc-14-dev-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libgcc-14-dev-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "f55933295979b017f7e94755396b95cf9fd59042f8c630ced39183dbe6711eaf",
+      "filename": "libgcc-14-dev-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libgcc-s1-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libgcc-s1-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "7cbb781db348bffeac4dbd94896ea933b6fad50aeb7744c660fee72b05f9f4b8",
+      "filename": "libgcc-s1-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libgomp1-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libgomp1-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "c6978a6fdbd3d7d3fc4d79ac9a1089e639ac9deb309a1146a13f69c260f71478",
+      "filename": "libgomp1-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libstdc++6-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libstdc++6-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "adb763a300749cb6df94ec702a95977b820dbee17e1e7595b89bf7edf191de46",
+      "filename": "libstdc++6-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "libubsan1-armhf-cross",
+      "version": "14.2.0-19cross1",
+      "architecture": "all",
+      "url": "https://deb.debian.org/debian/pool/main/g/gcc-14-cross/libubsan1-armhf-cross_14.2.0-19cross1_all.deb",
+      "sha256": "2ccd83bcbde97c5d47ad89bb1ce74c23b7b2268cd58c57805b520f9e7e851032",
+      "filename": "libubsan1-armhf-cross_14.2.0-19cross1_all.deb"
+    },
+    {
+      "package": "m4",
+      "version": "1.4.19-8",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/m/m4/m4_1.4.19-8_amd64.deb",
+      "sha256": "221b3e224708c1da2a1a88b6824380593579b2254ae7d914afa14cbd5d343334",
+      "filename": "m4_1.4.19-8_amd64.deb"
+    }
+  ]
+}

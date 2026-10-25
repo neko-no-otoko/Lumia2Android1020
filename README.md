@@ -4,7 +4,31 @@ Experimental research toward Linux and Android bring-up on Nokia Lumia 1020 hard
 
 ## Status
 
-Research bootstrap only. No working Android image, PureView camera support, cellular support, or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
+Host build foundations are underway: pinned source/license and dependency inventories,
+rootless setup, synthetic safety tests, and Lumia **920** reference cross-compilation.
+No working Lumia 1020 Linux/Android image, PureView camera support, cellular support,
+or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
+
+- [Tested / untested / blocked matrix](docs/status.md)
+- [Reproduce the host builds and inspect debugging notes](docs/build.md)
+- [Source provenance and license review](docs/sources.md)
+- [Reviewed build evidence](evidence/)
+
+Quick start on x86_64 Linux (Python 3.12+, native GCC/Make/curl/dpkg-deb; 8 GiB free):
+
+```sh
+python3 -m unittest discover -s tests -v
+python3 scripts/lumia.py check
+python3 scripts/lumia.py setup
+python3 scripts/lumia.py fetch
+python3 scripts/lumia.py build --target dtbs --jobs 4
+python3 scripts/lumia.py build --target objects --jobs 4
+```
+
+All downloads and build outputs remain in ignored `.work/`. The commands compile
+the pinned 920 baseline; they do not produce or install an EOS image. Current
+full-AOSP storage/RAM needs exceed this cloud allocation, and EOS device/HAL
+dependencies remain unverified. No Android release has been selected.
 
 ## Initial milestones
 

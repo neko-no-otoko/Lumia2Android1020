@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-25",
+  "scope": "Cloud host compile only; no hardware connected",
+  "repository_base": "dde83f8d393a75ef7fd37acc8eed56fef31a798c",
+  "source": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "archive_sha256": "30e9a71b6f3816b26c46abec906a644bfc947872980e3d145a824c324ff31cd6",
+  "host": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "cpu_visible": 5,
+    "free_disk_bytes": 29823885312,
+    "cpu.max": "400000 100000",
+    "memory.max": "17179869184",
+    "git": "git version 2.52.0",
+    "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+    "make": "GNU Make 4.4.1",
+    "curl": "curl 8.14.1 (x86_64-pc-linux-gnu) libcurl/8.14.1 OpenSSL/3.5.7 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.8.0 librtmp/2.3 OpenLDAP/2.6.10"
+  },
+  "configuration": "Unmodified upstream lumia920_defconfig resolved by GCC 14.2",
+  "commands": [
+    {
+      "command": "make -C .work/sources/linux-lumia920 O=\"$PWD/.work/build/linux-lumia920\" ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- lumia920_defconfig",
+      "exit_code": 0
+    },
+    {
+      "command": "make -C .work/sources/linux-lumia920 O=\"$PWD/.work/build/linux-lumia920\" ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 qcom/lumia920.dtb qcom/lumia920-simple.dtb",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py build --target objects --jobs 4",
+      "exit_code": 0
+    }
+  ],
+  "environment": "Local tool paths and fixed KBUILD metadata described in docs/build.md; initial DTB-only make predates KBUILD overrides, which do not affect DTB bytes",
+  "warnings": [
+    "lumia920.dtb: reg_format and avoid_default_addr_size for cpus/cpu@0 and cpu@1, with dependent warning categories",
+    "No source warnings suppressed or compiler flags weakened"
+  ],
+  "artifacts": [
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920.dtb",
+      "bytes": 4094,
+      "sha256": "d3ce6b82ce22449efc506852db9ac008d16db833b89ad992107bf3e05aba7f56"
+    },
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920-simple.dtb",
+      "bytes": 7210,
+      "sha256": "022cba58dcad9a694d27595286324bb131ca54b01e77a927997b980b4f38748d"
+    },
+    {
+      "path": "drivers/video/fbdev/lumiafb.o",
+      "bytes": 2748,
+      "sha256": "53dd9ea876df2a289ba33eb5cb6658ea3709a72bdafdcb78b7d9863b71f4f1dc"
+    },
+    {
+      "path": "drivers/mmc/host/easy_mmc.o",
+      "bytes": 9420,
+      "sha256": "2b72b83e020056762866f7a82cfd32b1915bc3b098772a22418d71d44f2f2dfa"
+    }
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "count": 10,
+    "exit_code": 0
+  },
+  "android_config_gaps": [
+    "CONFIG_ANDROID_BINDER_IPC disabled",
+    "CONFIG_NAMESPACES disabled",
+    "CONFIG_SECURITY disabled"
+  ],
+  "hardware_tests": "None",
+  "full_kernel": "In progress; separate final report to follow"
+}

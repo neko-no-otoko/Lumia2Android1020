@@ -1,0 +1,17 @@
+# Sources, packages, all build output and raw logs remain local.
+.work/
+.cache/
+__pycache__/
+*.py[cod]
+*.img
+*.bin
+*.ffu
+*.hex
+*.elf
+*.dtb
+*.cpio*
+*.deb
+*.tar*
+.env*
+*.pem
+*.key
