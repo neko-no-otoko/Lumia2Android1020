@@ -40,6 +40,8 @@ def setup():
         cached = BASE / 'cache/debs' / item['filename']
         lumia.download(item, cached)
         subprocess.run(['dpkg-deb', '-x', str(cached), str(BASE / item['role'])], check=True)
+    # Debian copyright paths may symlink into a package extracted later.
+    for item in data['packages']:
         if lumia.digest(BASE / item['role'] / item['license_notice']) != item['license_notice_sha256']:
             raise ValueError('Pinned license notice changed')
     archive = BASE / 'cache/linux-v6.6.tar.gz'

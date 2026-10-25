@@ -1,7 +1,10 @@
 """Adversarial boot-harness tests, independent of optional QEMU installation."""
 import copy
+import hashlib
 from pathlib import Path
+import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
@@ -61,3 +64,26 @@ class VirtualHarnessTests(unittest.TestCase):
         for setting in ['CONFIG_ANDROID_BINDER_IPC=y', 'CONFIG_ARCH_VIRT=y', 'CONFIG_SMP=y']:
             with self.assertRaises(ValueError):
                 v.verify_config(text.replace(setting, '# '+setting.replace('=y', ' is not set')))
+
+    def test_fresh_setup_allows_forward_license_symlinks_between_packages(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp); (base/'linux').mkdir()
+            source = dict(sha256='a'*64, archive_root='synthetic')
+            (base/'linux/.source-sha256').write_text(source['sha256']+'\n')
+            digest = hashlib.sha256(b'synthetic notice').hexdigest()
+            data = dict(source=source, packages=[
+                dict(filename=name+'.deb', role='runtime', license_notice='doc/'+name+'/copyright',
+                     license_notice_sha256=digest) for name in ['a', 'b']])
+            def unpack(cmd, **kwargs):
+                if cmd[0] == 'dpkg-deb':
+                    name = Path(cmd[2]).stem; path = base/'runtime/doc'/name
+                    path.mkdir(parents=True)
+                    if name == 'a':
+                        (path/'copyright').symlink_to('../b/copyright')
+                    else:
+                        (path/'copyright').write_bytes(b'synthetic notice')
+                return subprocess.CompletedProcess(cmd, 0, stdout='')
+            with patch.object(v, 'BASE', base), patch.object(v, 'lock', return_value=data), \
+                 patch.object(v.lumia, 'download'), patch.object(v.lumia, 'require_space'), \
+                 patch.object(v.subprocess, 'run', side_effect=unpack):
+                v.setup()

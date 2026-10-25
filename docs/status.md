@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 71 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 72 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |

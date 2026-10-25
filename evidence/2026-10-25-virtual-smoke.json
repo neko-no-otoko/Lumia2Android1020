@@ -197,8 +197,8 @@
   ],
   "guest_binder_protocol": 8,
   "host_tests": {
-    "passed": 71,
-    "new_harness_tests": 6
+    "passed": 72,
+    "new_harness_tests": 7
   },
   "negative_control": {
     "requested_init": "/missing-init",
@@ -231,5 +231,12 @@
     "prebuilt_image_size": "Not selected/downloaded; no footprint invented"
   },
   "publication": "Original software, public-source/dependency hashes and synthetic results only; binaries/logs stay ignored; no new proprietary firmware content",
-  "rm937_build_status": "Not started in this executor during this bounded virtual pass; separate public reference README inspected only, no source archive or kernel build performed"
+  "rm937_build_status": "Not started in this executor. Pinned public README/APKBUILD/license metadata inspected only; no1520source archive or kernel build performed.",
+  "ci_initial_failure": {
+    "run_id": 40187785221,
+    "stage": "generic-arm-virtual setup, before guest execution",
+    "error": "libncursesw6/copyright symlink target libtinfo6 was not yet unpacked",
+    "cause": "Immediate per-package notice verification depended on extraction order; warm local cache hid it",
+    "fix": "Extract the entire pinned closure before checking retained notices; synthetic forward-symlink fresh-setup regression added"
+  }
 }

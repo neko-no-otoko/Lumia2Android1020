@@ -49,9 +49,14 @@ artifacts are preserved privately under `.work/emulation/first-failure/`.
   assertion was corrected. BINDER_WRITE_READ separately verifies EFAULT for an
   invalid buffer and EINVAL for an invalid command. No kernel behavior was changed.
 
+Fresh Ubuntu CI exposed a setup-order issue: a copyright symlink pointed to a
+package not yet extracted. Setup now unpacks the full pinned closure before
+verifying notices; a fresh forward-symlink regression protects this case. No
+license check was removed and no guest/kernel change was needed.
+
 Requested fragment settings are checked against effective Kconfig after dependency
 resolution, so a silently dropped prerequisite fails before compilation. There
-are 71 host tests, including six new harness/configuration regressions. These are
+are 72 host tests, including seven new harness/configuration regressions. These are
 separate from the eight guest groups and the bad-boot control.
 
 The final compile emitted no compiler warnings. The minimal guest reports that
