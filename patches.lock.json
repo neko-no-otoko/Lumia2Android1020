@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source_revision": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "patches": [
+    {
+      "path": "patches/0001-lumia920-cpu-cells.patch",
+      "sha256": "195f8937312890aedf1fb6afe2d08cfe26413298b6dc8ee0b1b834053ff6c8a6",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "arch/arm/boot/dts/qcom/lumia920.dts",
+          "before_sha256": "61b680efec4fe95eb731c4a43d829f18caf09bd940196235969c5437e56b55b9",
+          "after_sha256": "2c6ed800e2b94e274f940d604720b7965c1a66f8de29ec20cfc7edb40b666f26"
+        }
+      ]
+    }
+  ]
+}

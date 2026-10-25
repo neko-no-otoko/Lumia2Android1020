@@ -17,8 +17,12 @@ RAM ranges, regulators or pin mappings need to change.
 Validate a separate patched build against the recorded unmodified DTB: check
 warning removal and read back the CPU nodes, model and compatible properties.
 Retain both hashes. This would improve the reference source; it would not establish
-EOS support or constitute a full binding-schema or hardware test. This patch has
-not been applied in the current milestone.
+EOS support or constitute a full binding-schema or hardware test.
+
+Implemented as `patches/0001-lumia920-cpu-cells.patch` in a separate patched source
+tree. All 28 nodes and 126 original property byte values are unchanged; only the
+two intended properties were added. The original and patched hashes and exact
+commands are in `evidence/2026-10-25-cpu-cells.json`.
 
 ## Next structural patch: isolate the 920 early-debug assumptions
 

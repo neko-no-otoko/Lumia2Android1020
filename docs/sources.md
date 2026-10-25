@@ -57,7 +57,7 @@ or a redistributable ISP/calibration stack. They were not downloaded or committe
 
 ## Build tool provenance
 
-`dependencies.lock.json` pins 22 official Debian binary package URLs, versions,
+`dependencies.lock.json` pins 23 official Debian binary package URLs, versions,
 architectures and SHA-256 values discovered from signed trixie metadata. These
 are build tools, not handset firmware. Their package copyright notices remain
 under `.work/tools/usr/share/doc/*/copyright`; GPL-family compiler/binutils tools,
@@ -65,6 +65,12 @@ Bison, Flex, m4, dtc, libc and libelf retain their individual terms and exceptio
 No claim is made that all packages have one license. The binaries are downloaded
 for local use, not republished in this repository. Recheck source-offer and
 license obligations before any future redistribution.
+
+The initial baseline used 22 packages. Source patching adds GNU patch 2.8-2
+(GPL-3+ according to its packaged copyright notice). The reviewed patch series is
+GPL-2.0-only, follows the kernel COPYING terms, and records its upstream commit
+and per-file before/after hashes in `patches.lock.json`. It does not include any
+LumiaToy code.
 
 CI pins `actions/checkout` at `11d5960a326750d5838078e36cf38b85af677262` (v4).
 Its MIT `LICENSE` was reviewed at that commit; it runs only on the host CI runner.

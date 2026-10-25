@@ -35,6 +35,9 @@ jobs:
       - run: python3 scripts/lumia.py fetch
       - run: python3 scripts/lumia.py build --target dtbs --jobs 2
       - run: python3 scripts/lumia.py build --target objects --jobs 2
+      - run: python3 scripts/lumia.py prepare
+      - run: python3 scripts/lumia.py build --profile patched --target dtbs --jobs 2
+      - run: python3 scripts/verify_dtbs.py
       - name: Show compiler diagnostics
         if: always()
         run: tail -n 60 .work/logs/*.log 2>/dev/null || true

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-25",
+  "scope": "Lumia 920 CPU-cell metadata only; no EOS or hardware validation",
+  "source": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "patches": [
+    "195f8937312890aedf1fb6afe2d08cfe26413298b6dc8ee0b1b834053ff6c8a6"
+  ],
+  "commands": [
+    "python3 scripts/lumia.py build --target dtbs --jobs 4 (forced regeneration of retained baseline tiny DTB)",
+    "python3 scripts/lumia.py prepare",
+    "python3 scripts/lumia.py build --profile patched --target dtbs --jobs 4",
+    "python3 scripts/verify_dtbs.py"
+  ],
+  "exit_codes": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "baseline_sha256": "d3ce6b82ce22449efc506852db9ac008d16db833b89ad992107bf3e05aba7f56",
+  "baseline_warnings": [
+    "reg_format",
+    "avoid_default_addr_size",
+    "dependent pci/i2c/spi prerequisite warnings"
+  ],
+  "patched_warnings": [],
+  "patched_artifacts": [
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920.dtb",
+      "bytes": 4126,
+      "sha256": "013c2af9d42d656202bca4ce167897f9cab82c3ed9e74636e3a5f60806cdbf69"
+    },
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920-simple.dtb",
+      "bytes": 7210,
+      "sha256": "022cba58dcad9a694d27595286324bb131ca54b01e77a927997b980b4f38748d"
+    }
+  ],
+  "regression": {
+    "result": "PASS",
+    "nodes_compared": 28,
+    "original_properties_compared": 126,
+    "only_added_properties": [
+      "/cpus/#address-cells=1",
+      "/cpus/#size-cells=0"
+    ],
+    "scope": "All other DT nodes and property bytes unchanged; no hardware validation"
+  },
+  "baseline_log_sha256": "ff7a1f666e798bba2b65c1dc8ffd1ba7f44795765cd615330eda44726645c381",
+  "patched_log_sha256": "54b81674a81c3b07d2c291fe64ec112ffb1b8406fb6b0c97eb704c4f51120e24"
+}

@@ -26,6 +26,70 @@ TARGETS = {
 }
 
 
+def patch_entries():
+    kernel, _ = validate_locks()
+    lock = load_json("patches.lock.json")
+    if lock["source_revision"] != kernel["revision"]:
+        raise ValueError("Patch source revision mismatch")
+    for entry in lock["patches"]:
+        patch = confined(ROOT, ROOT / entry["path"])
+        if digest(patch) != entry["sha256"] or entry["license"] != "GPL-2.0-only":
+            raise ValueError("Patch hash or reviewed license mismatch")
+        paths = {f["path"] for f in entry["files"]}
+        headers = []
+        for line in patch.read_text().splitlines():
+            if line.startswith(("--- ", "+++ ")):
+                if not line.startswith(("--- a/", "+++ b/")):
+                    raise ValueError("Patch header must use reviewed relative a/b paths")
+                headers.append(line[6:])
+        if set(headers) != paths or len(headers) != len(paths) * 2:
+            raise ValueError("Patch paths differ from reviewed file list")
+        for path in paths:
+            if Path(path).is_absolute() or ".." in Path(path).parts:
+                raise ValueError("Unsafe patch path")
+    return lock["patches"]
+
+
+def apply_source_patch(source, entry):
+    for item in entry["files"]:
+        if digest(confined(source, source / item["path"])) != item["before_sha256"]:
+            raise ValueError(f"Patch precondition mismatch: {item['path']}")
+    args = ["patch", "--batch", "--forward", "--fuzz=0", "--no-backup-if-mismatch",
+            "-p1", "-d", str(source), "-i", str(confined(ROOT, ROOT / entry["path"]))]
+    subprocess.run(args + ["--dry-run"], env=build_environment(), check=True)
+    subprocess.run(args, env=build_environment(), check=True)
+    for item in entry["files"]:
+        if digest(source / item["path"]) != item["after_sha256"]:
+            raise ValueError(f"Patch postcondition mismatch: {item['path']}")
+
+
+def prepare():
+    """Keep the original source/build; prepare a separate reviewed patch series."""
+    kernel, _ = validate_locks()
+    entries = patch_entries()
+    require_space(ROOT, 8)
+    archive = workpath("cache/linux-lumia920.tar.gz")
+    download(kernel, archive)
+    source = workpath("sources/linux-lumia920-patched")
+    receipt = source / ".patch-receipt.json"
+    if not source.exists():
+        extract_source(archive, source, kernel["archive_root"])
+        (source / ".source-sha256").write_text(kernel["sha256"] + "\n")
+        receipt.write_text("[]\n")
+    applied = json.loads(receipt.read_text())
+    if applied != [e["sha256"] for e in entries[:len(applied)]]:
+        raise ValueError("Existing patch receipt differs; preserve edits before fresh extraction")
+    tracked = {f["path"]: f["after_sha256"] for e in entries[:len(applied)] for f in e["files"]}
+    for path, expected in tracked.items():
+        if digest(confined(source, source / path)) != expected:
+            raise ValueError(f"Prepared source changed: {path}")
+    for entry in entries[len(applied):]:
+        apply_source_patch(source, entry)
+        applied.append(entry["sha256"])
+        receipt.write_text(json.dumps(applied, indent=2) + "\n")
+    print(f"Prepared {len(applied)} pinned patches in {source}; baseline retained")
+
+
 def digest(path):
     h = hashlib.sha256()
     with Path(path).open("rb") as f:
@@ -174,16 +238,21 @@ def build_environment():
     return env
 
 
-def build(target, jobs):
-    if target not in TARGETS or not 1 <= jobs <= 4:
+def build(target, jobs, profile="baseline"):
+    if target not in TARGETS or not 1 <= jobs <= 4 or profile not in {"baseline", "patched"}:
         raise ValueError("Only reviewed host compile targets and 1..4 jobs are allowed")
     kernel, _ = validate_locks()
     require_space(ROOT, 8 if target == "kernel" else 2)
-    source = workpath("sources/linux-lumia920")
+    suffix = "-patched" if profile == "patched" else ""
+    source = workpath("sources/linux-lumia920" + suffix)
     if (source / ".source-sha256").read_text().strip() != kernel["sha256"]:
         raise ValueError("Fetch the pinned source first")
     env = build_environment()
-    output = workpath("build/linux-lumia920")
+    patches = patch_entries() if profile == "patched" else []
+    if patches and json.loads((source / ".patch-receipt.json").read_text()) != [
+            p["sha256"] for p in patches]:
+        raise ValueError("Run prepare for the current patch series first")
+    output = workpath("build/linux-lumia920" + suffix)
     logs = workpath("logs")
     logs.mkdir(parents=True, exist_ok=True)
     base = ["make", "-C", str(source), f"O={output}", "ARCH=arm",
@@ -192,8 +261,9 @@ def build(target, jobs):
     if not (output / ".config").exists():
         commands.append(base + ["lumia920_defconfig"])
     commands.append(base + [f"-j{jobs}"] + TARGETS[target])
-    stamp = f"{target}-{time.time_ns()}"
+    stamp = f"{profile}-{target}-{time.time_ns()}"
     report = dict(source=kernel["revision"], target=target, scope="Lumia 920 compile only",
+                  profile=profile, patches=[p["sha256"] for p in patches],
                   commands=commands, exit_code=None, artifacts=[])
     log = logs / (stamp + ".log")
     print(f"Compile only; no hardware access. Log: {log}", flush=True)
@@ -233,6 +303,8 @@ def inventory():
 
 def check():
     validate_locks()
+    if (ROOT / "patches.lock.json").exists():
+        patch_entries()
     files = subprocess.check_output(["git", "ls-files", "--cached", "--others",
                                      "--exclude-standard", "-z"], cwd=ROOT).split(b"\0")
     prohibited = {".img", ".bin", ".ffu", ".hex", ".elf", ".dtb", ".deb", ".pem", ".key"}
@@ -252,12 +324,13 @@ def check():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["inventory", "setup", "fetch", "build", "check", "android"])
+    parser.add_argument("command", choices=["inventory", "setup", "fetch", "prepare", "build", "check", "android"])
     parser.add_argument("--target", choices=TARGETS, default="dtbs")
     parser.add_argument("--jobs", type=int, choices=range(1, 5), default=4)
+    parser.add_argument("--profile", choices=["baseline", "patched"], default="baseline")
     args = parser.parse_args()
     if args.command == "build":
-        return build(args.target, args.jobs)
+        return build(args.target, args.jobs, args.profile)
     if args.command == "android":
         print("BLOCKED: no verified EOS kernel/DT, Android device tree, or HAL/license "
               "bundle. No Android release selected. Current AOSP resource baseline: "

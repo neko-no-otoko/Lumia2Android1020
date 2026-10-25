@@ -7,9 +7,10 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | --- | --- | --- |
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
-| Dependency setup | Tested | 22 hash-pinned Debian packages, rootless extraction; no credentials created or system installation. |
-| Host safety tests | Tested | 11 synthetic tests for path/archive confinement, hash failure, disk gate, target restrictions, license gate and Android blocker. |
+| Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
+| Host safety tests | Tested | 15 tests cover host safety plus patch hashes, source preconditions and reviewed paths. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
+| Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | Lumia 920 simple DTB | Compiled | No target-specific diagnostics observed; not hardware validation. |
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | Compiled | Exit 0 after about 21 minutes; 8,667,648-byte ARM image. One unused-function warning; see the kernel report for hashes. A zImage alone is not an OS image. |

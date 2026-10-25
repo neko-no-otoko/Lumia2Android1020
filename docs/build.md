@@ -34,7 +34,7 @@ python3 scripts/lumia.py build --target objects --jobs 4
 python3 scripts/lumia.py build --target kernel --jobs 4
 ```
 
-`setup` downloads only the 22 hashed Debian packages in `dependencies.lock.json`
+`setup` downloads only the 23 hashed Debian packages in `dependencies.lock.json`
 and unpacks them into `.work/tools`. It needs no root access and executes no
 package maintainer scripts. If a pinned pool URL is retired, stop and review a
 new package/hash set; do not silently fall back to floating versions.
@@ -83,6 +83,30 @@ A rootless download-only apt attempt initially tried to lock the system dpkg
 database. Dependency discovery was corrected to use a workspace-local status
 copy and cache; the checked-in setup bypasses apt and uses the resulting exact
 package URLs and hashes. Nothing was installed into system directories.
+
+## Reviewed source patches
+
+The original source and full-kernel artifacts are retained. A separate patched
+source/output pair is prepared from the same verified archive:
+
+```sh
+python3 scripts/lumia.py setup
+python3 scripts/lumia.py prepare
+python3 scripts/lumia.py build --profile patched --target dtbs --jobs 4
+python3 scripts/verify_dtbs.py
+```
+
+`patches.lock.json` pins each GPL-2.0-only patch and the before/after hashes of
+every changed source file. Preparation checks relative paths, runs a zero-fuzz
+dry run, applies the patch, and verifies its output hashes. A receipt supports
+appending reviewed patches without silently accepting edited source files.
+GNU patch 2.8-2 is the 23rd pinned package (GPL-3+ tool license); its package
+copyright notice was reviewed locally. No kernel or loader binaries are imported.
+
+The first patch adds only CPU-node cell metadata. A forced unmodified-DTB rebuild
+reproduced its warnings; the patched compile removes them. The focused comparator
+checks every original DT node/property byte, allowing only the two new CPU cell
+properties, and requires the simple DTB to stay unchanged.
 
 Relocated Bison first failed with `m4 subprocess failed: No such file or directory`.
 Setting both `M4` and `BISON_PKGDATADIR` fixed its data/executable paths. The next
