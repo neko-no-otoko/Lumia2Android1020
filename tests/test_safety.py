@@ -47,6 +47,19 @@ class SafetyTests(unittest.TestCase):
                     lumia.download({"sha256": "0" * 64}, p)
                 run.assert_not_called()
 
+    def test_downloaded_hash_mismatch_is_cleaned_up(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            def corrupt_download(command, **kwargs):
+                Path(command[command.index("--output") + 1]).write_bytes(b"corrupt fixture")
+            with mock.patch.object(lumia, "ROOT", root), \
+                    mock.patch.object(lumia.subprocess, "run", side_effect=corrupt_download):
+                with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                    lumia.download({"sha256": "0" * 64, "url": "https://deb.debian.org/fixture"},
+                                   root / "cache/file")
+            self.assertFalse((root / "cache/file").exists())
+            self.assertEqual(list((root / "cache").iterdir()), [])
+
     def archive(self, directory, name="source/file", kind=tarfile.REGTYPE, link=""):
         p = Path(directory) / "fixture.tar"
         with tarfile.open(p, "w") as tar:

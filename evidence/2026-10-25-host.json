@@ -61,7 +61,7 @@
   ],
   "tests": {
     "command": "python3 -m unittest discover -s tests -v",
-    "count": 10,
+    "count": 11,
     "exit_code": 0
   },
   "android_config_gaps": [
@@ -70,7 +70,17 @@
     "CONFIG_SECURITY disabled"
   ],
   "hardware_tests": "None",
-  "full_kernel": "In progress; separate final report to follow",
+  "full_kernel": {
+    "state": "running at requested checkpoint",
+    "command": "python3 scripts/lumia.py build --target kernel --jobs 4",
+    "make_target": "zImage",
+    "log": ".work/logs/kernel-1792889499746423310.log",
+    "result_when_finished": ".work/logs/kernel-1792889499746423310.json",
+    "objects_compiled_at_checkpoint": 2369,
+    "compile_errors_observed": 0,
+    "warning_observed": "init/main.c: mark_readonly defined but not used",
+    "hardware_operations": "None"
+  },
   "fresh_extraction": {
     "result": "PASS",
     "comparison": [
@@ -93,5 +103,64 @@
     "init/main.c comments out free_initmem() and mark_readonly(); full build warns mark_readonly is unused",
     "920 framebuffer physical address hard-coded",
     "Experimental eMMC driver polls with direct I/O; never executed on hardware here"
-  ]
+  ],
+  "network_inventory": {
+    "verified": [
+      "Public GitHub git fetch/push",
+      "GitHub codeload HTTPS: pinned kernel archive downloaded",
+      "Official Debian HTTPS: signed indexes and 22 hash-verified packages"
+    ],
+    "unavailable": [
+      "snapshot.debian.org index: HTTP 403 from environment proxy; official Debian mirror used for discovery"
+    ],
+    "device_connections": "None"
+  },
+  "initial_tool_inventory": {
+    "available": [
+      "git",
+      "gh",
+      "gcc",
+      "make",
+      "python3",
+      "curl",
+      "wget",
+      "tar",
+      "xz",
+      "java",
+      "docker (unused)"
+    ],
+    "missing_before_setup": [
+      "ARM cross compiler",
+      "bison",
+      "flex",
+      "bc",
+      "device-tree compiler",
+      "libelf development headers",
+      "clang",
+      "cmake",
+      "ninja",
+      "repo",
+      "qemu-system-arm"
+    ]
+  },
+  "dtb_identity": {
+    "lumia920.dtb": {
+      "model": "Lumia 920 tiny"
+    },
+    "lumia920-simple.dtb": {
+      "model": "Nokia Lumia 920",
+      "compatible": [
+        "nokia,lumia920",
+        "qcom,msm8960"
+      ]
+    },
+    "method": "Read compiled properties using local fdtget; no hardware operations"
+  },
+  "ci_hardened_setup": {
+    "head": "ccf5b288df2dadd24a1704071772039df4060e2c",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40148811370",
+    "safety": "success",
+    "reference_compile": "success",
+    "verified_on": "2026-10-25"
+  }
 }

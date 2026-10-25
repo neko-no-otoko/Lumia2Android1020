@@ -8,13 +8,14 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 22 hash-pinned Debian packages, rootless extraction; no credentials created or system installation. |
-| Host safety tests | Tested | 10 synthetic tests for path/archive confinement, hash failure, disk gate, target restrictions, license gate and Android blocker. |
+| Host safety tests | Tested | 11 synthetic tests for path/archive confinement, hash failure, disk gate, target restrictions, license gate and Android blocker. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Lumia 920 simple DTB | Compiled | No target-specific diagnostics observed; not hardware validation. |
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | In progress | See the build report for the final outcome. A zImage alone is not an OS image. |
 | GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
 | EOS kernel / device tree | Blocked | No validated EOS board description or source/build provenance chain. The 920 source cannot be relabeled as EOS. |
+| EOS UEFI loader / kernel handoff | Blocked | No reviewed reusable EOS handoff implementation. LumiaToy remains reference-only due to its license restriction; no loader was imported or built. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
 | Android product/image build | Blocked | No verified EOS device tree, compatible kernel configuration, full HAL/vendor provenance or justified Android release; cloud also below current full-AOSP resources. |
