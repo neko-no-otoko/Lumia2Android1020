@@ -35,11 +35,16 @@ The baseline modifies generic ARM boot paths with 920-specific behavior:
 | [lumiafb.c](https://github.com/UEFI-code/linux-6.6-lumia920/blob/9872e9316212490b7db8e3371fa1d63bd3394cc5/drivers/video/fbdev/lumiafb.c#L11) | Fixed physical address, geometry and pixel layout. | Separate the debug console from generic boot; future firmware-derived data needs a reviewed handoff implementation. |
 | [setup.c](https://github.com/UEFI-code/linux-6.6-lumia920/blob/9872e9316212490b7db8e3371fa1d63bd3394cc5/arch/arm/kernel/setup.c#L1103) and [init/main.c](https://github.com/UEFI-code/linux-6.6-lumia920/blob/9872e9316212490b7db8e3371fa1d63bd3394cc5/init/main.c#L1455) | Early-console hooks plus disabled normal init-memory freeing/read-only marking. | Audit lifetime and ordering before restoring either operation; do not blindly uncomment them. |
 
-The resulting experiment should retain an explicit current-reference configuration
-and add a separate configuration with the 920 debug hooks disabled. Compile both
-on the host, checking symbols and diagnostics. Review the EFI stub's color-bar
-code as part of the same dependency audit. Default-off isolation is a proposed
-design, not an implemented or tested configuration in this milestone.
+Implemented separately as `patches/0002-lumia920-debug-option.patch` with
+`CONFIG_LUMIA920_EARLY_DEBUG`. It defaults off; the saved 920 defconfig explicitly
+enables it to retain the reference path. The patch includes all three EFI-stub
+color bars as well as startup writes, mapping/PMD preservation and console hooks.
+The separately commented-out init finalization block is unchanged in both modes.
+
+Regression work compares reference-on ARM objects with the original baseline and
+checks off-mode objects for removal of each identified hook. Original source and
+artifacts stay separate. Successful host compilation or hook removal cannot
+establish boot, storage, charging or thermal safety for EOS or for the 920.
 
 ## Evidence still required for an actual EOS port
 

@@ -23,6 +23,9 @@ TARGETS = {
     "dtbs": ["qcom/lumia920.dtb", "qcom/lumia920-simple.dtb"],
     "objects": ["drivers/video/fbdev/lumiafb.o", "drivers/mmc/host/easy_mmc.o"],
     "kernel": ["zImage"],
+    "debug-objects": ["arch/arm/kernel/head.o", "arch/arm/kernel/setup.o",
+                      "arch/arm/mm/mmu.o", "init/main.o",
+                      "drivers/firmware/efi/libstub/fdt.stub.o"],
 }
 
 
@@ -238,9 +241,11 @@ def build_environment():
     return env
 
 
-def build(target, jobs, profile="baseline"):
+def build(target, jobs, profile="baseline", debug_mode="reference"):
     if target not in TARGETS or not 1 <= jobs <= 4 or profile not in {"baseline", "patched"}:
         raise ValueError("Only reviewed host compile targets and 1..4 jobs are allowed")
+    if debug_mode not in {"reference", "off"} or (profile == "baseline" and debug_mode != "reference"):
+        raise ValueError("Debug mode changes require the separate patched profile")
     kernel, _ = validate_locks()
     require_space(ROOT, 8 if target == "kernel" else 2)
     suffix = "-patched" if profile == "patched" else ""
@@ -260,10 +265,19 @@ def build(target, jobs, profile="baseline"):
     commands = []
     if not (output / ".config").exists():
         commands.append(base + ["lumia920_defconfig"])
+    has_debug_option = "config LUMIA920_EARLY_DEBUG\n" in (source / "arch/arm/Kconfig.debug").read_text()
+    if profile == "patched" and has_debug_option:
+        commands.append([str(source / "scripts/config"), "--file", str(output / ".config"),
+                         "--enable" if debug_mode == "reference" else "--disable",
+                         "LUMIA920_EARLY_DEBUG"])
+        commands.append(base + ["olddefconfig"])
+    elif debug_mode == "off":
+        raise ValueError("Reviewed debug isolation patch is not prepared")
     commands.append(base + [f"-j{jobs}"] + TARGETS[target])
-    stamp = f"{profile}-{target}-{time.time_ns()}"
+    stamp = f"{profile}-{debug_mode}-{target}-{time.time_ns()}"
     report = dict(source=kernel["revision"], target=target, scope="Lumia 920 compile only",
                   profile=profile, patches=[p["sha256"] for p in patches],
+                  debug_mode=debug_mode,
                   commands=commands, exit_code=None, artifacts=[])
     log = logs / (stamp + ".log")
     print(f"Compile only; no hardware access. Log: {log}", flush=True)
@@ -274,14 +288,21 @@ def build(target, jobs, profile="baseline"):
             report["exit_code"] = result.returncode
             if result.returncode:
                 break
+            if command[-1] == "olddefconfig" and profile == "patched" and has_debug_option:
+                enabled = "CONFIG_LUMIA920_EARLY_DEBUG=y\n" in (output / ".config").read_text()
+                if enabled != (debug_mode == "reference"):
+                    print("ERROR: requested debug option did not resolve", file=f)
+                    report["exit_code"] = 1
+                    break
     if report["exit_code"] == 0:
-        relative = TARGETS[target] if target == "objects" else (
+        relative = TARGETS[target] if target in {"objects", "debug-objects"} else (
             ["arch/arm/boot/zImage"] if target == "kernel" else
             ["arch/arm/boot/dts/" + t for t in TARGETS[target]])
         for path in relative:
             artifact = output / path
             report["artifacts"].append(dict(path=path, bytes=artifact.stat().st_size,
                                              sha256=digest(artifact)))
+        report["config_sha256"] = digest(output / ".config")
     (logs / (stamp + ".json")).write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps(report, indent=2))
     return report["exit_code"]
@@ -328,9 +349,10 @@ def main():
     parser.add_argument("--target", choices=TARGETS, default="dtbs")
     parser.add_argument("--jobs", type=int, choices=range(1, 5), default=4)
     parser.add_argument("--profile", choices=["baseline", "patched"], default="baseline")
+    parser.add_argument("--debug-mode", choices=["reference", "off"], default="reference")
     args = parser.parse_args()
     if args.command == "build":
-        return build(args.target, args.jobs, args.profile)
+        return build(args.target, args.jobs, args.profile, args.debug_mode)
     if args.command == "android":
         print("BLOCKED: no verified EOS kernel/DT, Android device tree, or HAL/license "
               "bundle. No Android release selected. Current AOSP resource baseline: "

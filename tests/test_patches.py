@@ -11,6 +11,12 @@ spec.loader.exec_module(lumia)
 
 
 class PatchTests(unittest.TestCase):
+    def test_debug_mode_cannot_change_baseline_configuration(self):
+        with mock.patch.object(lumia.subprocess, "run") as run:
+            with self.assertRaisesRegex(ValueError, "separate patched"):
+                lumia.build("debug-objects", 1, "baseline", "off")
+            run.assert_not_called()
+
     def test_pinned_patch_metadata(self):
         self.assertGreaterEqual(len(lumia.patch_entries()), 1)
 

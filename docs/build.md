@@ -108,6 +108,34 @@ reproduced its warnings; the patched compile removes them. The focused comparato
 checks every original DT node/property byte, allowing only the two new CPU cell
 properties, and requires the simple DTB to stay unchanged.
 
+The second patch adds `CONFIG_LUMIA920_EARLY_DEBUG`, default off and explicitly on
+in the saved 920 defconfig. It gates the identified early identity mapping, PMD
+preservation, console object/calls and EFI/startup color bars together. It does not
+restore or change the separate init-memory/read-only finalization overrides.
+
+```sh
+python3 scripts/lumia.py prepare
+python3 scripts/lumia.py build --target debug-objects --jobs 4
+python3 scripts/lumia.py build --profile patched --target debug-objects --jobs 4
+python3 scripts/verify_debug.py reference
+python3 scripts/lumia.py build --profile patched --debug-mode off --target debug-objects --jobs 4
+python3 scripts/verify_debug.py off
+python3 scripts/verify_debug.py verify
+```
+
+Both patched modes share one output directory; run these commands sequentially.
+The baseline uses a separate source and output directory and cannot accept an off
+mode. The comparison checks actual ARM object code, allows only source-line
+diagnostic changes in the reference mode, and checks removal of the identified
+hooks in the off mode. Off is a source-isolation experiment, not an EOS/generic
+boot-safety result. Full cloud kernel builds and their measured outcomes are
+reported separately; CI runs focused object checks.
+
+For a completed full build, `python3 scripts/verify_debug.py reference --kernel`
+or `off --kernel` preserves its linked artifacts only after checking that the
+successful build report matches the current config and image hash. The comparator
+then also checks linked console inclusion and records both kernel hashes.
+
 Relocated Bison first failed with `m4 subprocess failed: No such file or directory`.
 Setting both `M4` and `BISON_PKGDATADIR` fixed its data/executable paths. The next
 configuration failed with `unknown assembler invoked`: the relocated ARM binutils
