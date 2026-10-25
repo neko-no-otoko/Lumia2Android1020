@@ -46,9 +46,13 @@ checks off-mode objects for removal of each identified hook. Original source and
 artifacts stay separate. Successful host compilation or hook removal cannot
 establish boot, storage, charging or thermal safety for EOS or for the 920.
 
-Checkpoint result: both affected-object modes and default-off resolution passed
-CI, and the cloud's reference-on full kernel linked successfully. The full
-off-mode link remains a next bounded host check; no build is left running.
+The full off-mode link exposed a further caller in `kernel/panic.c`. The third
+pinned patch gates its console reactivation, and `panic.o` is now covered by the
+paired checks. All of its allocated sections remain unchanged in reference mode.
+
+Checkpoint result: both full modes now link, paired regression passes, and off
+vmlinux contains neither early-console entry point. The baseline/reference-on
+images are preserved; no kernel build is left running.
 See `evidence/2026-10-25-debug-isolation.json` for measured results.
 
 ## Evidence still required for an actual EOS port

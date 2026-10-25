@@ -61,6 +61,18 @@
           "after_sha256": "9e632544cf8bc88ad30d87d455691f3620c67940c1a515b4c31a0609ca76478a"
         }
       ]
+    },
+    {
+      "path": "patches/0003-lumia920-panic-debug-hook.patch",
+      "sha256": "586f161e53b19a6e540a4251423d78c6727851810bc868e23ee856c327649390",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "kernel/panic.c",
+          "before_sha256": "08440ee8fab4c74466a919591c2494380b20d824f2c57c19c9723a8a6ff55859",
+          "after_sha256": "8182f7ad7ec06327fc7e0c41c3607d75652d7388f4d43de8d77b7d42fe8b5bb4"
+        }
+      ]
     }
   ],
   "ci": {
@@ -72,27 +84,31 @@
   "object_regression": {
     "result": "PASS",
     "scope": "Compiled-object regression only; no EOS or hardware validation",
+    "default_off": "PASS: old baseline config plus new option defaults off with dependencies satisfied",
     "object_sha256": {
       "baseline": {
         "arch/arm/kernel/head.o": "f33e5c1d7444305331e5f384515b06b545f3df8e0037326dc66d4d79b924f6eb",
         "arch/arm/kernel/setup.o": "03856f744cc4d1aad9b64b520385d2a22893e3b1bef72f9c0e6d7dced47871ce",
         "arch/arm/mm/mmu.o": "5b3ca92491dc9da034595a824eb494608164e32c5163b6b6757939dd1f8dda46",
         "init/main.o": "9874ebafa2925d32e10ed4f89bdf800d02c9ae8d9b5a6381b55ea87af33a21dd",
-        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee"
+        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee",
+        "kernel/panic.o": "2bfecf9c637dcf4655daec1599723693de555a103bc2f278b50eb9408c597ac3"
       },
       "reference": {
         "arch/arm/kernel/head.o": "f33e5c1d7444305331e5f384515b06b545f3df8e0037326dc66d4d79b924f6eb",
         "arch/arm/kernel/setup.o": "cd73f9f6e1dbbbecf9d5fa182326febd48090e13004949ae2d74bcd8b5dbce57",
         "arch/arm/mm/mmu.o": "5b3ca92491dc9da034595a824eb494608164e32c5163b6b6757939dd1f8dda46",
         "init/main.o": "380a3e063784ebe3b85ba2519350d8a7ef03e037b7c89755be878fe2cfc991b6",
-        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee"
+        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee",
+        "kernel/panic.o": "5b9ce5f6d31b04262854efb1e43ddd6d0d0df960d48b9a1e93ca0adba1661abb"
       },
       "off": {
         "arch/arm/kernel/head.o": "d16dd067109b1f53f61a5ece3772b4f65fa3130018d5e9082a345534e65b7033",
         "arch/arm/kernel/setup.o": "65605f1bda1c6a42bcb8ff01368a7dc20b0b20d11642d29e366b401184bccc57",
         "arch/arm/mm/mmu.o": "7c308e2d3fc2dcc0e548e8ea5a1a68e7c3439203343865c2f61430f5be0a1e0c",
         "init/main.o": "0a9020b4ef56e885a89034388ba80a65e49bd2fa48ae0a57dc39815fe91d81d2",
-        "drivers/firmware/efi/libstub/fdt.stub.o": "8cd1a9e09ac78e7f890499a50c7cd5bdbb8d811a64cd6451c80cb9da03d2c65f"
+        "drivers/firmware/efi/libstub/fdt.stub.o": "8cd1a9e09ac78e7f890499a50c7cd5bdbb8d811a64cd6451c80cb9da03d2c65f",
+        "kernel/panic.o": "1b680dd1e5562774200e2cffb5a55d06d31e339efa9406b9394016f8412d999b"
       }
     },
     "reference_byte_identical_objects": [
@@ -101,6 +117,7 @@
       "drivers/firmware/efi/libstub/fdt.stub.o"
     ],
     "setup_change": "Only BUG source line metadata / non-allocated symbol strings",
+    "panic_change": "All allocated sections unchanged; only non-allocated local-symbol metadata differs",
     "init_change": "Only verified WARN source-line immediates",
     "warn_line_changes": [
       {
@@ -127,12 +144,71 @@
       "all three EFI color constants absent"
     ],
     "init_memory_and_readonly_overrides": "Unchanged; still unresolved in both modes",
-    "linked_kernels": "Not checked in this focused object run"
+    "linked_kernels": {
+      "reference": {
+        "vmlinux": "9f8c7885e5b856c69469ca1227141b83d4cea76c6472d73d67eb09a1e1d0589b",
+        "arch/arm/boot/zImage": "6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd"
+      },
+      "off": {
+        "vmlinux": "f041ac3ab21712f079f6e2e8c13218ee371b2166bb8480a377734dc53dccc855",
+        "arch/arm/boot/zImage": "a678672622b528e18e37b32d8a43a9d048c0f5f4f310010f629db3d34dbe8e3b"
+      }
+    }
   },
-  "cloud_comparison": "All five original and five reference-on object hashes match CI",
+  "cloud_comparison": "Six affected objects per mode checked locally; baseline/reference/off linked snapshots retained. Init and setup diagnostic changes are constrained; panic allocated sections unchanged.",
   "config_default": "PASS: original baseline config does not enable the new option when all dependencies are satisfied",
   "scope_limit": "Init-memory/read-only finalization overrides, 920 DTS ranges and other upstream research modifications remain unchanged",
   "full_kernel_reference": {
+    "state": "completed",
+    "exit_code": 0,
+    "reproduction_command": "python3 scripts/lumia.py build --profile patched --target kernel --jobs 4",
+    "resolved_config_sha256": "579fede7e4b3ea0479678ead719faf821c032964a1b9227ac1b65fcaab743699",
+    "artifacts": [
+      {
+        "path": "arch/arm/boot/zImage",
+        "bytes": 8667648,
+        "sha256": "6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd"
+      },
+      {
+        "path": "vmlinux",
+        "bytes": 26824116,
+        "sha256": "9f8c7885e5b856c69469ca1227141b83d4cea76c6472d73d67eb09a1e1d0589b"
+      }
+    ],
+    "report": ".work/logs/patched-reference-kernel-1792893715353230311.json",
+    "raw_log_sha256": "a67e891be3d7203e5de373669943cf2704c689de3131934f3dd92a2295a80864",
+    "linked_console_symbols": "present",
+    "original_reference_zImage_unchanged": true
+  },
+  "next_eos_dependency": "Reusable, exact-device board/UEFI provenance establishing EOS memory/reserved regions, framebuffer handoff and power/clock constraints before an EOS DTS can be written",
+  "full_kernel_off": {
+    "state": "completed",
+    "exit_code": 0,
+    "reproduction_command": "python3 scripts/lumia.py build --profile patched --debug-mode off --target kernel --jobs 4",
+    "resolved_config_sha256": "c484c7c46d69c5496928b2c662fd3ef6529306ffd43a58332d6365e9c295581b",
+    "artifacts": [
+      {
+        "path": "arch/arm/boot/zImage",
+        "bytes": 8667648,
+        "sha256": "a678672622b528e18e37b32d8a43a9d048c0f5f4f310010f629db3d34dbe8e3b"
+      },
+      {
+        "path": "vmlinux",
+        "bytes": 26823736,
+        "sha256": "f041ac3ab21712f079f6e2e8c13218ee371b2166bb8480a377734dc53dccc855"
+      }
+    ],
+    "report": ".work/logs/patched-off-kernel-1792893886957205578.json",
+    "raw_log_sha256": "c8fcf1f7c8669800546095463d81b50f8701c884b6edacdb4b1f94253d96090b",
+    "linked_console_symbols": "absent"
+  },
+  "ci_current_source": {
+    "commit": "327191e066022105f661d34cdff05d015d14634f",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40151825377",
+    "conclusion": "success",
+    "scope": "16 safety tests; DTBs; reference/off objects; default-off; allocated data checks"
+  },
+  "reference_before_panic_fix": {
     "state": "completed",
     "exit_code": 0,
     "reproduction_command": "python3 scripts/lumia.py build --profile patched --target kernel --jobs 4",
@@ -160,16 +236,13 @@
     "full_build_log_warning_count": 0,
     "original_baseline_image": "Retained unchanged at ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565"
   },
-  "next_eos_dependency": "Reusable, exact-device board/UEFI provenance establishing EOS memory/reserved regions, framebuffer handoff and power/clock constraints before an EOS DTS can be written",
-  "full_kernel_off": {
-    "state": "not built at requested bounded checkpoint",
-    "scope": "Off-mode affected objects and default-off resolver passed CI",
-    "next_host_command": "python3 scripts/lumia.py build --profile patched --debug-mode off --target kernel --jobs 4"
-  },
-  "ci_current_source": {
-    "commit": "327191e066022105f661d34cdff05d015d14634f",
-    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40151825377",
-    "conclusion": "success",
-    "scope": "16 safety tests; DTBs; reference/off objects; default-off; allocated data checks"
+  "panic_regression": {
+    "initial_off_exit_code": 2,
+    "failure_report": ".work/logs/patched-off-kernel-1792893418886034407.json",
+    "failure_log_sha256": "88a4c9c881fe3866d45ec8495581501ed5500a2d1a9732ef89c53ef8de1c3b02",
+    "cause": "Unconditional kernel/panic.c references to lumiafb_enabled and lumiafb_early_init were outside the original focused object set",
+    "fix": "Third GPL-2.0-only patch guards panic declarations and reactivation with the existing option; panic.o added to both mode checks",
+    "reference_preservation": "All allocated panic.o sections unchanged; reference zImage remains byte-identical",
+    "whole_source_symbol_audit": "Callers are kernel/panic.c, init/main.c and arch/arm/kernel/setup.c; driver definitions are in drivers/video/fbdev/lumiafb.c"
   }
 }

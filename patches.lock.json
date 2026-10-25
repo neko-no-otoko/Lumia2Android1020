@@ -60,6 +60,18 @@
           "after_sha256": "9e632544cf8bc88ad30d87d455691f3620c67940c1a515b4c31a0609ca76478a"
         }
       ]
+    },
+    {
+      "path": "patches/0003-lumia920-panic-debug-hook.patch",
+      "sha256": "586f161e53b19a6e540a4251423d78c6727851810bc868e23ee856c327649390",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "kernel/panic.c",
+          "before_sha256": "08440ee8fab4c74466a919591c2494380b20d824f2c57c19c9723a8a6ff55859",
+          "after_sha256": "8182f7ad7ec06327fc7e0c41c3607d75652d7388f4d43de8d77b7d42fe8b5bb4"
+        }
+      ]
     }
   ]
 }

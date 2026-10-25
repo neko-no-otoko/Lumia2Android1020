@@ -143,10 +143,14 @@ The original baseline image remains unchanged. The reference-on head, MMU and EF
 stub objects are byte-identical to baseline; setup/init differences are verified
 diagnostic line metadata only. Both modes pass the affected-object CI checks.
 
-The full off-mode image was not started before the requested bounded checkpoint.
-Its next host step is the documented `--debug-mode off --target kernel` command,
-followed by `verify_debug.py off --kernel` and `verify_debug.py verify`. This is
-not a hardware-test proposal. All measured hashes and limits are in
+The subsequent full off-mode link exposed an unconditional panic-console caller
+in `kernel/panic.c`. A third pinned patch guards it with the same option and adds
+`panic.o` to the affected-object set. Reference-on allocation/code behavior is
+preserved; the reference zImage hash stays unchanged. Both full modes now link
+with exit 0, and the paired checker confirms console symbols are present only
+in reference-on mode. The off zImage SHA-256 is
+`a678672622b528e18e37b32d8a43a9d048c0f5f4f310010f629db3d34dbe8e3b`.
+These are host tests only. All measured hashes, the reproduced failure and limits are in
 [`2026-10-25-debug-isolation.json`](../evidence/2026-10-25-debug-isolation.json).
 
 Relocated Bison first failed with `m4 subprocess failed: No such file or directory`.

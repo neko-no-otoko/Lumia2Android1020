@@ -31,6 +31,8 @@ def snapshot(mode, kernel=False):
         report = json.loads(reports[-1].read_text())
         if report["exit_code"] or report["config_sha256"] != lumia.digest(output / ".config"):
             raise ValueError("No successful full build for this configuration")
+        if report["patches"] != [p["sha256"] for p in lumia.patch_entries()]:
+            raise ValueError("Full-build report is for an older patch series")
         for artifact in report["artifacts"]:
             if lumia.digest(output / artifact["path"]) != artifact["sha256"]:
                 raise ValueError("Full-build artifact changed since its report")
@@ -40,6 +42,7 @@ def snapshot(mode, kernel=False):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(output / path, target)
     (destination / "snapshot.json").write_text(json.dumps(dict(mode=mode, full_kernel=kernel,
+        patches=[p["sha256"] for p in lumia.patch_entries()],
         config_sha256=lumia.digest(output / ".config")), indent=2) + "\n")
     print(f"Saved {mode} objects{' and linked kernel' if kernel else ''}: {destination}")
 
@@ -118,6 +121,10 @@ def verify():
     for path in identical:
         if hashes["baseline"][path] != hashes["reference"][path]:
             raise ValueError(f"Reference behavior regression: {path}")
+    a, b = sections(base / "kernel/panic.o"), sections(on / "kernel/panic.o")
+    for name, (data, flags) in a.items():
+        if flags & 2 and b[name][0] != data:
+            raise ValueError(f"Reference panic allocated section changed: {name}")
     path = "arch/arm/kernel/setup.o"
     a, b = sections(base / path), sections(on / path)
     for name, (data, flags) in a.items():
@@ -140,7 +147,9 @@ def verify():
         if flags & 2 and not flags & 4 and b[name][0] != data:
             raise ValueError(f"Reference init allocated data changed: {name}")
     for path, symbol in [("arch/arm/kernel/setup.o", "lumiafb_early_init"),
-                         ("init/main.o", "lumiafb_early_deinit")]:
+                         ("init/main.o", "lumiafb_early_deinit"),
+                         ("kernel/panic.o", "lumiafb_early_init"),
+                         ("kernel/panic.o", "lumiafb_enabled")]:
         if symbol not in tool("nm", "-u", on / path) or symbol in tool("nm", "-u", off / path):
             raise ValueError(f"Console hook isolation failed: {symbol}")
     needle = bytes.fromhex("00004080")
@@ -164,6 +173,7 @@ def verify():
                   default_off=default_off(),
                   object_sha256=hashes, reference_byte_identical_objects=identical,
                   setup_change="Only BUG source line metadata / non-allocated symbol strings",
+                  panic_change="All allocated sections unchanged; only non-allocated local-symbol metadata differs",
                   init_change="Only verified WARN source-line immediates", warn_line_changes=old_lines,
                   debug_off_checks=["console calls absent", "early framebuffer map literal absent",
                                     "PMD preservation marker absent", "all three EFI color constants absent"],

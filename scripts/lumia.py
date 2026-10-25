@@ -25,7 +25,7 @@ TARGETS = {
     "kernel": ["zImage"],
     "debug-objects": ["arch/arm/kernel/head.o", "arch/arm/kernel/setup.o",
                       "arch/arm/mm/mmu.o", "init/main.o",
-                      "drivers/firmware/efi/libstub/fdt.stub.o"],
+                      "drivers/firmware/efi/libstub/fdt.stub.o", "kernel/panic.o"],
 }
 
 
