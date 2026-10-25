@@ -34,7 +34,7 @@ namespaces; they are not Linux GPIO numbers.
 
 | Firmware function | Bus/address | Firmware identity / unresolved interpretation |
 | --- | --- | --- |
-| Touch | I2C3 / 0x4b | NOKIA_TOUCH. Neither this name nor an older Windows INF justifies choosing a Linux compatible/driver. |
+| Touch | I2C3 / 0x4b | NOKIA_TOUCH. Stock Synaptics3400_EOS configuration now identified; live silicon/PDT and Linux binding remain unverified. |
 | NFC | IC10 / 0x2b | NXP_NFCC; resource and power semantics still needed. |
 | Accelerometer | IC12 / 0x1e | KXTNK, not a confirmed Linux compatible. |
 | Ambient light and proximity | IC12 / 0x39 | ALS1 and PRX1 share address and IRQ49; do not emit two independent physical I2C devices blindly. |
@@ -121,10 +121,10 @@ these host tooling changes; the previously linked baseline/on/off images remain.
 
 Additional parent/local bounded parsing reports GIO0 QCOM0500/UID0, PM01
 QCOM2038/UID1 dependent on PMIC QCOM2037, and repeated firmware-controller IRQ
-resources. GIO0 OFNI bytes could suggest 152 lines, but the schema is absent.
-PM01 PMIO values could suggest GPIO and MPP subranges; **never globally subtract
-192** from its pins. Its DSM function1 value 0x33 is an ActiveBoth polarity
-override, not a line count. These facts are recorded without a Linux mapping.
+resources. The new [static decoder milestone](eos-static-decoders.md) verifies a DALTLMM limit
+of 152 pins and operation-specific PMIO GPIO/MPP/IRQ namespaces. **Never globally
+subtract 192**. The confirmed standard DSM function1 package identifies pin 51
+for an ActiveBoth logic-high override, not a count or Linux physical mapping.
 
 The memory literals are SMEM 0x80000000+0x200000, framebuffer
 0x80400000+0x400000, two adjacent SCM0 regions at 0x81400000+0x3d000 and
@@ -137,7 +137,8 @@ The parent/local task found two enabled **40-byte legacy GICC** records, parking
 protocol1 and parked addresses 0x80301000/0x80302000; MADT distributor and legacy
 header addresses correlate with Linux's GIC register windows. FADT ARM flags0
 do not advertise PSCI. The template tables have zero checksum fields and nonzero
-sums; runtime fixups are unknown. Do not reuse either a PSCI or the reference
+sums. AcpiPlatform recomputes checksum byte 9 before installation and adjusts a
+TPM2 control area; general AML fixups and installed runtime values remain unproven. Do not reuse either a PSCI or the reference
 DTSI's KPSS CPU enable method without a reviewed handoff case.
 
 Modern iasl rendered later GICC fields beyond the legacy record's length before
@@ -161,27 +162,11 @@ protocols or CSI lane maps. The pinned Linux CAMSS match table lists MSM8916,
 MSM8996, SDM660, SDM845 and SM8250, with no MSM8960 entry. Neither module codenames
 nor those Windows declarations supply a PureView Linux/Android stack.
 
-## Highest-value remaining questions for the local static task
+## Updated static investigation
 
-1. Find a documented PMIO/GIO0 resource schema or a bounded analysis of the stock
-   controller-driver decoder. Which controller/pin namespaces cover PM01 GPIO,
-   MPP and other subranges, and how do they map to Linux? Keep the candidate
-   PM8921 identification and pin-offset arithmetic as hypotheses until confirmed.
-2. Trace **outside the inspected ACPI templates** how firmware installs/fixes
-   DSDT versus2SDT, MADT and FADT and selects Tanya/Jessica. The inspected tables
-   have no Load/_STA/_INI selector; CDPI fields are unreferenced there. What
-   stock UEFI configuration or module supplies that selection and fixup logic?
-3. Find static GSBI mode/clock/electrical setup and power-helper tuple semantics:
-   raw 60 MHz/24 MHz rates, pulls/drive/sleep state, regulator voltage/sequence,
-   touch identity and USB/storage dependencies. No method should be evaluated.
-4. Find a reusable, licensed ARM32 UEFI/kernel handoff implementation or document
-   the exact missing contract: usable/reserved memory, cache/MMU transition,
-   CPU parking release and framebuffer/GOP data. Template literals do not replace
-   a runtime memory map. LumiaToy's reuse restriction remains in effect.
-
-Those targeted questions can be pursued through the existing local static task
-via the parent; no new user upload, device modification or physical test is
-requested. All peripherals remain unresolved and no EOS DTS is emitted. Actual
-boot memory/handoff and power/resource selection must precede enabling them.
-Android HAL/camera/modem compatibility is a further dependency; host compilation
-cannot prove any of those functions.
+The [decoder milestone](eos-static-decoders.md) supersedes the previous missing
+PMIO schema, DSM GUID, stock touch configuration and absence of firmware selector
+logic. Actual product.dat/table selection, panel caller precedence, PEP units and
+shared-data consumers remain unresolved. Its targeted Mini questions take priority;
+no new upload or physical test is requested. Runtime EFI memory/GOP and CPU
+handoff remain separate needs, followed by Android HAL/camera/modem dependencies.

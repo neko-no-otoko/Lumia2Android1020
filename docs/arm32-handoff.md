@@ -53,6 +53,12 @@ final EFI map around ExitBootServices. ARM32 Linux still needs the appropriate
 DT; merely possessing Windows ACPI tables does not make this kernel enumerate
 EOS devices through ACPI.
 
+The inspected upstream libstub/fdt.c ignores command-line `dtb=` unless
+`efi_get_secureboot()` explicitly reports disabled; unknown is treated as enabled.
+It also checks the firmware DEVICE_TREE_GUID table. Actual EOS DT availability and
+trust state are unknown. This is a delivery dependency, not a proposal to bypass
+or change Secure Boot.
+
 Use the actual source behavior when interpreting memory: libstub/fdt.c removes
 FDT reserve-map entries, and
 [EFI reserve_regions](https://github.com/torvalds/linux/blob/ffc253263a1375a65fa6c9f62a893e9767fbebfa/drivers/firmware/efi/efi-init.c)
@@ -98,38 +104,20 @@ to an Intel404 endpoint through the reader. Its contents were not reviewed here.
 The bounded conclusions above rest on the inspected Linux implementations, not
 an invented claim of having audited that unavailable specification.
 
-## PMIO and touch: what public sources establish
+## PMIO and touch: source boundaries
 
-[Microsoft GPIO documentation](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/general-purpose-i-o--gpio-)
-distinguishes controller-relative and bank-relative numbering.
-The [standard GPIO DSM](https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/gpio-controller-device-specific-method---dsm-)
-function 1 returns a package of controller-relative ActiveBoth pins whose initial
-asserted polarity is high. If the observed package {0x33} uses that standard GUID
-and revision, it names pin 51; it is not a pin-count field or a Linux GPIO number.
-The exact GUID/return-type match still needs confirmation from the private source.
-
-The public NT ARM [PMIC GPIO INF](https://github.com/vizPilot/MSM8x60-NT-ARM-Drivers/blob/ba5627f1bb42b174583b14ea225b80c8684a5ca5/msm8x60/Drivers/SOC/PMIC/qcpmicgpio8960.inf)
-binds QCOM2038 to qcpmicgpio8960.sys, identifying a driver family. It does not
-document the seventeen-field PMIO tuple or prove PM8921 silicon. No PMIO schema
-was verified in bounded public searches; search absence is not universal absence.
-The inspected INF is an all-rights-reserved reference, not imported driver source.
+The [static decoder milestone](eos-static-decoders.md) now confirms the stock
+17-field PMIO parser, separate I/O and IRQ namespaces, standard GPIO DSM GUID,
+and Synaptics3400_EOS intended configuration from the same verified FFU. These
+supersede the earlier public-source-only gaps. No raw driver or disassembly is
+published, and cloud arithmetic tests do not independently authenticate it.
 
 The official [PMIC GPIO binding](https://github.com/torvalds/linux/blob/ffc253263a1375a65fa6c9f62a893e9767fbebfa/Documentation/devicetree/bindings/pinctrl/qcom,pmic-gpio.yaml)
 and [SSBI implementation](https://github.com/torvalds/linux/blob/ffc253263a1375a65fa6c9f62a893e9767fbebfa/drivers/pinctrl/qcom/pinctrl-ssbi-gpio.c)
-use physical GPIO numbers1..44 for PM8921, translated to internal offsets by
-subtracting 1. That does not decode the Windows namespace or justify subtracting
-192 globally. The actual stock PMIC driver's data decoder is a targeted remaining
-static source, not a reason to probe or write handset pins.
-
-Synaptics RMI4 is a reasonable **candidate**, not a confirmed EOS silicon model
-or Linux compatible. The EOS-ATT aftermarket INF names it. Another model's
-[stock Fame research](https://github.com/samcday/nokia-fame-mainlining/blob/d7920b332a8c26a40cc9d998351081796c15c76b/notes/touch.md)
-combines NOKIA_TOUCH and address0x4b with a disabled Synaptics sketch, so 0x4b is
-not itself proof of a different vendor. Conversely, a
-[OnePlus5 driver INF](https://github.com/edk2-porting/WOA-Drivers/blob/524346372da2091e905164841317f35c35947a82/components/AnySoC/SynapticsTouch-OP5/SynapticsTouch.inf_)
-reuses NOKIA_TOUCH for an S3320: that generic identifier cannot identify EOS
-silicon. Stock EOS driver/INF/product/function data could narrow this further
-statically. No drivers, I2C probes or touch firmware updates were run.
+use physical GPIO numbers 1..44 for PM8921, translated to internal offsets by
+subtracting 1. A Windows GPIO index is not automatically a Linux binding.
+Likewise stock F01/F11/F51/F54 configuration labels are not an observed RMI
+function table or silicon identity. No I2C probes or firmware updates occurred.
 
 ## Host validation and remaining observations
 
@@ -155,8 +143,8 @@ source fingerprints are in [evidence](../evidence/2026-10-25-handoff.json).
 | Usable/reserved memory | Standard map transport/consumption understood; static literals recorded. | Actual GetMemoryMap descriptors, attributes, version/size and reservations, including mailbox/shared/secure/framebuffer regions. |
 | Display handoff | Standard GOP/screen_info path and compiled FB_EFI support identified. | Actual protocol/current mode, base/size, scanline stride, pixel format/masks and persistence. |
 | Secondary parking | Licensed ARM32 reference exists, but is Surface-specific. | Static EOS protocol/entry/wakeup decoder plus live installed CPU data and initial mailbox state. Releasing a CPU is a later write/test, outside scope. |
-| PMIO translation | Windows controller namespace and Linux numbering boundary understood. | Exact stock decoder or vendor schema; may be resolvable statically on the Mini. |
-| Touch identity | Synaptics candidate strengthened; generic HID/address insufficient. | Exact stock EOS driver/product/function evidence, potentially later silicon-ID observation if static evidence remains ambiguous. |
+| PMIO translation | Stock operation-specific decoder now verified; pure host checks pass. | Linux binding, electrical behavior and PEP consumer semantics remain unresolved. |
+| Touch identity | Stock Synaptics3400_EOS product/vendor/function configuration identified. | Actual silicon/PDT observation and supported Linux binding remain unverified. |
 
 These are observations to plan, not instructions to collect them now. Reading
 normal-mode phone Info does not provide pre-ExitBootServices memory/GOP state.

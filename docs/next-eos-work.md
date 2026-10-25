@@ -82,7 +82,7 @@ before concluding a live phone is necessary; see the staged
 
 The source-input gap above is superseded by [eos-board-evidence.md](eos-board-evidence.md).
 An original typed fact inventory, compiled generic-SoC property audit and four
-fresh ARM controller-driver object builds now pass. Use its six targeted static
+fresh ARM controller-driver object builds now pass. Use the updated decoder milestone’s targeted static
 questions before defining an EOS board or enabling peripherals. Memory/handoff,
 GPIO translation, mode/power semantics and panel/table selection remain unresolved.
 
@@ -93,3 +93,11 @@ EFI stub as a primary-core source path and a GPL Surface-specific ARM32 parking
 reference. Actual EOS compliance, live memory/GOP state and a reviewed secondary
 backend remain unverified. Follow its static/runtime matrix; further local
 inspection is on the Mac Mini via the parent, with no new upload requested.
+
+## Stock decoder checkpoint
+
+[Typed decoder checks](eos-static-decoders.md) now resolve PMIO I/O versus IRQ
+namespaces, DALTLMM fields, GPIO DSM semantics, conditional embedded panel
+dispatch and stock touch configuration. The next static work is PEP consumer
+semantics, panel caller precedence and shared-data fixup/consumer tracing on
+the Mini. Actual runtime memory/handoff and active hardware remain unobserved.

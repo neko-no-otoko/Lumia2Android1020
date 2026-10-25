@@ -17,6 +17,7 @@ or safe flashing procedure is claimed. No hardware has been flashed or tested by
 - [Next source-level work and EOS evidence gaps](docs/next-eos-work.md)
 - [Offline EOS data investigation](docs/eos-offline-research.md)
 - [Actual EOS board facts and Linux resource audit](docs/eos-board-evidence.md)
+- [Stock EOS decoder facts and host checks](docs/eos-static-decoders.md)
 - [ARM32 EFI handoff contract and remaining observations](docs/arm32-handoff.md)
 - [Staged assistance plan and recovery limits](docs/physical-assistance-plan.md)
 

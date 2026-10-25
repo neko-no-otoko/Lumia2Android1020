@@ -133,18 +133,20 @@
   "pmio": {
     "public_source_query_results": "No documented Qualcomm PMIO tuple schema verified in bounded exact QCOM2038/PMIO searches; indexed search coverage is incomplete.",
     "windows_driver_reference": "vizPilot/MSM8x60-NT-ARM-Drivers@ba5627f1bb42b174583b14ea225b80c8684a5ca5/msm8x60/Drivers/SOC/PMIC/qcpmicgpio8960.inf",
-    "finding": "QCOM2038 binds Qualcomm PMIC GPIO client qcpmicgpio8960.sys, version1.0.3051.0000. This identifies a driver family, not PMIO tuple fields or exact PMIC silicon.",
+    "finding": "Earlier public-source-only observation: QCOM2038 INF binds qcpmicgpio8960.sys version1.0.3051.0000. The later exact stock decoder finding below supersedes its schema gap.",
     "linux_boundary": "pm8921 GPIO binding uses physical pins1..44; SSBI GPIO xlate subtracts1. Windows offsets are not Linux GPIO cells.",
-    "next_static_question": "On the Mac Mini, confirm standard DSM GUID/revision/package type and inspect the exact stock PMIC GPIO decoder/config without executing it."
+    "next_static_question": "PEP consumer units/opcodes/shared votes and Linux binding/electrical correspondence; do not reinterpret Windows indices as Linux cells.",
+    "superseding_stock_finding": "Authorized Mac Mini static inspection of same verified RM876 FFU resolves 17-argument parser and independent GPIO/MPP I/O versus IRQ namespaces; see eos-resources.json verified_static with driver hash."
   },
   "touch": {
     "candidate": "Synaptics RMI4 is a supported research hypothesis, not a verified EOS Linux compatible or silicon model.",
     "evidence": [
       "Pinned EOS-ATT aftermarket INF labels Synaptics RMI4 F12",
       "samcday/nokia-fame-mainlining@d7920b332a8c26a40cc9d998351081796c15c76b notes stock fame NOKIA_TOUCH at0x4b; other model, not proof",
-      "edk2-porting/WOA-Drivers@524346372da2091e905164841317f35c35947a82 OnePlus5 INF reuses NOKIA_TOUCH for SynapticsS3320, showing identifier is not model-specific"
+      "edk2-porting/WOA-Drivers@524346372da2091e905164841317f35c35947a82 OnePlus5 INF reuses NOKIA_TOUCH for SynapticsS3320, showing identifier is not model-specific",
+      "Stock SynapticsTouch.sys SHA256 2b3907b0402783ce18ba1048f2efbf7504e86387a3cc346e32ed99fdafb82b5a: Synaptics3400_EOS, vendors3/8, PLG0150-01/-02, F01/F11/F51/F54 labels; configuration only."
     ],
-    "next_static_question": "On the Mac Mini, identify exact stock touch driver/INF/product/function data for this FFU; do not run drivers or force firmware updates."
+    "next_static_question": "Observed silicon/function table remains absent; configuration alone does not select Linux compatible."
   },
   "local_execution_policy": "All new local inspection uses Mac Mini via parent; cloud work remains here. No MacBook work requested."
 }

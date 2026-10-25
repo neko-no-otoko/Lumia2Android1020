@@ -9,8 +9,10 @@ and [board evidence](eos-board-evidence.md) before proposing a handset test.
 ## Smallest useful help now
 
 No new upload or physical action is requested. The existing Mac Mini task can
-inspect exact stock PMIC GPIO/touch driver metadata and decoder/configuration
-logic, and firmware template/panel selection evidence, through the parent.
+continue the [targeted decoder questions](eos-static-decoders.md): PEP consumers,
+panel caller precedence, shared-data layout consumers and stock product.dat
+selection/parser bounds. PMIO namespaces and stock touch configuration are now
+resolved statically.
 This remains private static analysis: no bundled tool or device binary is run,
 and no personal Data, DPP, NVI, simlock or provisioning material is processed.
 No further work is requested on the MacBook.

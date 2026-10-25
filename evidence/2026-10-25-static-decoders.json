@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-25",
+  "scope": "Original factual synthesis of authorized local static findings and independent cloud arithmetic/format tests; no firmware execution or hardware enablement",
+  "provenance": {
+    "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+    "method": "Original factual findings reported by authorized Mac Mini static inspection of this FFU; no firmware/driver execution; binaries and disassembly private; cloud independently checks arithmetic only",
+    "driver_files": {
+      "qcpmicgpio8960.sys": {
+        "bytes": 107008,
+        "sha256": "6b21dc1c1bd884cd95751140c7db5c5526a1e613f6fb9609cfd26ac14362892c"
+      },
+      "SynapticsTouch.sys": {
+        "bytes": 507392,
+        "sha256": "2b3907b0402783ce18ba1048f2efbf7504e86387a3cc346e32ed99fdafb82b5a"
+      }
+    }
+  },
+  "source_limit": "Cloud has not materialized private raw firmware/disassembly; UEFI module hashes absent from local factual handoff. Driver hashes and FFU provenance supplied by local analysis; vendor trust unverified.",
+  "commands": [
+    {
+      "command": "python3 scripts/firmware_facts.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/eos_resources.py --check-kernel",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "passed": 45,
+    "new_decoder_tests": 8,
+    "scope": "Synthetic boundary/namespace/inference tests; native CAB/iasl synthetic integration included"
+  },
+  "decoder_result": {
+    "result": "PASS",
+    "runtime_enablement": "none",
+    "display_io": {
+      "kind": "gpio",
+      "windows_index": 42,
+      "linear_pin": 234
+    },
+    "dsm_irq": {
+      "kind": "irq",
+      "controller_relative_pin": 51
+    },
+    "gpio192_io": {
+      "kind": "gpio",
+      "windows_index": 0,
+      "linear_pin": 192
+    },
+    "irq192": {
+      "kind": "irq",
+      "controller_relative_pin": 192
+    },
+    "shared_rails": [
+      "LVS4",
+      "SMPS4"
+    ],
+    "aml_dpid_conditionally_matches_tanya": true,
+    "shared_data_base_differs": true,
+    "shared_data_offsets_differ": true,
+    "active_panel": "unresolved",
+    "active_acpi_table": "unresolved"
+  },
+  "compile": {
+    "scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
+    "diagnostics": [
+      "(unit_address_vs_reg): /memory: node has a reg or ranges property, but no unit name"
+    ],
+    "kernel_patches_or_images_changed": false,
+    "existing_links": "Baseline/reference-on/off preserved; full linked results in2026-10-25-debug-isolation.json"
+  },
+  "resolved": [
+    "PMIO17-field parser and operation-specific Windows GPIO/MPP I/O versus IRQ namespaces",
+    "Standard GPIO DSM GUID and controller-relative ActiveBoth-high pin51",
+    "DALTLMM two packed formats, index bounds, register addresses and unresolved drive/direction overlap",
+    "Conditional embedded Tanya low-byte predicate, not actual panel selection",
+    "Partial product.dat ACPI selection and checksum fixup, not installed runtime tables",
+    "Stock Synaptics3400_EOS intended product/vendor/function configuration"
+  ],
+  "remaining_static": [
+    "PEP consumer units/opcodes/flags/shared votes and sleep/off behavior",
+    "Panel caller precedence and actual input source",
+    "ProductCfg shared-data versus raw SSDT CDPI consumer/fixup/version chain",
+    "Stock product.dat TYPE/HWID and comparison bounds if present without accessing provisioning"
+  ],
+  "remaining_runtime": [
+    "Actual EFI services/trust/DT delivery path",
+    "GetMemoryMap descriptors and attributes",
+    "Active GOP mode/base/size/stride/format",
+    "CPU parking protocol and initial mailbox state",
+    "Actual peripheral silicon/PDT and electrical/power behavior"
+  ],
+  "android": "No verified EOS kernel/device/HAL/PureView compatibility case; no release chosen",
+  "publication": "Original analysis and tools only; no raw proprietary binaries, tables or disassembly"
+}
