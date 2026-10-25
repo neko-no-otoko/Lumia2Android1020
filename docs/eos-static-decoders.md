@@ -5,11 +5,14 @@ inspection of the same RM-876 stock FFU; no firmware, AML or driver execution.
 Raw binaries and disassembly remain private. Cloud tooling implements independently
 written arithmetic checks of the reported facts, not copied vendor routines.
 
-The current user-selected target is **RM-877**, still to verify against the actual
-handset RM and product code. Every firmware observation here is **RM-876-specific**.
+The current user-selected target firmware is verified **RM-877 /059T019**. Actual
+handset identity/state remains unobserved. The analysis below originated from
+**RM-876**; its limited target corroboration is recorded separately.
 Shared EOS names do not prove board equivalence. A provenance-backed variant
-comparison is required before emitting any RM-877 target configuration; no
-cross-flash or hardware action is proposed.
+comparison is required before emitting any RM-877 target configuration. The new
+[exact-image comparison](rm877-evidence.md) now corroborates the selected shared
+tables and PMIC/PEP decoder scope; changed touch data and UEFI stay separate.
+No cross-flash or hardware action is proposed.
 
 ## Provenance
 
@@ -145,18 +148,14 @@ among 1,975 checked stock System32 entries. Generic BOOTARM/winload paths suppli
 no observed Nokia CDPI edit. The address/layout mismatch remains unresolved, not
 established as a firmware defect.
 
-## Current next dependency: RM-877 input
+## Current next dependency: exact-target changed firmware
 
-The identified RM-876 routes in this bounded Mini pass are exhausted. Runtime
-final tables/CDPI, actual panel/fitted touch, aggregate rails and EFI memory/GOP/
-acceptance remain unknown. This does not establish universal static impossibility.
-
-The user now selected **RM-877** and supplied a matching candidate image for Mini
-verification. Await its exact filename/size/hash, platform/metadata and embedded
-integrity results, then compare selected stock board facts with this historical
-RM-876 dataset. Do not relabel RM-876 observations as RM-877 facts or emit target
-configuration before comparison. RM-875 acquisition is retired; no further
-RM-875 downloads are requested. The separate RM-937/1520 effort does not change
-this repository's 1020 scope. No new user upload, live observer or physical action
-is requested here.
+The [RM-877 input/comparison milestone](rm877-evidence.md) closes the former input
+gap: selected ACPI/PEP assets match these exact images, PMIC GPIO is identical,
+and PEP raw sections match. Thirteen selected UEFI modules and touch data differ.
+The preceding analysis retains its RM-876 provenance; only explicitly corroborated
+facts carry to the exact target. The bounded target loader/touch pass is complete.
+Runtime tables/CDPI, panel/fitted touch, aggregate rails and EFI state remain
+unobserved. Minimum next help is ownership/normal stock identity/condition; no
+new upload, live observer or hardware operation is requested.
 Android kernel/device/HAL and PureView dependencies remain unresolved.

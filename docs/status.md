@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 57 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 65 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |
@@ -16,10 +16,10 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | Compiled | Exit 0 after about 21 minutes; 8,667,648-byte ARM image. One unused-function warning; see the kernel report for hashes. A zImage alone is not an OS image. |
 | GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
-| EOS stock board facts | Static analysis available | Parent/local FFU extraction and AML disassembly supplied actual RM-876 facts. Cloud independently cross-checks original factual inventory against pinned Linux. Vendor trust and runtime selections unresolved; raw data private. |
+| EOS stock board facts | Static analysis available | Private Mini inspection verified exact RM-877 input; selected ACPI/PEP assets match the exact RM-876 reference. Cloud independently cross-checks original factual inventory against pinned Linux. Vendor trust and runtime selections unresolved; raw data private. |
 | EOS resource audit / SoC driver objects | Passed host checks | Five controller bases/IRQs and four candidate GSBI pinmux groups cross-checked; four ARM objects freshly rebuilt. No Linux board bindings or hardware enablement inferred. |
 | EOS static driver/UEFI decoders | Passed host checks | PMIO namespaces, packed TLMM and conditional panel rule checked; stock touch configuration identified. PEP clock operations and per-client vote arithmetic resolved statically; field labels now statically corroborated, other flags and active table/panel/shared-data consumers unresolved. |
-| EOS kernel / device tree | Blocked | Partial actual RM-876 board facts now recorded; usable/reserved memory, handoff, controller translation and power/selection semantics still unresolved. No EOS DTS emitted. |
+| EOS kernel / device tree | Blocked | Selected RM-877 static board facts corroborated; usable/reserved memory, handoff, controller translation and power/selection semantics still unresolved. No EOS DTS emitted. |
 | EOS UEFI loader / kernel handoff | Blocked | Upstream GPL ARM32 EFI stub identified and existing PE images checked; actual EOS UEFI services/trust, board DT and parking contract remain unverified. LumiaToy is not imported. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
@@ -31,13 +31,13 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 ## Concrete next dependencies
 
 The current user-selected target is RM-877, subject to exact handset RM/product
-code verification. Current firmware findings are RM-876 / 059T3B3 only. Compare
-variant evidence before emitting a target configuration; no board equivalence
-or cross-flash compatibility is established.
+code verification. The exact RM-877 / 059T019 input is now verified and selected assets compared
+with RM-876 / 059T3B3. This proves the selected static subset, not whole-board
+behavior or cross-flash compatibility. Changed firmware requires target review.
 
-1. Verify the supplied RM-877 FFU metadata/integrity on the Mini and compare
-   selected board facts with historical RM-876 input. Record product/board
-   differences before assuming parity; no target configuration is emitted.
+1. Establish ownership/availability and exact normal-mode handset/build/condition
+   using the minimum steps in the assistance plan. The bounded target static
+   pass is complete; no target configuration follows from unobserved runtime facts.
 2. Compare EOS memory/reserved ranges, UEFI handoff, panel, GPIO, PMIC/regulators,
    clocks, thermal controls and storage controller against the 920 reference.
    Remove hard-coded 920 assumptions only with evidence; do not invent addresses.
@@ -72,12 +72,9 @@ of board-description input; it does not establish boot or runtime support.
 contract from unresolved EOS static mappings and required runtime observations.
 Existing images pass host PE checks; no new image or device test was performed.
 
-[Static decoder findings](eos-static-decoders.md) supersede the missing PMIO schema
-and stock touch metadata. The bounded RM-876 static pass is complete; RM-877 input verification is next.
-No physical action or new upload is requested.
-
-Current target update: the user selected RM-877. All RM-876 observations remain
-historical reference only; no RM-877 equivalence is established. The identified
-RM-876 static routes in the bounded Mini pass are complete. Await verification
-of the supplied RM-877 FFU and compare its board facts before target configuration.
-RM-875 acquisition is stopped; the separate RM-937 effort stays outside this repo.
+[Static decoder findings](eos-static-decoders.md) and the new
+[exact RM-877 comparison](rm877-evidence.md) separate shared tables/decoders from
+changed UEFI/touch data. The target input is verified, with vendor trust still
+unverified. The bounded target loader/touch pass is complete; minimum next help
+is ownership/normal stock identity/condition, not a live observer or firmware
+upload; the separate RM-937 effort stays outside this repo.

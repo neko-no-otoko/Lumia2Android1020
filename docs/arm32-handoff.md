@@ -150,3 +150,8 @@ These are observations to plan, not instructions to collect them now. Reading
 normal-mode phone Info does not provide pre-ExitBootServices memory/GOP state.
 Launching even a read-only EFI collector can require a device boot-chain change;
 no such delivery, boot, unlock or write is authorized by this research step.
+
+The [exact RM-877 comparison](rm877-evidence.md) now verifies the target input
+and selected shared tables/PMIC/PEP scope. Changed target UEFI loaders and touch
+data require direct review; reference loader behavior is not inherited merely
+from matching ACPI bytes. Runtime handoff observations remain uncollected.

@@ -19,9 +19,9 @@ DSDT, 2SDT and SSDT using official ACPICA 20260930, with each iasl exit 0 and no
 AML execution. This cloud did not materialize that private bundle: its Library
 transfer failed. The factual inventory explicitly attributes the source findings
 to the parent/local inspection; cloud checks below independently use the pinned
-Linux source. The current user-selected target is RM-877, still to verify; this input is
-RM-876 China Unicom. No parity is inferred. Variant comparison must precede
-any target configuration.
+Linux source. This original input is RM-876 China Unicom. The now-verified
+RM-877 target has a scoped comparison below; selected asset equality does not
+establish general board behavior or authorize target configuration.
 
 The previous absence of board-description input is superseded by those actual
 stock facts. Missing runtime selections, memory/handoff and resource semantics
@@ -173,9 +173,10 @@ and regulator field labels are statically corroborated. Physical aggregate rails
 actual table/panel/touch selections and shared-data consumers remain unobserved.
 The identified RM-876 routes in the bounded Mini pass are complete.
 
-The current user-selected target is RM-877. RM-876 observations remain historical
-reference; no RM-877 equivalence is established. Await verification of the supplied
-RM-877 FFU and compare its board facts before target configuration. RM-875
-acquisition is stopped; the separate RM-937 effort stays outside this repo.
-Runtime EFI memory/GOP and CPU handoff remain separate needs, followed by Android
-HAL/camera/modem dependencies. No new upload or physical test is requested.
+The verified RM-877 target now has [an exact-image comparison](rm877-evidence.md):
+twelve PLAT ACPI files, external XML and the PEP data match this exact reference.
+The resource facts carry only through that explicit provenance chain. Changed
+UEFI and touch data remain separate; the bounded target loader/touch pass is
+complete, with selected registry settings directly compared unchanged.
+No whole-board behavior, runtime table/panel state or hardware safety is inferred.
+Minimum next help is ownership/normal stock identity/condition, not an observer; RM-937 remains a separate effort.

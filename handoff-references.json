@@ -148,5 +148,10 @@
     ],
     "next_static_question": "Observed silicon/function table remains absent; configuration alone does not select Linux compatible."
   },
-  "local_execution_policy": "All new local inspection uses Mac Mini via parent; cloud work remains here. No MacBook work requested."
+  "local_execution_policy": "All new local inspection uses Mac Mini via parent; cloud work remains here. No MacBook work requested.",
+  "rm877_comparison": {
+    "record": "rm877-comparison.json",
+    "target_ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+    "scope": "Exact shared static assets and reported decoder corroboration only; changed UEFI/touch data require target review; no runtime equivalence"
+  }
 }

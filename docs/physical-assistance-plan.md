@@ -6,43 +6,51 @@ is proposed. Actual stock FFU board facts are now available; the earlier CAB
 acquisition request is superseded. Continue the [handoff source matrix](arm32-handoff.md)
 and [board evidence](eos-board-evidence.md) before proposing a handset test.
 
-## Smallest useful help now
+## Minimum help needed now
 
-No new upload or physical action is requested. The bounded RM-876 static pass
-is complete. The Mini is verifying the user's newly supplied RM-877 candidate;
-its exact metadata/integrity and selected board facts are the next input. Compare
-those with historical RM-876 observations before any target configuration.
-This remains private static analysis: no bundled tool or device binary is run,
-and no personal Data, DPP, NVI, simlock or provisioning material is processed.
-No further work is requested on the MacBook.
+The exact RM-877 FFU is verified, selected shared assets are compared, and the
+bounded target loader/touch static pass is complete. No firmware reupload or
+further identified local static route is pending. Ownership of either target
+handset is still unknown. The next useful information is:
 
-The generic upstream ARM32 EFI stub is a reusable licensed source path. The
-remaining runtime questions include live EFI memory descriptors, GOP mode/stride,
-entry state, executable trust policy and installed CPU/mailbox information.
-Normal-mode Info cannot supply all of these. A read-only EFI collector still
-requires an approved delivery/execution path; do not treat a boot-chain change
-as read-only merely because its payload would only read state.
+1. Confirm whether an RM-877 Lumia 1020 is already owned/available. The separate
+   RM-937/1520 effort needs its own identity; this repository remains 1020-only.
+   If no target is available, say so. No purchase is requested.
+2. If already owned, report the model/RM, firmware and OS build visible in normal
+   stock settings, plus public product SKU only if already visible. Do not open
+   the phone, use service modes or inspect provisioning to find missing fields;
+   report unknown instead. Omit IMEI, serial, MAC and account details.
+3. Report baseline condition: whether it already boots stock, charges normally,
+   stock camera works and ordinary USB is recognized. Unknown is acceptable.
+   Also state whether a Windows host and known-good data cable are available.
+   No tool install, mode change, unlock, flash or observer launch is requested.
 
-## If an already-owned target is available later
+These facts establish the actual device/build, baseline function and available
+access/recovery context. A matching downloaded FFU does not establish that a
+handset is the same variant or safe to modify. Do not cross-flash a different
+1020 variant to match the chosen research input.
 
-The current user-selected target is RM-877, still to verify. Current RM-876
-China Unicom firmware is research input only; compare variant evidence before
-any target configuration or later exact-device proposal.
+Personal files may be copied through ordinary supported stock interfaces before
+any later experiments. This is user-file backup, not a complete recoverable raw
+image. No personal files, accounts, DPP, modem NV or provisioning data should be
+sent for this research.
 
-Supply only the RM variant (875/876/877), firmware and OS version, and whether it
-currently boots stock, charges normally, takes a photo and appears over ordinary
-USB. Crop IMEI, serial, product/device identifiers and account details from any
-screenshots. State whether an existing Windows host and known-good data cable
-are available. These observations establish identity, baseline function and
-available tools; they do not require bootloader changes. Do not buy a phone or
-switch operating modes for this checklist.
+## What this first step cannot supply
 
-Personal photos/files can be copied through ordinary supported stock interfaces
-before experiments. This is user-file backup, not a complete recoverable device
-image. Future tool-assisted **read-only Info** would require review of the exact
-tool/version, current connection mode and fields to collect. It must not silently
-reboot into flash/mass-storage mode, unlock, write or disclose unique IDs. No such
-session has been authorized or run here.
+Normal settings/Info do not provide runtime EFI memory descriptors, GOP
+base/stride/format, installed ACPI/CDPI, CPU/mailbox state, fitted touch/PDT or
+aggregate rails. The upstream ARM32 EFI source contract is known, but target
+alternative-image acceptance and permitted DT delivery remain unverified.
+
+The target GOP wrappers copy mode information, but their callers also have
+preferred-mode logic; full stock graphics initialization is not a passive
+collector. No live-observer route has been accepted or authorized. Even a
+read-only payload can require a boot-chain write to launch. After the minimal
+handset context is available, review a concrete access/recovery proposal before
+any such operation. Tool-assisted Info must not silently reboot into another
+mode or reveal unique identifiers. No such session is requested here.
+
+Current target static work uses the Mini; no MacBook work is requested.
 
 ## Recovery facts that constrain later decisions
 
@@ -85,13 +93,7 @@ path or a separately approved later plan. Static ACPI facts alone cannot prove
 charging, thermal, eMMC-write or modem safety. A functional PureView photo in the
 stock OS provides a baseline, not a Linux sensor/ISP driver or Android HAL.
 
-The next actions are the remaining source questions in the handoff matrix, using
-the existing Mac Mini for further local inspection. No device purchase, unlock,
-partition write or firmware execution is proposed. Runtime collection must wait
-for a concrete exact-device access and recovery decision.
-
-Current target update: the user selected RM-877. All RM-876 observations remain
-historical reference only; no RM-877 equivalence is established. The identified
-RM-876 static routes in the bounded Mini pass are complete. Await verification
-of the supplied RM-877 FFU and compare its board facts before target configuration.
-RM-875 acquisition is stopped; the separate RM-937 effort stays outside this repo.
+The next action is the minimal ownership/identity/condition report above, not
+more speculative board code or a collector launch. Hardware-specific execution
+must wait for an exact-device access and recovery decision. The supplied target
+FFU and scoped comparison are recorded in [RM-877 evidence](rm877-evidence.md).

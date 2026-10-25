@@ -102,8 +102,11 @@ panel dispatch. The identified RM-876 static routes in the bounded Mini pass are
 complete; physical selections, shared-data runtime behavior and EFI state remain
 unobserved.
 
-The user now selected RM-877. Verify the supplied target FFU on the Mini, then
-compare selected board facts against this historical RM-876 dataset before
-emitting a target configuration. Do not relabel old findings. RM-875 acquisition
-is stopped; the separate RM-937 effort stays outside this repo. No new user
-upload or hardware action is requested.
+The supplied RM-877 FFU is now verified and selected static assets compared
+against the exact RM-876 reference. See [the comparison](rm877-evidence.md) for
+what carries across and what changed. The bounded exact-target loader/touch pass is complete. Its directly reviewed
+findings remain separate from table identity and unobserved live state.
+Runtime handoff/peripheral state and Android HAL/PureView dependencies remain.
+Next obtain minimum ownership/normal stock identity/condition, as detailed in
+the assistance plan. No EOS DTS/image or hardware action is authorized by these checks. RM-875
+acquisition is stopped; the separate RM-937 effort stays outside this repo.

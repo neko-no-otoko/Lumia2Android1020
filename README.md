@@ -7,8 +7,9 @@ Experimental research toward Linux and Android bring-up on Nokia Lumia 1020 hard
 Host build foundations are in place: pinned source/license and dependency inventories,
 rootless setup, synthetic safety tests, and successful Lumia **920** reference
 DTB, driver and full-kernel cross-compilation.
-The current user-selected target is RM-877, still to verify. Current stock
-firmware observations are RM-876-specific; board equivalence remains unverified.
+The RM-877 target FFU is verified by private Mini static inspection. Selected
+ACPI/PEP assets match the exact RM-876 reference; changed UEFI/touch data remain
+separate, and general board/runtime equivalence is unverified.
 No working Lumia 1020 Linux/Android image, PureView camera support, cellular support,
 or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
 
@@ -19,6 +20,7 @@ or safe flashing procedure is claimed. No hardware has been flashed or tested by
 - [Next source-level work and EOS evidence gaps](docs/next-eos-work.md)
 - [Offline EOS data investigation](docs/eos-offline-research.md)
 - [Actual EOS board facts and Linux resource audit](docs/eos-board-evidence.md)
+- [Verified RM-877 input and scoped comparison](docs/rm877-evidence.md)
 - [Stock EOS decoder facts and host checks](docs/eos-static-decoders.md)
 - [ARM32 EFI handoff contract and remaining observations](docs/arm32-handoff.md)
 - [Staged assistance plan and recovery limits](docs/physical-assistance-plan.md)
