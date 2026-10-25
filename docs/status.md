@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 45 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 54 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |
@@ -18,7 +18,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
 | EOS stock board facts | Static analysis available | Parent/local FFU extraction and AML disassembly supplied actual RM-876 facts. Cloud independently cross-checks original factual inventory against pinned Linux. Vendor trust and runtime selections unresolved; raw data private. |
 | EOS resource audit / SoC driver objects | Passed host checks | Five controller bases/IRQs and four candidate GSBI pinmux groups cross-checked; four ARM objects freshly rebuilt. No Linux board bindings or hardware enablement inferred. |
-| EOS static driver/UEFI decoders | Passed host checks | PMIO namespaces, packed TLMM and conditional panel rule checked; stock touch configuration identified. PEP units, active table/panel and shared-data consumers remain unresolved. |
+| EOS static driver/UEFI decoders | Passed host checks | PMIO namespaces, packed TLMM and conditional panel rule checked; stock touch configuration identified. PEP clock operations and per-client vote arithmetic resolved statically; units remain inferred, other flags and active table/panel/shared-data consumers unresolved. |
 | EOS kernel / device tree | Blocked | Partial actual RM-876 board facts now recorded; usable/reserved memory, handoff, controller translation and power/selection semantics still unresolved. No EOS DTS emitted. |
 | EOS UEFI loader / kernel handoff | Blocked | Upstream GPL ARM32 EFI stub identified and existing PE images checked; actual EOS UEFI services/trust, board DT and parking contract remain unverified. LumiaToy is not imported. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
@@ -29,6 +29,11 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Modem / graphics / audio / sensors | Untested / missing dependencies | No end-to-end EOS driver/HAL evidence. |
 
 ## Concrete next dependencies
+
+The intended international target is RM-875, subject to exact handset RM/product
+code verification. Current firmware findings are RM-876 / 059T3B3 only. Compare
+variant evidence before emitting a target configuration; no board equivalence
+or cross-flash compatibility is established.
 
 1. Locate a source-and-license chain for the independently mentioned RM-875 pmOS
    work, or establish an EOS board port from publicly reusable technical evidence.

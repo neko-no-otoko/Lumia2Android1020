@@ -9,8 +9,8 @@ and [board evidence](eos-board-evidence.md) before proposing a handset test.
 ## Smallest useful help now
 
 No new upload or physical action is requested. The existing Mac Mini task can
-continue the [targeted decoder questions](eos-static-decoders.md): PEP consumers,
-panel caller precedence, shared-data layout consumers and stock product.dat
+continue the [targeted decoder questions](eos-static-decoders.md): remaining PEP policy/mode fields,
+panel branch coverage, shared-data layout consumers and stock product.dat
 selection/parser bounds. PMIO namespaces and stock touch configuration are now
 resolved statically.
 This remains private static analysis: no bundled tool or device binary is run,
@@ -25,6 +25,10 @@ requires an approved delivery/execution path; do not treat a boot-chain change
 as read-only merely because its payload would only read state.
 
 ## If an already-owned target is available later
+
+The intended international target is RM-875, still to verify. Current RM-876
+China Unicom firmware is research input only; compare variant evidence before
+any target configuration or later exact-device proposal.
 
 Supply only the RM variant (875/876/877), firmware and OS version, and whether it
 currently boots stock, charges normally, takes a photo and appears over ordinary

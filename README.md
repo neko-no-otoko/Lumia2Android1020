@@ -7,6 +7,8 @@ Experimental research toward Linux and Android bring-up on Nokia Lumia 1020 hard
 Host build foundations are in place: pinned source/license and dependency inventories,
 rootless setup, synthetic safety tests, and successful Lumia **920** reference
 DTB, driver and full-kernel cross-compilation.
+The intended international target is RM-875, still to verify. Current stock
+firmware observations are RM-876-specific; board equivalence remains unverified.
 No working Lumia 1020 Linux/Android image, PureView camera support, cellular support,
 or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
 

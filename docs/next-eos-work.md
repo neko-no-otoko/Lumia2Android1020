@@ -98,6 +98,7 @@ inspection is on the Mac Mini via the parent, with no new upload requested.
 
 [Typed decoder checks](eos-static-decoders.md) now resolve PMIO I/O versus IRQ
 namespaces, DALTLMM fields, GPIO DSM semantics, conditional embedded panel
-dispatch and stock touch configuration. The next static work is PEP consumer
-semantics, panel caller precedence and shared-data fixup/consumer tracing on
-the Mini. Actual runtime memory/handoff and active hardware remain unobserved.
+dispatch and stock touch configuration. The next static work is remaining PEP policy/mode fields, panel branch
+coverage and shared-data fixup/consumer tracing on the Mini. Clock operations
+and per-client vote arithmetic are now decoded. Intended RM-875 target evidence
+must be compared with this RM-876 dataset before emitting a configuration. Actual runtime memory/handoff and active hardware remain unobserved.

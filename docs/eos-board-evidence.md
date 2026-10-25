@@ -19,7 +19,9 @@ DSDT, 2SDT and SSDT using official ACPICA 20260930, with each iasl exit 0 and no
 AML execution. This cloud did not materialize that private bundle: its Library
 transfer failed. The factual inventory explicitly attributes the source findings
 to the parent/local inspection; cloud checks below independently use the pinned
-Linux source. No inference of parity with other EOS variants is made.
+Linux source. The intended target is international RM-875, still to verify; this input is
+RM-876 China Unicom. No parity is inferred. Variant comparison must precede
+any target configuration.
 
 The previous absence of board-description input is superseded by those actual
 stock facts. Missing runtime selections, memory/handoff and resource semantics
@@ -166,7 +168,8 @@ nor those Windows declarations supply a PureView Linux/Android stack.
 
 The [decoder milestone](eos-static-decoders.md) supersedes the previous missing
 PMIO schema, DSM GUID, stock touch configuration and absence of firmware selector
-logic. Actual product.dat/table selection, panel caller precedence, PEP units and
-shared-data consumers remain unresolved. Its targeted Mini questions take priority;
+logic. PEP clock operations and per-client vote arithmetic are now decoded, while
+units remain inferred and other flags unresolved. Actual product.dat/table
+selection, panel branch coverage and shared-data consumers remain unresolved. Its targeted Mini questions take priority;
 no new upload or physical test is requested. Runtime EFI memory/GOP and CPU
 handoff remain separate needs, followed by Android HAL/camera/modem dependencies.
