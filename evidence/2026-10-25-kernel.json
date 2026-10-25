@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-25",
+  "scope": "Lumia 920 reference cross-compilation only; no EOS or hardware validation",
+  "source": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "source_archive_sha256": "30e9a71b6f3816b26c46abec906a644bfc947872980e3d145a824c324ff31cd6",
+  "source_changes": "None beyond the local source-archive receipt; no kernel source or defconfig patches",
+  "reproduction_command": "python3 scripts/lumia.py build --target kernel --jobs 4",
+  "make_command": [
+    "make",
+    "-C",
+    ".work/sources/linux-lumia920",
+    "O=${REPO}/.work/build/linux-lumia920",
+    "ARCH=arm",
+    "CROSS_COMPILE=arm-linux-gnueabihf-",
+    "-j4",
+    "zImage"
+  ],
+  "exit_code": 0,
+  "started_utc": "2026-10-25T00:51:39.746Z",
+  "finished_utc": "2026-10-25T01:12:49Z",
+  "approx_elapsed_seconds": 1269.261,
+  "host": "Saved Debian 13 x86_64 cloud, 4 effective CPU cores, 16 GiB RAM; pinned GCC 14.2.0 and binutils 2.44",
+  "environment": {
+    "KBUILD_BUILD_USER": "eos-builder",
+    "KBUILD_BUILD_HOST": "cloud-build",
+    "KBUILD_BUILD_TIMESTAMP": "2026-08-11 07:21:00 +0000",
+    "KBUILD_BUILD_VERSION": "1",
+    "LC_ALL": "C",
+    "TZ": "UTC",
+    "relocated_tools": "PATH, LD_LIBRARY_PATH, BISON_PKGDATADIR and M4 as documented in docs/build.md"
+  },
+  "configuration": {
+    "source": "arch/arm/configs/lumia920_defconfig",
+    "source_sha256": "2b3fc44de487e65d484ac9085408fbd7e012b56f1ffa43adff0e2d5c6f3a72cd",
+    "resolved_sha256": "b2ab03c75c68bb34ec31b31198c327f548800b674f249b4cfda28e3cb0de7762"
+  },
+  "artifacts": [
+    {
+      "path": "arch/arm/boot/zImage",
+      "bytes": 8667648,
+      "sha256": "ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565"
+    },
+    {
+      "path": "vmlinux",
+      "bytes": 26824116,
+      "sha256": "7fdd35039551b4202e66873365feb59bad30b4c6f5b4e486015d84527d3c0be6"
+    }
+  ],
+  "inspection": {
+    "zImage": "Linux kernel ARM boot executable zImage, little-endian",
+    "vmlinux": "ELF32 little-endian ARM EABI5 executable, statically linked, soft-float ABI"
+  },
+  "warnings": [
+    "init/main.c:1405:13: warning: \u2018mark_readonly\u2019 defined but not used [-Wunused-function]"
+  ],
+  "warnings_suppressed": false,
+  "compile_errors": 0,
+  "hardware_execution": "None",
+  "output_is_installable_eos_image": false,
+  "modules_or_rootfs_built": false,
+  "raw_log": ".work/logs/kernel-1792889499746423310.log",
+  "raw_log_sha256": "5f282b2da2753551f22ea9bf1364070f219d5aed01144e3d085acb756d0fa7ea",
+  "checkpoint_ci": {
+    "head": "516def15fc829808c5fcff1557335968bc5eb47b",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40149458747",
+    "conclusion": "success",
+    "scope": "11 synthetic safety tests and fresh focused DTB/driver compile; no full kernel CI"
+  }
+}

@@ -1,0 +1,192 @@
+SPDX-License-Identifier: GPL-2.0-only
+Subject: [PATCH 2/2] ARM: isolate Lumia 920 fixed-framebuffer debug hooks
+Upstream-Source: https://github.com/UEFI-code/linux-6.6-lumia920
+Upstream-Revision: 9872e9316212490b7db8e3371fa1d63bd3394cc5
+License-Provenance: kernel COPYING and existing per-file GPL SPDX notices
+
+Keep the existing Lumia 920 defconfig behavior through an explicit option.
+Default it off elsewhere and guard all identified framebuffer mapping,
+PMD-preservation, early console and EFI/startup color-bar hooks together.
+No physical values or EOS parameters are added or changed. Leave the separate
+init-memory/read-only finalization overrides untouched pending lifetime review.
+
+--- a/arch/arm/Kconfig.debug
++++ b/arch/arm/Kconfig.debug
+@@ -1,4 +1,16 @@
+ # SPDX-License-Identifier: GPL-2.0
++
++config LUMIA920_EARLY_DEBUG
++	bool "Lumia 920 fixed-framebuffer early debug hooks"
++	depends on ARCH_QCOM && MMU && !ARM_LPAE && FB && FONT_8x16
++	default n
++	help
++	  Enable the pinned research tree's fixed-address Lumia 920 console,
++	  early mapping preservation and EFI/startup color bars. These values
++	  are not an EOS board description and must not be used for Lumia 1020.
++	  The Lumia 920 reference defconfig explicitly enables this option.
++	  Disabling it removes these framebuffer hooks only; it does not restore
++	  the separate init-memory/read-only finalization overrides in this tree.
+ 
+ config ARM_PTDUMP_CORE
+ 	def_bool n
+--- a/arch/arm/configs/lumia920_defconfig
++++ b/arch/arm/configs/lumia920_defconfig
+@@ -10087,3 +10087,5 @@
+ #
+ # end of Rust hacking
+ # end of Kernel hacking
++
++CONFIG_LUMIA920_EARLY_DEBUG=y
+--- a/arch/arm/kernel/head.S
++++ b/arch/arm/kernel/head.S
+@@ -304,6 +304,7 @@
+ 	addne	r6, r6, #1 << SECTION_SHIFT
+ 	strne	r6, [r3]
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	/*
+ 	 * Lumia framebuffer early identity map:
+ 	 * VA 0x80400000 -> PA 0x80400000
+@@ -325,6 +326,7 @@
+ 	add	r5, r5, #0x00100000
+ 	subs	r6, r6, #1
+ 	bne	1b
++#endif
+ 
+ #if defined(CONFIG_ARM_LPAE) && defined(CONFIG_CPU_ENDIAN_BE8)
+ 	sub	r4, r4, #4			@ Fixup page table pointer
+--- a/arch/arm/mm/mmu.c
++++ b/arch/arm/mm/mmu.c
+@@ -1314,11 +1314,13 @@
+ #else
+ 	for (addr = 0; addr < MODULES_VADDR; addr += PMD_SIZE)
+ 	{
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 		if (addr >= 0x80400000 && addr <= 0x807C0000)
+ 		{
+ 			printk(KERN_INFO "Hack: Skipping clearing PMD for address range %lx-%lx :)\n", addr, addr + PMD_SIZE - 1);
+ 			continue;
+ 		}
++#endif
+ 		pmd_clear(pmd_off_k(addr));
+ 	}
+ 		
+--- a/arch/arm/kernel/setup.c
++++ b/arch/arm/kernel/setup.c
+@@ -63,7 +63,9 @@
+ 
+ #include "atags.h"
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ void lumiafb_early_init(void);
++#endif
+ 
+ #if defined(CONFIG_FPE_NWFPE) || defined(CONFIG_FPE_FASTFPE)
+ char fpe_type[8];
+@@ -1100,13 +1102,17 @@
+ 	.priority = 128,
+ };
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ static u32 *fb = (u32 *)0x80400000;
++#endif
+ 
+ void __init setup_arch(char **cmdline_p)
+ {
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	for (int i = 768*1230; i < 768*1240; i++)
+ 		fb[i] = 0x005500aa;
+ 	lumiafb_early_init();
++#endif
+ 	const struct machine_desc *mdesc = NULL;
+ 	void *atags_vaddr = NULL;
+ 
+--- a/init/main.c
++++ b/init/main.c
+@@ -866,16 +866,20 @@
+ 	memblock_free(unknown_options, len);
+ }
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ static u32 *fb = (u32 *)0x80400000;
+ 
+ void lumiafb_early_deinit(void);
++#endif
+ 
+ asmlinkage __visible __init __no_sanitize_address __noreturn __no_stack_protector
+ void start_kernel(void)
+ {
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	// chk if page-table is not crashed
+ 	for (int i = 768*1210; i < 768*1220; i++)
+ 		fb[i] = 0x0033ffaa;
++#endif
+ 
+ 	char *command_line;
+ 	char *after_dashes;
+@@ -1073,7 +1077,9 @@
+ 	kcsan_init();
+ 
+ 	/* Do the rest non-__init'ed, we're now alive */
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	lumiafb_early_deinit();
++#endif
+ 	arch_call_rest_init();
+ 
+ 	/*
+--- a/drivers/firmware/efi/libstub/fdt.c
++++ b/drivers/firmware/efi/libstub/fdt.c
+@@ -16,7 +16,9 @@
+ #define EFI_DT_ADDR_CELLS_DEFAULT 2
+ #define EFI_DT_SIZE_CELLS_DEFAULT 2
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ static u32 *fb = (u32 *)0x80400000;
++#endif
+ 
+ static void fdt_update_cell_size(void *fdt)
+ {
+@@ -296,8 +298,10 @@
+ 	priv.new_fdt_addr = (void *)*new_fdt_addr;
+ 
+ 	status = efi_exit_boot_services(handle, &priv, exit_boot_func);
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	for (int i = 768*1140; i < 768*1160; i++)
+ 		fb[i] = 0x0066ff00;
++#endif
+ 
+ 	if (status == EFI_SUCCESS) {
+ 		efi_set_virtual_address_map_t *svam;
+@@ -355,8 +359,10 @@
+ 	unsigned long fdt_addr;
+ 	efi_status_t status;
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	for (int i = 768*1100; i < 768*1120; i++)
+ 		fb[i] = 0x00ffff00;
++#endif
+ 
+ 	status = allocate_new_fdt_and_exit_boot(handle, image, &fdt_addr,
+ 						cmdline_ptr);
+@@ -369,8 +375,10 @@
+ 		efi_handle_post_ebs_state();
+ 	
+ 	// test framebuffer to chk is it still working after exit boot services
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	for (int i = 768*1180; i < 768*1200; i++)
+ 		fb[i] = 0x00ff0066;
++#endif
+ 
+ 	efi_enter_kernel(kernel_addr, fdt_addr, fdt_totalsize((void *)fdt_addr));
+ 	/* not reached */
+--- a/drivers/video/fbdev/Makefile
++++ b/drivers/video/fbdev/Makefile
+@@ -120,7 +120,7 @@
+ obj-$(CONFIG_FB_UVESA)            += uvesafb.o
+ obj-$(CONFIG_FB_VESA)             += vesafb.o
+ obj-$(CONFIG_FB_EFI)              += efifb.o
+-obj-y                             += lumiafb.o
++obj-$(CONFIG_LUMIA920_EARLY_DEBUG) += lumiafb.o
+ obj-$(CONFIG_FB_VGA16)            += vga16fb.o
+ obj-$(CONFIG_FB_OF)               += offb.o
+ obj-$(CONFIG_FB_DA8XX)		  += da8xx-fb.o

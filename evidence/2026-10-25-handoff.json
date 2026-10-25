@@ -1,0 +1,231 @@
+{
+  "date": "2026-10-25",
+  "scope": "Static source contract and existing compiled-image metadata; no new image build or device execution",
+  "image_checks": {
+    "baseline": {
+      "result": "PASS",
+      "bytes": 8667648,
+      "sha256": "ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565",
+      "machine": "ARMTHUMB_MIXED 0x01c2",
+      "optional_magic": "PE32 0x010b",
+      "subsystem": "EFI application 10",
+      "entry_rva": 30676,
+      "size_of_image": 8672256,
+      "sections": [
+        {
+          "name": ".text",
+          "virtual_address": 4096,
+          "virtual_size": 8663040,
+          "raw_offset": 4096,
+          "raw_size": 8663040,
+          "characteristics": 1610612768
+        },
+        {
+          "name": ".data",
+          "virtual_address": 8667136,
+          "virtual_size": 5120,
+          "raw_offset": 8667136,
+          "raw_size": 512,
+          "characteristics": 3221225536
+        }
+      ],
+      "certificate_directory": [
+        0,
+        0
+      ],
+      "scope": "Container metadata only; no firmware acceptance, signature trust, EOS handoff or hardware validation"
+    },
+    "reference": {
+      "result": "PASS",
+      "bytes": 8667648,
+      "sha256": "6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd",
+      "machine": "ARMTHUMB_MIXED 0x01c2",
+      "optional_magic": "PE32 0x010b",
+      "subsystem": "EFI application 10",
+      "entry_rva": 30676,
+      "size_of_image": 8672256,
+      "sections": [
+        {
+          "name": ".text",
+          "virtual_address": 4096,
+          "virtual_size": 8663040,
+          "raw_offset": 4096,
+          "raw_size": 8663040,
+          "characteristics": 1610612768
+        },
+        {
+          "name": ".data",
+          "virtual_address": 8667136,
+          "virtual_size": 5120,
+          "raw_offset": 8667136,
+          "raw_size": 512,
+          "characteristics": 3221225536
+        }
+      ],
+      "certificate_directory": [
+        0,
+        0
+      ],
+      "scope": "Container metadata only; no firmware acceptance, signature trust, EOS handoff or hardware validation"
+    },
+    "debug_off": {
+      "result": "PASS",
+      "bytes": 8667648,
+      "sha256": "a678672622b528e18e37b32d8a43a9d048c0f5f4f310010f629db3d34dbe8e3b",
+      "machine": "ARMTHUMB_MIXED 0x01c2",
+      "optional_magic": "PE32 0x010b",
+      "subsystem": "EFI application 10",
+      "entry_rva": 30676,
+      "size_of_image": 8672256,
+      "sections": [
+        {
+          "name": ".text",
+          "virtual_address": 4096,
+          "virtual_size": 8663040,
+          "raw_offset": 4096,
+          "raw_size": 8663040,
+          "characteristics": 1610612768
+        },
+        {
+          "name": ".data",
+          "virtual_address": 8667136,
+          "virtual_size": 5120,
+          "raw_offset": 8667136,
+          "raw_size": 512,
+          "characteristics": 3221225536
+        }
+      ],
+      "certificate_directory": [
+        0,
+        0
+      ],
+      "scope": "Container metadata only; no firmware acceptance, signature trust, EOS handoff or hardware validation"
+    }
+  },
+  "source_comparison": {
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "files": [
+      {
+        "path": "Documentation/arch/arm/booting.rst",
+        "official_sha256": "0f1ec9a2107b070e4758cddc640ff6ae227b2b68f3f6782446271dbb0b117b47",
+        "reference_sha256": "0f1ec9a2107b070e4758cddc640ff6ae227b2b68f3f6782446271dbb0b117b47",
+        "identical": true
+      },
+      {
+        "path": "Documentation/arch/arm/uefi.rst",
+        "official_sha256": "eee4a7b8d6928fdd02c5b350c4fd6fa91be85fdfbe38332ad6a11a5cd0bb5e27",
+        "reference_sha256": "eee4a7b8d6928fdd02c5b350c4fd6fa91be85fdfbe38332ad6a11a5cd0bb5e27",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/arm32-stub.c",
+        "official_sha256": "6046bd6948b677207653d5a98abdd8788abb1dde099926330857e59ccb2dae8b",
+        "reference_sha256": "6046bd6948b677207653d5a98abdd8788abb1dde099926330857e59ccb2dae8b",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/efi-stub-entry.c",
+        "official_sha256": "27dee435b30455c9c73f393aeecc16d1e0f17549ce620990a66d2247612010eb",
+        "reference_sha256": "27dee435b30455c9c73f393aeecc16d1e0f17549ce620990a66d2247612010eb",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/fdt.c",
+        "official_sha256": "7a16765949c89cf3e48f383876be8c7607aa2f4d83b5dd3fd9101c55b0974cc0",
+        "reference_sha256": "61611354f7b7b59a1573fa4fd51e9d61377f4bcabede1382bc733ec90fa44047",
+        "identical": false
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/gop.c",
+        "official_sha256": "048a8a966f82ecc38a6c1f8c32a5383a092668a7f5fee66bd6a4c67a0b724d20",
+        "reference_sha256": "048a8a966f82ecc38a6c1f8c32a5383a092668a7f5fee66bd6a4c67a0b724d20",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/screen_info.c",
+        "official_sha256": "df604a7e5bbce12a35152c310764cd04c2b231f22bf7b58a61e74c77d86d93bf",
+        "reference_sha256": "df604a7e5bbce12a35152c310764cd04c2b231f22bf7b58a61e74c77d86d93bf",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/boot/compressed/head.S",
+        "official_sha256": "f58ea39b9d2d64f6b985a3be842ddb340365521a782dcb0c15e6183804bf3d82",
+        "reference_sha256": "f58ea39b9d2d64f6b985a3be842ddb340365521a782dcb0c15e6183804bf3d82",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/boot/compressed/efi-header.S",
+        "official_sha256": "ba0cf0ae6a8d6fb066c784f11723e9d4d0c0cb58abc4973347125a6f24106683",
+        "reference_sha256": "ba0cf0ae6a8d6fb066c784f11723e9d4d0c0cb58abc4973347125a6f24106683",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/Kconfig",
+        "official_sha256": "ba026ac05f7ed53a73c4e0083c3993987d9751db56515191aa949cfae0ef49f9",
+        "reference_sha256": "ba026ac05f7ed53a73c4e0083c3993987d9751db56515191aa949cfae0ef49f9",
+        "identical": true
+      },
+      {
+        "path": "drivers/acpi/Kconfig",
+        "official_sha256": "7bf3d46ea92f15146df3cf64e4124c73785b8abd78bbea24cdcb1346ff7c3037",
+        "reference_sha256": "7bf3d46ea92f15146df3cf64e4124c73785b8abd78bbea24cdcb1346ff7c3037",
+        "identical": true
+      },
+      {
+        "path": "arch/arm64/kernel/acpi_parking_protocol.c",
+        "official_sha256": "5c974d63ac37be68ddb477ce072c964a017ca0b2e3c1113ef6d06e7065949938",
+        "reference_sha256": "5c974d63ac37be68ddb477ce072c964a017ca0b2e3c1113ef6d06e7065949938",
+        "identical": true
+      },
+      {
+        "path": "drivers/pinctrl/qcom/pinctrl-ssbi-gpio.c",
+        "official_sha256": "56f42ca1c1546446daebdb329737ceed67a86ff57d3806db3c4f8e80e0607b20",
+        "reference_sha256": "56f42ca1c1546446daebdb329737ceed67a86ff57d3806db3c4f8e80e0607b20",
+        "identical": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/pinctrl/qcom,pmic-gpio.yaml",
+        "official_sha256": "7785ccf1eb7fb19264ef02f4a07cf5be5523df6af8695f0075b8802fe748c938",
+        "reference_sha256": "7785ccf1eb7fb19264ef02f4a07cf5be5523df6af8695f0075b8802fe748c938",
+        "identical": true
+      }
+    ]
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -q",
+    "local_total": 37,
+    "result": "PASS",
+    "new_cases": [
+      "mixed ARM/Thumb entry metadata",
+      "wrong architecture/subsystem/PE32+ rejection",
+      "non-executable or unbacked entry rejection",
+      "section truncation/overlap rejection",
+      "PE header/data directory bounds"
+    ]
+  },
+  "resolved_static": [
+    "Reusable GPL-licensed upstream ARM32 EFI stub exists; does not require LumiaToy",
+    "Existing preserved kernels are ARM32 PE32 EFI applications with backed executable entry; no embedded certificate table",
+    "EFI entry and raw Linux entry have distinct CPU/register/cache contracts",
+    "EFI map and GOP metadata pathways are implemented upstream",
+    "ARM32 SurfaceRT GPL parking port exists but is not EOS-ready"
+  ],
+  "unresolved_static": [
+    "EOS GPIO PMIO decoder and exact touch identity",
+    "Data-driven ARM32 parking adaptation and protocol compatibility",
+    "Board DT/peripheral/power wiring and external template/panel selection"
+  ],
+  "runtime_observations_needed": [
+    "Actual EFI system/configuration table and firmware LoadImage/StartImage acceptance/trust policy",
+    "GetMemoryMap descriptors/version/attributes and reservations including mailbox/framebuffer/secure/shared regions",
+    "Actual GOP base/size/resolution/PixelsPerScanLine/format/masks and protocol availability",
+    "Primary CPU state and firmware ExitBootServices behavior",
+    "Installed CPU/parking/GIC information and initial mailbox state; release validation would be a later write/test, outside current scope"
+  ],
+  "limits": [
+    "PE structural validity is not Secure Boot acceptance or EOS boot safety",
+    "Static templates are not runtime captures",
+    "No proprietary raw firmware/disassembly published",
+    "No new images, mailbox writes, SMC calls, AML evaluation or device execution"
+  ]
+}

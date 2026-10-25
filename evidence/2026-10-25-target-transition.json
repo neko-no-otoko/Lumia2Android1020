@@ -1,0 +1,272 @@
+{
+  "date": "2026-10-25",
+  "scope": "Target-neutral host tests and historical RM-876 static evidence cleanup; current user-selected target RM-877",
+  "variant_gate": {
+    "source_rm": "RM-876",
+    "source_product_code": "059T3B3",
+    "intended_target_rm": "RM-877",
+    "actual_handset_rm_product_code_verified": false,
+    "board_equivalence": "unverified",
+    "target_configuration_emitted": false
+  },
+  "target_input": "User supplied RM-877 candidate to Mini; no exact target hash/metadata received by cloud yet; no RM-876 facts relabeled",
+  "tests": {
+    "passed": 57,
+    "added_since_54_test_stage": 3,
+    "new_cases": [
+      "CSI logical mux subset and invalid selectors",
+      "LVS shared-client enable/pull-down OR, separate unobserved rail state",
+      "Recorded RM-876 D3 voltage retained; synthetic trailing fields for first-three-field arithmetic"
+    ]
+  },
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s tests -q",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/eos_resources.py --check-kernel",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "stock_source": {
+    "variant": "RM-876 / 059T3B3 / 3051.50009.1424.0004",
+    "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+    "QCpep8960.sys": {
+      "bytes": 900896,
+      "sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642"
+    },
+    "method": "Original factual findings reported by authorized Mac Mini static inspection of this FFU; no firmware/driver execution; binaries and disassembly private; cloud independently checks arithmetic only"
+  },
+  "upstream_corroboration": {
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "files": [
+      {
+        "path": "drivers/clk/qcom/mmcc-msm8960.c",
+        "official_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+        "reference_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+        "identical": true
+      },
+      {
+        "path": "drivers/regulator/qcom_rpm-regulator.c",
+        "official_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+        "reference_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+        "identical": true
+      }
+    ],
+    "interpretation": "Byte-identical MMCC CSI mux fields, RPM8960 masks/units, mode and selector mappings corroborate selected consumer facts; no hardware enablement"
+  },
+  "final_bounded_rm876_pass": {
+    "regulator_field_labels": {
+      "type1_LDO": [
+        "microvolts",
+        "peak_microamps",
+        "average_microamps",
+        "force_mode",
+        "pin_control_mask",
+        "pin_function",
+        "pull_down"
+      ],
+      "type2_SMPS_extra": [
+        "power_mode",
+        "switching_frequency_selector",
+        "frequency_clock_source_selector"
+      ],
+      "type4_LVS": [
+        "enable",
+        "pull_down",
+        "pin_control_mask",
+        "pin_function",
+        "optional_HPM"
+      ],
+      "force2": "auto where supported",
+      "force3": "high-power for this corroborated3-bit encoding; not universal across PMICs",
+      "SMPS_power0": "hysteretic",
+      "frequency_selector6_hz": 3200000,
+      "LVS_enable_pull_down_aggregation": "per-client OR",
+      "EOS_specific_pin_routing_source_values": "unresolved"
+    },
+    "csi_subset": {
+      "tuple_count": 10,
+      "output_count": 5,
+      "scope": "All stock RM-876 operation9 tuples inspected; not all possible API sub-enums",
+      "preceding_slots_11_12": "generic slots, not MHz",
+      "selector_values": {
+        "1": [
+          0,
+          0
+        ],
+        "2": [
+          1,
+          0
+        ],
+        "3": [
+          0,
+          1
+        ]
+      },
+      "linux_parent_indices": {
+        "1": 0,
+        "2": 1,
+        "3": 2
+      },
+      "CAMF_requested": "CSI1",
+      "CAMS_requested": "CSI0",
+      "fitted_sensor": "unobserved",
+      "mmcc_fields": {
+        "pixel": [
+          [
+            88,
+            25
+          ],
+          [
+            568,
+            13
+          ]
+        ],
+        "pixel1": [
+          [
+            568,
+            8
+          ],
+          [
+            568,
+            9
+          ]
+        ],
+        "RDI": [
+          [
+            88,
+            12
+          ],
+          [
+            568,
+            12
+          ]
+        ],
+        "RDI1": [
+          [
+            568,
+            0
+          ],
+          [
+            568,
+            1
+          ]
+        ],
+        "RDI2": [
+          [
+            568,
+            4
+          ],
+          [
+            568,
+            5
+          ]
+        ]
+      }
+    },
+    "partial_per_client_snapshots": {
+      "scope": "Reported per-client prefixes only, not full packages or physical aggregate measurements",
+      "prefix_field_order": [
+        "microvolts",
+        "peak_microamps",
+        "average_microamps",
+        "force_mode_if_reported"
+      ],
+      "DISP_D0_SMPS4": [
+        1800000,
+        40000,
+        20000,
+        3
+      ],
+      "DISP_D3_SMPS4": [
+        1800000,
+        100,
+        100,
+        2
+      ],
+      "TCH1_D0_SMPS4": [
+        1800000,
+        25000,
+        25000
+      ],
+      "TCH1_D0_LDO9": [
+        2850000,
+        18000,
+        12000
+      ],
+      "TCH1_D3_LDO9": [
+        2850000,
+        5000,
+        5000
+      ],
+      "DISP_D0_LVS4_enable": true,
+      "TCH1_D0_LVS4_enable": true,
+      "TCH1_D3_own_LVS4_enable": false,
+      "TCH1_D3_own_SMPS4_voltage_current_vote": "cleared; not physical rail off"
+    },
+    "optional_acpi_table": {
+      "modules": [
+        "BOOTARM.EFI",
+        "winload.efi"
+      ],
+      "nokia_cdpi_edit_observed": false,
+      "winload_optional_acpitabl_dat_option": "0x16000049",
+      "bcd_read_or_changed": false,
+      "acpitabl_dat_found_in_three_checked_mainos_directories": false,
+      "scope": "Bounded stock System32 traversal and optional loader path; BCD not read; no CDPI mismatch resolution",
+      "winload_constructed_path": "<configured system root>\\system32\\acpitabl.dat",
+      "system_root_option": "0x22000002",
+      "checked_stock_system32_entries": 1975,
+      "matching_acpitabl_dat_found": false
+    },
+    "limit": "No identified unexhausted route in this bounded Mini pass; not universal absence proof. CDPI mismatch not established as a defect. Runtime state unobserved."
+  },
+  "retired_rm875_attempt": {
+    "status": "stopped and retired after target changed to RM-877",
+    "target": "https://api.lumiadb.com/RM-875/RM875_3051.50009.1424.0003_RETAIL_eu_euro1_211_03_447991_prd_signed.ffu",
+    "ordinary_HEAD": {
+      "curl_exit": 22,
+      "http_status": 403,
+      "response_server": "envoy",
+      "response_content_length": 16,
+      "ffu_bytes_acquired": 0,
+      "get_ffu_attempted": false
+    },
+    "metadata_get": {
+      "target": "https://lumiadb.com/database.json",
+      "curl_exit": 22,
+      "http_status": 403,
+      "result": "No local metadata bytes; web-reader metadata available"
+    },
+    "disk_before_request": "26GiB free of32GiB; capacity sufficient",
+    "metadata_sources": [
+      "https://lumiafirmware.com/model/RM-875/hwid/059T1V6",
+      "https://lumiadb.com/database.json",
+      "https://lumiadb.com/developers"
+    ],
+    "metadata_match": "059T1V6 UK country variant,3051.50009.1424.0003, exact FFU filename corroborated in both catalogs",
+    "reported_external_HEAD": "Parent reported200/1644953600bytes; this cloud independently received403, not a confirmed available download here",
+    "authenticity": "Community mirror metadata is not vendor authentication",
+    "retry": "No artifact retry, rerouting, security bypass or subsequent RM-875 download",
+    "current_action": "Await verified user-supplied RM-877 Mini input; no user retrieval chore requested"
+  },
+  "compile": {
+    "scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
+    "warnings": [
+      "Existing /memory unit_address_vs_reg warning retained"
+    ],
+    "kernel_or_images_changed": false
+  },
+  "next_dependency": "Verified RM-877 exact image provenance/structure/integrity and selected stock board facts from Mini, before target configuration. No live collector/boot/write authorization inferred."
+}

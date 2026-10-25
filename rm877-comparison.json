@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "comparison_scope": "two_exact_ffus",
+  "method": "Original factual findings reported by authorized Mini static inspection; raw firmware/disassembly private; no firmware/driver execution. Cloud validates recorded consistency and host tools, not raw target bytes.",
+  "reference_ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+  "target": {
+    "rm": "RM-877",
+    "product_code": "059T019",
+    "description": "AT&T US yellow",
+    "software": "3051.50009.1451.1001",
+    "os": "8.10.14226.359",
+    "variant": "3805",
+    "platform": "Nokia.MSM8960.P5217_ATT",
+    "ffu_filename": "RM877_3051.50009.1451.1_RETAIL_nam_att_205_01_473928_prd_signed.ffu",
+    "ffu_bytes": 1684013056,
+    "ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+    "ffu_crc32": "7346f0cb",
+    "crc_matches_vpl": true,
+    "chunk_hashes_passed": 12844,
+    "gpt_and_header_checks": "pass as reported by Mini",
+    "vendor_signature_trust": "unverified"
+  },
+  "byte_identical_assets": {
+    "plat_acpi_file_count": 12,
+    "known_tables": [
+      "DSDT",
+      "2SDT",
+      "SSDT"
+    ],
+    "external_panel_xml": "PTANYA.XML",
+    "pep_device_packages": 35,
+    "pep_action_groups": 418,
+    "pep_clock_names": 72,
+    "scope": "Selected clean stock assets of these two exact FFUs; not runtime-installed tables, all variants or hardware equivalence",
+    "individual_file_hashes": "not supplied in factual handoff; equality attributed to Mini"
+  },
+  "config_pcn": {
+    "difference": "Only adds _ATT",
+    "byte_offsets_in_target": [
+      21,
+      22,
+      23,
+      24
+    ],
+    "behavioral_meaning": "not inferred"
+  },
+  "selected_uefi_modules": {
+    "compared": 14,
+    "different": 13,
+    "whole_file_identical": [
+      "PmicDxe"
+    ],
+    "general_behavior_equivalence": "unverified",
+    "rule": "Direct target review required for each behavior; no general inheritance from matching tables"
+  },
+  "drivers": {
+    "pmic_gpio": {
+      "comparison": "whole_file_identical",
+      "reference_sha256": "6b21dc1c1bd884cd95751140c7db5c5526a1e613f6fb9609cfd26ac14362892c",
+      "target_hash_status": "Whole-file equality reported; same SHA follows, not independently calculated by cloud",
+      "decoder_scope": "Exact target static PMIO decoder corroborated; no Linux binding or runtime GPIO behavior inferred"
+    },
+    "pep": {
+      "comparison": "declared_raw_sections_identical_whole_file_differs",
+      "target_whole_sha256": "not supplied",
+      "reference_sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642",
+      "decoder_scope": "Raw-section equality corroborates reported decoder semantics for this exact target; not whole-file/firmware behavior equivalence"
+    },
+    "touch": {
+      "comparison": "executable_sections_identical_rdata_pdata_differ",
+      "reference_package_version": "3051.50009.4070.57",
+      "target_package_version": "3051.50009.4071.17",
+      "configuration_carry_forward": false,
+      "target_configuration_review": "Bounded target pass complete; compared registry differences only package identity/path/version",
+      "configuration_carry_forward_meaning": "No blanket inheritance of rdata/pdata or all configuration; explicitly compared registry subset below is corroborated",
+      "compared_registry_settings": "unchanged_except_package_identity_path_version",
+      "compared_unchanged_fields": [
+        "HID",
+        "service",
+        "vendor selectors",
+        "product selectors",
+        "configuration-write flags",
+        "compared power settings"
+      ],
+      "fitted_touch_identity": "unobserved"
+    }
+  },
+  "direct_target_reviews": {
+    "AcpiPlatform": "Directly confirms reported RM877 TYPE branch and HWID2000/2100/2005/2110 selects2SDT, otherwiseDSDT. Exact target string bytes/comparison bounds not supplied; actual runtime product.dat absent from checked clean locations; no DPP inspection.",
+    "ProductCfg": "Direct target review confirms same CDPI address/layout mismatch; no defect or patch inferred.",
+    "DisplayDxe": "Direct target review confirms panel detection and low-byte0xc2 Tanya predicate; actual panel and runtime ID unobserved."
+  },
+  "target_loader_sha256": {
+    "BOOTARM.EFI": "3e0a832f8d4f8971b31ada5d20b280d1be33d47404f97b367731ee6e21b0b8bc",
+    "winload.efi": "187f21bdd129167cca9e7dd78dd8d60b8733e752a905f7b07d657e56a751b10e"
+  },
+  "installed_runtime_tables_observed": false,
+  "runtime_product_dat_observed": false,
+  "target_configuration_emitted": false,
+  "next_static": [],
+  "remaining_runtime": [
+    "Actual installed tables/CDPI",
+    "Panel ID and fitted touch/PDT",
+    "EFI memory/GOP/trust/DT delivery and CPU parking state",
+    "Aggregate rails and physical peripheral behavior"
+  ],
+  "android": "No verified target kernel/device/HAL/PureView compatibility case or Android release chosen",
+  "target_loader_review": {
+    "status": "bounded identified static pass complete",
+    "source": "Direct Mini tracing of the exact hashed target BOOTARM.EFI/winload.efi",
+    "override": {
+      "boolean_gate_option": "0x16000049",
+      "system_root_option": "0x22000002",
+      "constructed_path": "<configured system root>\\system32\\acpitabl.dat",
+      "checked_stock_system32_entries": 1997,
+      "file_found": false,
+      "missing_file_nonfatal": true,
+      "table_validation": [
+        "length",
+        "bounds",
+        "checksum"
+      ],
+      "bcd_inspected": false,
+      "actual_option_root_values": "unobserved"
+    },
+    "acpi": {
+      "efi_guid_preference": [
+        "ACPI2.0",
+        "ACPI1.0"
+      ],
+      "traversed_roots": [
+        "XSDT",
+        "RSDT"
+      ],
+      "cdpi_patch_observed_in_selected_paths": false,
+      "universal_absence_claim": false,
+      "installed_runtime_tables_observed": false
+    },
+    "memory_and_exit": {
+      "memory_map_collection": "directly statically traced",
+      "exit_boot_services_retry": "up to4 times as reported; no live calls observed",
+      "alternative_image_acceptance": "not inferred"
+    },
+    "graphics": {
+      "copies_current_mode_index": true,
+      "copied_mode_information_bytes": 36,
+      "preferred_mode_logic_in_callers": true,
+      "stock_initialization_passive": false,
+      "live_mode_observed": false
+    },
+    "live_observer_route_accepted": false,
+    "live_observer_execution_authorized": false
+  },
+  "bounded_static_status": "Identified target loader/touch routes complete; remaining specific observations require runtime facts. Not a universal claim that every static possibility is impossible.",
+  "minimum_user_help": [
+    "Confirm ownership/availability of exact RM-877 and/or separate RM-937 handset; no purchase requested",
+    "If already owned, report normal stock model/RM, OS/firmware and condition; hide unique identifiers",
+    "Report available Windows host/data cable; no tool installation, mode switching or live observer requested"
+  ]
+}

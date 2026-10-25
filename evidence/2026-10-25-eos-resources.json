@@ -1,0 +1,288 @@
+{
+  "result": "PASS",
+  "scope": "Host resource audit only; no EOS DTS emitted or hardware enabled",
+  "source_ffu": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+  "shared_addresses": [
+    {
+      "bus": "IC12",
+      "address_7bit": 57,
+      "firmware_nodes": [
+        "ALS1",
+        "PRX1"
+      ],
+      "interpretation": "Shared address; physical-device/driver grouping unresolved"
+    }
+  ],
+  "runtime_enablement": "none",
+  "kernel_check": {
+    "commands": [
+      [
+        "gcc",
+        "-E",
+        "-nostdinc",
+        "-undef",
+        "-D__DTS__",
+        "-x",
+        "assembler-with-cpp",
+        "-I",
+        ".work/sources/linux-lumia920/include",
+        ".work/sources/linux-lumia920/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi",
+        "-o",
+        ".work/eos-resource-audit/msm8960-reference.dts"
+      ],
+      [
+        "dtc",
+        "-I",
+        "dts",
+        "-O",
+        "dtb",
+        "-o",
+        ".work/eos-resource-audit/msm8960-reference.dtb",
+        ".work/eos-resource-audit/msm8960-reference.dts"
+      ]
+    ],
+    "compiled_scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "official_identical_files": [
+      "drivers/pinctrl/qcom/pinctrl-msm8960.c",
+      "drivers/clk/qcom/gcc-msm8960.c",
+      "drivers/irqchip/irq-gic.c",
+      "include/dt-bindings/clock/qcom,gcc-msm8960.h",
+      "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml",
+      "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml",
+      "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml"
+    ],
+    "fork_dtsi_differences": [
+      "Adds ssbi label and removes upstream PM8921 interrupt-controller subtree, power key/keypad/RTC children",
+      "Removes USB controller core/iface clocks, assigned rate and core reset",
+      "Removes USB PHY sleep/ref clocks and POR reset"
+    ],
+    "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
+    "compiler_log_sha256": "8d60543c20fceee50110a27974127fa0da2497fc4101d9816e11a5e4d1e6ddbe",
+    "compiler_diagnostics": [
+      ".work/sources/linux-lumia920/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi:50.9-53.4: Warning (unit_address_vs_reg): /memory: node has a reg or ranges property, but no unit name"
+    ],
+    "controller_comparisons": [
+      {
+        "name": "I2C1",
+        "base": 369623040,
+        "firmware_length": 2048,
+        "linux_length": 4096,
+        "length_relation": "firmware-subrange",
+        "raw_firmware_irq": 179,
+        "linux_spi_index": 147,
+        "irq_delta": 32,
+        "interpretation": "GIC hwirq/SPI-offset hypothesis only; no board IRQ assigned",
+        "linux_node": "/soc/gsbi@16000000/spi@16080000",
+        "linux_additional_reg_cells": []
+      },
+      {
+        "name": "SDC1",
+        "base": 306184192,
+        "firmware_length": 2048,
+        "linux_length": 32768,
+        "length_relation": "firmware-subrange",
+        "raw_firmware_irq": 136,
+        "linux_spi_index": 104,
+        "irq_delta": 32,
+        "interpretation": "GIC hwirq/SPI-offset hypothesis only; no board IRQ assigned",
+        "linux_node": "/soc/mmc@12400000",
+        "linux_additional_reg_cells": []
+      },
+      {
+        "name": "UFN1",
+        "base": 307232768,
+        "firmware_length": 512,
+        "linux_length": 512,
+        "length_relation": "equal",
+        "raw_firmware_irq": 132,
+        "linux_spi_index": 100,
+        "irq_delta": 32,
+        "interpretation": "GIC hwirq/SPI-offset hypothesis only; no board IRQ assigned",
+        "linux_node": "/soc/usb@12500000",
+        "linux_additional_reg_cells": [
+          307233280,
+          512
+        ]
+      },
+      {
+        "name": "UART5",
+        "base": 373555200,
+        "firmware_length": 256,
+        "linux_length": 4096,
+        "length_relation": "firmware-subrange",
+        "raw_firmware_irq": 186,
+        "linux_spi_index": 154,
+        "irq_delta": 32,
+        "interpretation": "GIC hwirq/SPI-offset hypothesis only; no board IRQ assigned",
+        "linux_node": "/soc/gsbi@16400000/serial@16440000",
+        "linux_additional_reg_cells": [
+          373293056,
+          4096
+        ]
+      },
+      {
+        "name": "GIO0",
+        "base": 8388608,
+        "firmware_length": 8192,
+        "linux_length": 16384,
+        "length_relation": "firmware-subrange",
+        "raw_firmware_irq": 48,
+        "linux_spi_index": 16,
+        "irq_delta": 32,
+        "interpretation": "GIC hwirq/SPI-offset hypothesis only; no board IRQ assigned",
+        "linux_node": "/soc/pinctrl@800000",
+        "linux_additional_reg_cells": []
+      }
+    ],
+    "serial_candidates": [
+      {
+        "firmware_controller": "I2C1",
+        "candidate_gsbi": 1,
+        "pinmux_group_contains_raw_pair": true,
+        "linux_clock_names": [
+          "GSBI1_H_CLK",
+          "GSBI1_QUP_CLK"
+        ],
+        "limitation": "Corroboration only; GPIO translation, GSBI mode, rates and electrical settings unresolved"
+      },
+      {
+        "firmware_controller": "I2C3",
+        "candidate_gsbi": 3,
+        "pinmux_group_contains_raw_pair": true,
+        "linux_clock_names": [
+          "GSBI3_H_CLK",
+          "GSBI3_QUP_CLK"
+        ],
+        "limitation": "Corroboration only; GPIO translation, GSBI mode, rates and electrical settings unresolved"
+      },
+      {
+        "firmware_controller": "IC10",
+        "candidate_gsbi": 10,
+        "pinmux_group_contains_raw_pair": true,
+        "linux_clock_names": [
+          "GSBI10_H_CLK",
+          "GSBI10_QUP_CLK"
+        ],
+        "limitation": "Corroboration only; GPIO translation, GSBI mode, rates and electrical settings unresolved"
+      },
+      {
+        "firmware_controller": "IC12",
+        "candidate_gsbi": 12,
+        "pinmux_group_contains_raw_pair": true,
+        "linux_clock_names": [
+          "GSBI12_H_CLK",
+          "GSBI12_QUP_CLK"
+        ],
+        "limitation": "Corroboration only; GPIO translation, GSBI mode, rates and electrical settings unresolved"
+      }
+    ]
+  },
+  "driver_compile": {
+    "command": "python3 scripts/lumia.py build --target soc-objects --jobs 4",
+    "exit_code": 0,
+    "config_sha256": "b2ab03c75c68bb34ec31b31198c327f548800b674f249b4cfda28e3cb0de7762",
+    "artifacts": [
+      {
+        "path": "drivers/i2c/busses/i2c-qup.o",
+        "bytes": 21392,
+        "sha256": "7761bb392b125dbd91f2a396db7c39d5332932fd29dd386b7d5923d79867f6b1"
+      },
+      {
+        "path": "drivers/soc/qcom/qcom_gsbi.o",
+        "bytes": 7684,
+        "sha256": "9662d3134d8483a8b720582d9b05b10e5c0eb700b3e14fc3fd5c2a246a542884"
+      },
+      {
+        "path": "drivers/clk/qcom/gcc-msm8960.o",
+        "bytes": 45788,
+        "sha256": "66ff64d8485ad9d87875b3a68655124a7e9b3b8355100810816e68e796098cfc"
+      },
+      {
+        "path": "drivers/pinctrl/qcom/pinctrl-msm8960.o",
+        "bytes": 53324,
+        "sha256": "86f485da76c11ba57aa8b4ec768aa5a9d857c01189129b128b323ea78aa8ac8d"
+      }
+    ],
+    "fresh_compile_evidence": "Four preserved generated objects were removed only from the build output; log records CC for all four; each rebuilt SHA256 matches its preserved original. Baseline/reference/off kernel images preserved.",
+    "elf_header_fields": [
+      "Class:                             ELF32",
+      "Data:                              2's complement, little endian",
+      "Machine:                           ARM",
+      "Flags:                             0x5000000, Version5 EABI"
+    ],
+    "raw_log_sha256": "896acea9a6bed3e5f1cbb9068e0539fa4135bc6301115fc45b365e9fc29b22f5"
+  },
+  "tests": {
+    "local_total": 32,
+    "result": "PASS",
+    "new_cases": [
+      "shared ALS/proximity address",
+      "shifted I2C address rejection",
+      "implicit Linux GPIO/driver rejection",
+      "runtime enablement rejection",
+      "MMIO aperture mismatch/preservation",
+      "unsized pointers kept separate",
+      "static-region overlap rejection",
+      "adjacent legacy GICC/GICD bounds",
+      "malformed record rejection",
+      "unsupported modern GICC rejection",
+      "invalid template checksum opt-in/no mutation"
+    ]
+  },
+  "legacy_parser": "Synthetic regression only in cloud; actual EOS table observations supplied by parent/local bounded parsing; no raw tables published.",
+  "template_caveat": "Firmware static templates are not runtime-installed tables or a complete RAM map; no CPU enable method assigned.",
+  "official_source_comparison": {
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "files": [
+      {
+        "path": "arch/arm/boot/dts/qcom/qcom-msm8960.dtsi",
+        "official_sha256": "eee3d6cf051009705137e727943970246ab572bf19cabf85a3139cd1fdd6f63e",
+        "reference_sha256": "448cfaa18888cd40704fa9f76dec3b3e4e65cb284c9945f36f58247af7030074",
+        "identical_to_official_v6_6": false
+      },
+      {
+        "path": "drivers/pinctrl/qcom/pinctrl-msm8960.c",
+        "official_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+        "reference_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "drivers/clk/qcom/gcc-msm8960.c",
+        "official_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+        "reference_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "drivers/irqchip/irq-gic.c",
+        "official_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+        "reference_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "include/dt-bindings/clock/qcom,gcc-msm8960.h",
+        "official_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+        "reference_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml",
+        "official_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+        "reference_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml",
+        "official_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+        "reference_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml",
+        "official_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+        "reference_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+        "identical_to_official_v6_6": true
+      }
+    ]
+  }
+}

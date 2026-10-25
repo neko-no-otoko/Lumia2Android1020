@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-25",
+  "scope": "Original arithmetic models of attributed RM-876 static findings; no vendor code imported/executed, no device effect",
+  "provenance": {
+    "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+    "variant": "RM-876 / 059T3B3 / 3051.50009.1424.0004",
+    "QCpep8960.sys": {
+      "bytes": 900896,
+      "sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642"
+    },
+    "source_method": "Original factual findings reported by authorized Mac Mini static inspection of this FFU; no firmware/driver execution; binaries and disassembly private; cloud independently checks arithmetic only",
+    "vendor_trust_chain": "unverified"
+  },
+  "variant_gate": {
+    "source_rm": "RM-876",
+    "source_product_code": "059T3B3",
+    "intended_target_rm": "RM-875",
+    "actual_handset_rm_product_code_verified": false,
+    "board_equivalence": "unverified",
+    "target_configuration_emitted": false
+  },
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/eos_resources.py --check-kernel",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "passed": 54,
+    "new_this_stage": 9,
+    "coverage": [
+      "Selector Hz/kHz/MHz groups, all four policies and lower closest tie",
+      "Unavailable candidates and unknown conversion-overflow domain",
+      "Consumer TLMM tuple order and bounded fields",
+      "Resource-type package lengths instead of enable flags",
+      "Per-client maximum and independent sum aggregation",
+      "Rounding499/500 and clamp1023 boundaries",
+      "Shared CXO OR vote, separate unobserved physical state",
+      "Inferred units, unresolved policy and transport schema",
+      "RM-876 observations cannot establish RM-875 board equivalence"
+    ]
+  },
+  "pep_host_result": {
+    "clock_operation_count": 11,
+    "selector3": {
+      "unit": "Hz",
+      "multiplier": 1,
+      "policy": "closest"
+    },
+    "tlmm_tuple_order": [
+      "pin",
+      "output",
+      "function",
+      "direction",
+      "pull",
+      "drive"
+    ],
+    "vreg_package_lengths": {
+      "1": 9,
+      "2": 12,
+      "7": 3
+    },
+    "vote_transport_bytes": 60,
+    "vote_transport_ioctl": "0x80060fd4",
+    "vote_units": "strongly supported inference, not proven",
+    "runtime_enablement": "none"
+  },
+  "model_limitations": [
+    "Synthetic frequency candidates are not observed runtime rates",
+    "No register writes, IOCTL calls, Linux regulator policy or power sequences emitted",
+    "First-field values outside23-bit domain and unestablished32-bit overflow sums rejected instead of guessing machine behavior",
+    "Microvolt/microamp interpretation strongly supported inference, not proven; other mode flags unresolved"
+  ],
+  "panel_branch": {
+    "operation": 0,
+    "platform": 5,
+    "sequence": "GetProductInfo; three DSI reads; compiled XML dispatch",
+    "calls_GetPanelConfig": false,
+    "scope": "Bounded branch only; no general external-file override established"
+  },
+  "selected_pe_scan": {
+    "guid": "6357e21c-f8d6-438a-8b8d-af0c1d9476ac",
+    "selected_pe_count": 14,
+    "occurrences": [
+      "ProductCfgDxe",
+      "DisplayDxe"
+    ],
+    "scope": "Selected files only, not universal absence"
+  },
+  "shared_data_search": {
+    "modules": [
+      "BOOTARM.EFI",
+      "winload.efi"
+    ],
+    "nokia_cdpi_edit_observed": false,
+    "winload_optional_acpitabl_dat_option": "0x16000049",
+    "bcd_read_or_changed": false,
+    "acpitabl_dat_found_in_three_checked_mainos_directories": false,
+    "scope": "Exact remaining directory and alternate/fixup consumers unresolved"
+  },
+  "compile": {
+    "scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
+    "diagnostics": [
+      "Warning (unit_address_vs_reg): /memory: node has a reg or ranges property, but no unit name"
+    ],
+    "kernel_sources_or_images_changed": false,
+    "full_relink": "Not repeated; preserved baseline/on/off images remain valid reference compile evidence"
+  },
+  "remaining": [
+    "CLOCK policy sub-enum and remaining PMIC mode fields/lifecycle",
+    "Panel branch coverage beyond the traced branch",
+    "ProductCfg/CDPI consumer/version/fixup chain and exact optional acpitabl.dat directory",
+    "Actual stock product.dat inputs/parser bounds if present",
+    "Provenance-backed RM-875 versus RM-876 comparison before target configuration",
+    "Actual EFI memory/GOP, CPU parking and hardware identity/runtime behavior",
+    "Verified EOS Android kernel/device/HAL/PureView compatibility"
+  ]
+}

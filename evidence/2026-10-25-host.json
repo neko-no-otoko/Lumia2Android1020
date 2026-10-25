@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-25",
+  "scope": "Cloud host compile only; no hardware connected",
+  "repository_base": "dde83f8d393a75ef7fd37acc8eed56fef31a798c",
+  "source": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "archive_sha256": "30e9a71b6f3816b26c46abec906a644bfc947872980e3d145a824c324ff31cd6",
+  "host": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.12.14",
+    "cpu_visible": 5,
+    "free_disk_bytes": 29823885312,
+    "cpu.max": "400000 100000",
+    "memory.max": "17179869184",
+    "git": "git version 2.52.0",
+    "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+    "make": "GNU Make 4.4.1",
+    "curl": "curl 8.14.1 (x86_64-pc-linux-gnu) libcurl/8.14.1 OpenSSL/3.5.7 zlib/1.3.1 brotli/1.1.0 zstd/1.5.7 libidn2/2.3.8 libpsl/0.21.2 libssh2/1.11.1 nghttp2/1.64.0 nghttp3/1.8.0 librtmp/2.3 OpenLDAP/2.6.10"
+  },
+  "configuration": "Unmodified upstream lumia920_defconfig resolved by GCC 14.2",
+  "commands": [
+    {
+      "command": "make -C .work/sources/linux-lumia920 O=\"$PWD/.work/build/linux-lumia920\" ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- lumia920_defconfig",
+      "exit_code": 0
+    },
+    {
+      "command": "make -C .work/sources/linux-lumia920 O=\"$PWD/.work/build/linux-lumia920\" ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j4 qcom/lumia920.dtb qcom/lumia920-simple.dtb",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py build --target objects --jobs 4",
+      "exit_code": 0
+    }
+  ],
+  "environment": "Local tool paths and fixed KBUILD metadata described in docs/build.md; initial DTB-only make predates KBUILD overrides, which do not affect DTB bytes",
+  "warnings": [
+    "lumia920.dtb: reg_format and avoid_default_addr_size for cpus/cpu@0 and cpu@1, with dependent warning categories",
+    "No source warnings suppressed or compiler flags weakened"
+  ],
+  "artifacts": [
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920.dtb",
+      "bytes": 4094,
+      "sha256": "d3ce6b82ce22449efc506852db9ac008d16db833b89ad992107bf3e05aba7f56"
+    },
+    {
+      "path": "arch/arm/boot/dts/qcom/lumia920-simple.dtb",
+      "bytes": 7210,
+      "sha256": "022cba58dcad9a694d27595286324bb131ca54b01e77a927997b980b4f38748d"
+    },
+    {
+      "path": "drivers/video/fbdev/lumiafb.o",
+      "bytes": 2748,
+      "sha256": "53dd9ea876df2a289ba33eb5cb6658ea3709a72bdafdcb78b7d9863b71f4f1dc"
+    },
+    {
+      "path": "drivers/mmc/host/easy_mmc.o",
+      "bytes": 9420,
+      "sha256": "2b72b83e020056762866f7a82cfd32b1915bc3b098772a22418d71d44f2f2dfa"
+    }
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "count": 11,
+    "exit_code": 0
+  },
+  "android_config_gaps": [
+    "CONFIG_ANDROID_BINDER_IPC disabled",
+    "CONFIG_NAMESPACES disabled",
+    "CONFIG_SECURITY disabled"
+  ],
+  "hardware_tests": "None",
+  "full_kernel": {
+    "state": "completed",
+    "exit_code": 0,
+    "bytes": 8667648,
+    "sha256": "ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565",
+    "report": "evidence/2026-10-25-kernel.json",
+    "warnings": "One unused mark_readonly function warning; no source patch needed",
+    "hardware_operations": "None"
+  },
+  "fresh_extraction": {
+    "result": "PASS",
+    "comparison": [
+      "COPYING",
+      "arch/arm/configs/lumia920_defconfig",
+      "drivers/video/fbdev/lumiafb.c",
+      "drivers/mmc/host/easy_mmc.c"
+    ],
+    "copying_sha256": "fb5a425bd3b3cd6071a3a9aff9909a859e7c1158d54d32e07658398cd67eb6a0"
+  },
+  "ci": {
+    "head": "4a0f2ba00e08884602f115c7a6f32b626983969a",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40148596975",
+    "safety": "success",
+    "reference_compile": "success",
+    "artifact_comparison": "All four DTB/driver-object hashes match the local cloud results",
+    "verified_on": "2026-10-25"
+  },
+  "source_review_findings": [
+    "init/main.c comments out free_initmem() and mark_readonly(); full build warns mark_readonly is unused",
+    "920 framebuffer physical address hard-coded",
+    "Experimental eMMC driver polls with direct I/O; never executed on hardware here"
+  ],
+  "network_inventory": {
+    "verified": [
+      "Public GitHub git fetch/push",
+      "GitHub codeload HTTPS: pinned kernel archive downloaded",
+      "Official Debian HTTPS: signed indexes and 22 hash-verified packages"
+    ],
+    "unavailable": [
+      "snapshot.debian.org index: HTTP 403 from environment proxy; official Debian mirror used for discovery"
+    ],
+    "device_connections": "None"
+  },
+  "initial_tool_inventory": {
+    "available": [
+      "git",
+      "gh",
+      "gcc",
+      "make",
+      "python3",
+      "curl",
+      "wget",
+      "tar",
+      "xz",
+      "java",
+      "docker (unused)"
+    ],
+    "missing_before_setup": [
+      "ARM cross compiler",
+      "bison",
+      "flex",
+      "bc",
+      "device-tree compiler",
+      "libelf development headers",
+      "clang",
+      "cmake",
+      "ninja",
+      "repo",
+      "qemu-system-arm"
+    ]
+  },
+  "dtb_identity": {
+    "lumia920.dtb": {
+      "model": "Lumia 920 tiny"
+    },
+    "lumia920-simple.dtb": {
+      "model": "Nokia Lumia 920",
+      "compatible": [
+        "nokia,lumia920",
+        "qcom,msm8960"
+      ]
+    },
+    "method": "Read compiled properties using local fdtget; no hardware operations"
+  },
+  "ci_hardened_setup": {
+    "head": "ccf5b288df2dadd24a1704071772039df4060e2c",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40148811370",
+    "safety": "success",
+    "reference_compile": "success",
+    "verified_on": "2026-10-25"
+  },
+  "ci_checkpoint_latest": {
+    "head": "516def15fc829808c5fcff1557335968bc5eb47b",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40149458747",
+    "conclusion": "success",
+    "scope": "11 synthetic safety tests and fresh focused DTB/driver compile; no full kernel CI"
+  }
+}

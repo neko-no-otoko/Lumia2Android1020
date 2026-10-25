@@ -1,0 +1,76 @@
+name: Host checks and Lumia 920 reference compile
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: host-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-analysis-tools:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/research_tools.py
+      - run: python3 -m unittest discover -s tests -p test_static_eos.py -v
+  safety:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: python3 -m unittest discover -s tests -v
+      - run: python3 scripts/lumia.py check
+      - run: python3 scripts/firmware_facts.py
+  reference-compile:
+    needs: safety
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/lumia.py inventory
+      - run: python3 scripts/lumia.py setup
+      - run: python3 scripts/lumia.py fetch
+      - run: python3 scripts/eos_resources.py --check-kernel
+      - run: python3 scripts/lumia.py build --target dtbs --jobs 2
+      - run: python3 scripts/lumia.py build --target objects --jobs 2
+      - run: python3 scripts/lumia.py build --target soc-objects --jobs 2
+      - run: python3 scripts/lumia.py build --target debug-objects --jobs 2
+      - run: python3 scripts/lumia.py prepare
+      - run: python3 scripts/lumia.py build --profile patched --target dtbs --jobs 2
+      - run: python3 scripts/verify_dtbs.py
+      - run: python3 scripts/lumia.py build --profile patched --target debug-objects --jobs 2
+      - run: python3 scripts/verify_debug.py reference
+      - run: python3 scripts/lumia.py build --profile patched --debug-mode off --target debug-objects --jobs 2
+      - run: python3 scripts/verify_debug.py off
+      - run: python3 scripts/verify_debug.py verify
+      - name: Show compiler diagnostics
+        if: always()
+        run: tail -n 60 .work/logs/*.log 2>/dev/null || true
+  generic-arm-virtual:
+    needs: safety
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/lumia.py setup
+      - run: python3 scripts/virtual_smoke.py setup
+      - run: python3 scripts/virtual_smoke.py build
+      - run: python3 scripts/virtual_smoke.py run
+      - name: Show virtual test diagnostics
+        if: always()
+        run: tail -n 50 .work/emulation/*.log .work/logs/*.log 2>/dev/null || true

@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "source_revision": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "patches": [
+    {
+      "path": "patches/0001-lumia920-cpu-cells.patch",
+      "sha256": "195f8937312890aedf1fb6afe2d08cfe26413298b6dc8ee0b1b834053ff6c8a6",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "arch/arm/boot/dts/qcom/lumia920.dts",
+          "before_sha256": "61b680efec4fe95eb731c4a43d829f18caf09bd940196235969c5437e56b55b9",
+          "after_sha256": "2c6ed800e2b94e274f940d604720b7965c1a66f8de29ec20cfc7edb40b666f26"
+        }
+      ]
+    },
+    {
+      "path": "patches/0002-lumia920-debug-option.patch",
+      "sha256": "423d469d37d3f82aa062faa4ad7c9718b365b8b1236e30271190119e4b4b17d0",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "arch/arm/Kconfig.debug",
+          "before_sha256": "3af5c1371cd0a9d0707edb38086a808450b3241a8453dda0aa1d4dcfe2385254",
+          "after_sha256": "2ccd4a659d7c4a1b162651d3897db341099188308ba26929caf980f2b080a123"
+        },
+        {
+          "path": "arch/arm/configs/lumia920_defconfig",
+          "before_sha256": "2b3fc44de487e65d484ac9085408fbd7e012b56f1ffa43adff0e2d5c6f3a72cd",
+          "after_sha256": "e2aa56c7fc68afeec56fbde40f599072a2a74942fde7047ad47831de4cbbcc1c"
+        },
+        {
+          "path": "arch/arm/kernel/head.S",
+          "before_sha256": "5f0cdd51ff5cd28a8190559d77a435827dec5582877d91bc4954f4df8be81559",
+          "after_sha256": "5df6ff118ea1993b305d53707f2f9700d2796c9db4d5446010829d07ed5062ee"
+        },
+        {
+          "path": "arch/arm/mm/mmu.c",
+          "before_sha256": "1248e53af38e7b5904b79ef15475f486d8252e6b6de0aa3416f093dc51f09518",
+          "after_sha256": "5c9e19e15f78f2319d5e22448b01fda8215f4352b1679906b0047c40ef0c029d"
+        },
+        {
+          "path": "arch/arm/kernel/setup.c",
+          "before_sha256": "ecff1a8ffeac23ad99a915ad5656556f9539094731b68bf69388f476cf88dbe8",
+          "after_sha256": "83be11a423448e54470ee935c4e3e978198c5ee71411e288075944a16aea8338"
+        },
+        {
+          "path": "init/main.c",
+          "before_sha256": "b632c1c43a8ffdcaf11dca9f231071627a381617c2f6e14151658a97f75c0e06",
+          "after_sha256": "7e887fa72589c094047cc8f3195fba154874fd5bad6bdd267be62161d0e450bc"
+        },
+        {
+          "path": "drivers/firmware/efi/libstub/fdt.c",
+          "before_sha256": "61611354f7b7b59a1573fa4fd51e9d61377f4bcabede1382bc733ec90fa44047",
+          "after_sha256": "f129b1cea0bca02657b0813801010dfa0c677a672940a783b1c66107f8c105f3"
+        },
+        {
+          "path": "drivers/video/fbdev/Makefile",
+          "before_sha256": "b9dd52261357a150ab14147a2cb78ef216585b78b70acc782a2303d5ea7a779e",
+          "after_sha256": "9e632544cf8bc88ad30d87d455691f3620c67940c1a515b4c31a0609ca76478a"
+        }
+      ]
+    },
+    {
+      "path": "patches/0003-lumia920-panic-debug-hook.patch",
+      "sha256": "586f161e53b19a6e540a4251423d78c6727851810bc868e23ee856c327649390",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "kernel/panic.c",
+          "before_sha256": "08440ee8fab4c74466a919591c2494380b20d824f2c57c19c9723a8a6ff55859",
+          "after_sha256": "8182f7ad7ec06327fc7e0c41c3607d75652d7388f4d43de8d77b7d42fe8b5bb4"
+        }
+      ]
+    }
+  ]
+}

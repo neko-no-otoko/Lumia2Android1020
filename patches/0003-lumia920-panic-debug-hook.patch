@@ -1,0 +1,35 @@
+SPDX-License-Identifier: GPL-2.0-only
+Subject: [PATCH] printk: guard Lumia 920 panic-console reactivation
+Upstream-Source: https://github.com/UEFI-code/linux-6.6-lumia920
+Upstream-Revision: 9872e9316212490b7db8e3371fa1d63bd3394cc5
+License-Provenance: existing GPL-2.0-only SPDX header in kernel/panic.c
+
+A complete debug-off link exposed an unconditional panic-path caller outside
+of the initially focused objects. Gate its declarations and reactivation with
+the same option; retain the original panic behavior when explicitly enabled.
+No normal panic logic or physical hardware values are changed.
+
+--- a/kernel/panic.c
++++ b/kernel/panic.c
+@@ -265,8 +265,10 @@
+ 		crash_smp_send_stop();
+ }
+ 
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ extern u8 lumiafb_enabled;
+ void lumiafb_early_init(void);
++#endif
+ 
+ /**
+  *	panic - halt the system
+@@ -278,8 +280,10 @@
+  */
+ void panic(const char *fmt, ...)
+ {
++#ifdef CONFIG_LUMIA920_EARLY_DEBUG
+ 	if (!lumiafb_enabled)
+ 		lumiafb_early_init();
++#endif
+ 	
+ 	static char buf[1024];
+ 	va_list args;

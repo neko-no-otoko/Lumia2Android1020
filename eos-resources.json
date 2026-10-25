@@ -1,0 +1,1170 @@
+{
+  "schema": 1,
+  "scope": "Original RM-876 factual resource inventory, corroborated for selected byte-identical assets in exact RM-877 comparison; no firmware copied or runtime enablement",
+  "runtime_enablement": "none",
+  "provenance": {
+    "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+    "ffu_bytes": 1826881536,
+    "ffu_crc32": "41ae158c",
+    "platform": "Nokia.MSM8960.P5217",
+    "variant": "RM-876 / 059T3B3 / 3051.50009.1424.0004",
+    "provider": "Parent-provided findings from the user's authorized local static inspection; raw bundle not materialized in cloud",
+    "static_checks_reported": "13934 embedded SHA256 chunks and GPT CRCs pass; DSDT/2SDT/SSDT checksums/lengths pass; ACPICA 20260930 iasl exits 0; no AML execution",
+    "vendor_trust_chain": "unverified",
+    "license_policy": "No firmware/disassembly redistribution; only original factual summaries and host code"
+  },
+  "linux_source": {
+    "revision": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+    "files": {
+      "arch/arm/boot/dts/qcom/qcom-msm8960.dtsi": "448cfaa18888cd40704fa9f76dec3b3e4e65cb284c9945f36f58247af7030074",
+      "drivers/pinctrl/qcom/pinctrl-msm8960.c": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+      "drivers/clk/qcom/gcc-msm8960.c": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+      "drivers/irqchip/irq-gic.c": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+      "include/dt-bindings/clock/qcom,gcc-msm8960.h": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+      "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+      "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+      "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+      "drivers/clk/qcom/mmcc-msm8960.c": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+      "drivers/regulator/qcom_rpm-regulator.c": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6"
+    },
+    "official_v6_6": {
+      "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+      "files": [
+        {
+          "path": "arch/arm/boot/dts/qcom/qcom-msm8960.dtsi",
+          "official_sha256": "eee3d6cf051009705137e727943970246ab572bf19cabf85a3139cd1fdd6f63e",
+          "reference_sha256": "448cfaa18888cd40704fa9f76dec3b3e4e65cb284c9945f36f58247af7030074",
+          "identical_to_official_v6_6": false
+        },
+        {
+          "path": "drivers/pinctrl/qcom/pinctrl-msm8960.c",
+          "official_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+          "reference_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/clk/qcom/gcc-msm8960.c",
+          "official_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+          "reference_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/irqchip/irq-gic.c",
+          "official_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+          "reference_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "include/dt-bindings/clock/qcom,gcc-msm8960.h",
+          "official_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+          "reference_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml",
+          "official_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+          "reference_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml",
+          "official_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+          "reference_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml",
+          "official_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+          "reference_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/clk/qcom/mmcc-msm8960.c",
+          "official_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/regulator/qcom_rpm-regulator.c",
+          "official_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "identical_to_official_v6_6": true
+        }
+      ],
+      "comparison_scope": "Eight original source/binding files independently retrieved from official torvalds/linux v6.6; seven byte-identical; reference-fork DTSI differs as documented.",
+      "dtsi_differences": [
+        "Adds ssbi label and removes upstream PM8921 interrupt-controller subtree, power key/keypad/RTC children",
+        "Removes USB controller core/iface clocks, assigned rate and core reset",
+        "Removes USB PHY sleep/ref clocks and POR reset"
+      ],
+      "resource_fields": "The five compared controller bases/apertures/IRQs are unchanged between official and fork DTSI; no board enablement implied.",
+      "license": "Existing upstream GPL/BSD file notices; no upstream files vendored."
+    },
+    "pep_official_v6_6": {
+      "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+      "files": [
+        {
+          "path": "drivers/clk/qcom/mmcc-msm8960.c",
+          "official_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "reference_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "identical": true
+        },
+        {
+          "path": "drivers/regulator/qcom_rpm-regulator.c",
+          "official_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "reference_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "identical": true
+        }
+      ],
+      "interpretation": "Byte-identical MMCC CSI mux fields, RPM8960 masks/units, mode and selector mappings corroborate selected consumer facts; no hardware enablement"
+    }
+  },
+  "i2c_controllers": [
+    {
+      "name": "I2C1",
+      "gsbi_candidate": 1,
+      "mmio": 369623040,
+      "length": 2048,
+      "raw_irq": 179,
+      "raw_tlmm_pair": [
+        8,
+        9
+      ],
+      "raw_clock_names": [
+        "cc_gsbi1_hclk",
+        "cc_gsbi1_qup_apps_clk"
+      ],
+      "raw_clock_rates": [
+        60000000,
+        24000000
+      ]
+    },
+    {
+      "name": "I2C3",
+      "gsbi_candidate": 3,
+      "mmio": 371720192,
+      "length": 2048,
+      "raw_irq": 183,
+      "raw_tlmm_pair": [
+        16,
+        17
+      ],
+      "raw_clock_names": [
+        "cc_gsbi3_hclk",
+        "cc_gsbi3_qup_apps_clk"
+      ],
+      "raw_clock_rates": [
+        60000000,
+        24000000
+      ]
+    },
+    {
+      "name": "IC10",
+      "gsbi_candidate": 10,
+      "mmio": 438829056,
+      "length": 2048,
+      "raw_irq": 224,
+      "raw_tlmm_pair": [
+        73,
+        74
+      ],
+      "raw_clock_names": [
+        "cc_gsbi10_hclk",
+        "cc_gsbi10_qup_apps_clk"
+      ],
+      "raw_clock_rates": [
+        60000000,
+        24000000
+      ]
+    },
+    {
+      "name": "IC12",
+      "gsbi_candidate": 12,
+      "mmio": 306839552,
+      "length": 2048,
+      "raw_irq": 228,
+      "raw_tlmm_pair": [
+        44,
+        45
+      ],
+      "raw_clock_names": [
+        "cc_gsbi12_hclk",
+        "cc_gsbi12_qup_apps_clk"
+      ],
+      "raw_clock_rates": [
+        60000000,
+        24000000
+      ]
+    }
+  ],
+  "peripherals": [
+    {
+      "node": "TCH1",
+      "firmware_hid": "NOKIA_TOUCH",
+      "bus": "I2C3",
+      "address_7bit": 75,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 11,
+          "meaning": "irq-edge-low-shared"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 50,
+          "meaning": "io"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "NFC1",
+      "firmware_hid": "NXP_NFCC",
+      "bus": "IC10",
+      "address_7bit": 43,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 106,
+          "meaning": "irq-edge-high"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 18,
+          "meaning": "io"
+        },
+        {
+          "controller": "PM01",
+          "pin": 198,
+          "meaning": "io"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "ACC1",
+      "firmware_hid": "KXTNK",
+      "bus": "IC12",
+      "address_7bit": 30,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 10,
+          "meaning": "irq-edge-low"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 67,
+          "meaning": "irq-edge-low"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "ALS1",
+      "firmware_hid": "QPDS_T900_ALS",
+      "bus": "IC12",
+      "address_7bit": 57,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 49,
+          "meaning": "irq-edge-low-shared"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "GYR1",
+      "firmware_hid": "L3GD20S",
+      "bus": "IC12",
+      "address_7bit": 104,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 69,
+          "meaning": "irq-edge-low"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 68,
+          "meaning": "irq-edge-low"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "MAG1",
+      "firmware_hid": "Point_C",
+      "bus": "IC12",
+      "address_7bit": 15,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 70,
+          "meaning": "irq-edge-high"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "PRX1",
+      "firmware_hid": "QPDS_T900_PRX",
+      "bus": "IC12",
+      "address_7bit": 57,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 49,
+          "meaning": "irq-edge-low-shared"
+        }
+      ],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "BAR1",
+      "firmware_hid": "LPS331AP",
+      "bus": "IC12",
+      "address_7bit": 93,
+      "bus_hz": 400000,
+      "gpio_resources": [],
+      "linux_status": "unresolved"
+    },
+    {
+      "node": "IHF1",
+      "firmware_hid": "MAXIMUS",
+      "bus": "I2C1",
+      "address_7bit": 52,
+      "bus_hz": 400000,
+      "gpio_resources": [
+        {
+          "controller": "GIO0",
+          "pin": 47,
+          "meaning": "output"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 48,
+          "meaning": "output"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 51,
+          "meaning": "output"
+        },
+        {
+          "controller": "GIO0",
+          "pin": 52,
+          "meaning": "input"
+        }
+      ],
+      "linux_status": "unresolved"
+    }
+  ],
+  "other_controllers": [
+    {
+      "name": "SDC1",
+      "mmio": 306184192,
+      "length": 2048,
+      "raw_irq": 136,
+      "raw_dma": [
+        46,
+        47
+      ]
+    },
+    {
+      "name": "UFN1",
+      "mmio": 307232768,
+      "length": 512,
+      "raw_irq": 132,
+      "operation_region_length": 4096
+    },
+    {
+      "name": "UART5",
+      "mmio": 373555200,
+      "length": 256,
+      "raw_irq": 186
+    },
+    {
+      "name": "GIO0",
+      "mmio": 8388608,
+      "length": 8192,
+      "raw_irq": 48,
+      "firmware_hid": "QCOM0500",
+      "uid": 0,
+      "raw_irq_descriptors": "Three repeated level/high/shared descriptors"
+    }
+  ],
+  "display": {
+    "pcfg_panel": "Tanya",
+    "efiesp_ptanya_panel": "Jessica",
+    "selection": "unresolved",
+    "width": 768,
+    "height": 1280,
+    "dsi_lanes": 4,
+    "pixel_clock_hz": 59710000,
+    "raw_dpid": 16646338,
+    "raw_gpio_resources": {
+      "GIO0": [
+        0,
+        100,
+        101,
+        102
+      ],
+      "PM01": [
+        234
+      ]
+    },
+    "reset_resource_association": "GPU0.RESI ordered structural alignment associates DSI_PANEL_RESET with PM01 pin234; not a Linux pin mapping",
+    "embedded_rule": "ID low byte0xc2 selects Tanya if supplied to embedded dispatcher; external XML caller precedence and physical panel unresolved"
+  },
+  "power": {
+    "semantics": "RM-876 stock consumer and pinned upstream corroborate parameter labels, clock mux subset and per-client vote arithmetic; EOS pin routing/source values and physical runtime state unobserved",
+    "touch": [
+      "SMPS4",
+      "LVS4",
+      "LDO9"
+    ],
+    "display": [
+      "SMPS4",
+      "LVS4"
+    ],
+    "sensors": [
+      "LDO9",
+      "SMPS4"
+    ],
+    "nfc": [
+      "CXO_BUFFERS"
+    ]
+  },
+  "table_variants": {
+    "2SDT_adds": [
+      "touch IO50",
+      "display dependencies PEP0/PRXY/HWN0/PMIC/GPU0",
+      "thermal TZ11 NOKIA_THERMAL"
+    ],
+    "selected_at_boot": "unresolved: actual product.dat not retrieved",
+    "selection_rule": "AcpiPlatform product.dat TYPE/HWID comparison branches to2SDT or defaultDSDT using parsed value lengths; actual inputs absent."
+  },
+  "unknowns": [
+    "usable/reserved memory and boot handoff",
+    "Linux controller bindings and runtime pin/power behavior after operation-specific Windows namespace decoding",
+    "controller IRQ trigger/polarity and GIC interpretation",
+    "GSBI mode, clocks, rates, pinctrl electrical configuration",
+    "Remaining regulator mode flags, clock policy sub-enum, Linux shared-vote correspondence and runtime dependencies",
+    "Actual product.dat inputs, external/embedded panel precedence, and installed template/shared-data chain",
+    "Linux device compatible identities and actual silicon/function table, despite stock Synaptics3400_EOS configuration",
+    "charging/storage/thermal/modem/camera safety"
+  ],
+  "gpio_namespaces": {
+    "GIO0": {
+      "hid": "QCOM0500",
+      "uid": 0,
+      "ofni_bytes": "98 00",
+      "line_count_interpretation": "OFNI schema still unverified; independently verified DALTLMM accepts indices0..151 and rejects152+"
+    },
+    "PM01": {
+      "hid": "QCOM2038",
+      "uid": 1,
+      "dependency": "PMIC QCOM2037",
+      "upstream_resources": "Five descriptors of GIO0 pin104 level/low/shared PullUp",
+      "pmio_literal": [
+        0,
+        8921,
+        44,
+        192,
+        0,
+        0,
+        272,
+        64,
+        0,
+        256,
+        0,
+        0,
+        0,
+        12,
+        128,
+        0,
+        0
+      ],
+      "mapping_status": "Stock decoder confirms operation-specific GPIO192..235=>Windows0..43, MPP128..139=>0..11, IRQ0..255 distinct. No automatic Linux binding.",
+      "dsm_function1": "Confirmed standard GUID and Package{51}: controller-relative ActiveBoth logic-high override; no pin count or physical mapping. Arg1/Arg3 ignored."
+    }
+  },
+  "template_memory": {
+    "kind": "Static template observations, not usable RAM map or reservation instructions",
+    "regions": [
+      {
+        "name": "SMEM",
+        "base": 2147483648,
+        "length": 2097152
+      },
+      {
+        "name": "UEFI_FRAME_BUFFER",
+        "base": 2151677952,
+        "length": 4194304
+      },
+      {
+        "name": "SCM0-a",
+        "base": 2168455168,
+        "length": 249856
+      },
+      {
+        "name": "SCM0-b",
+        "base": 2168705024,
+        "length": 12288
+      },
+      {
+        "name": "RFS0",
+        "base": 2410676224,
+        "length": 3145728
+      }
+    ],
+    "unsized_pointers": [
+      {
+        "name": "BGRT",
+        "base": 2160066560
+      },
+      {
+        "name": "FPDT",
+        "base": 2151153664
+      }
+    ],
+    "ram_banks": "unknown",
+    "runtime_fixups": "ACPI checksum-byte fixup before installation confirmed; memory/shared-data fixup chain unresolved"
+  },
+  "boot_template": {
+    "madt_gicc_length": 40,
+    "enabled_gicc_count": 2,
+    "uids": [
+      0,
+      1
+    ],
+    "parking_protocol": 1,
+    "parked_addresses": [
+      2150633472,
+      2150637568
+    ],
+    "performance_irq": 26,
+    "distributor_base": 33554432,
+    "legacy_header_address": 33562624,
+    "fadt_arm_flags": 0,
+    "psci_advertised": false,
+    "facs_dsdt_pointers": 0,
+    "cpu_enable_method": "unresolved",
+    "checksum_warning": "Raw templates have zero checksums/nonzero sums; AcpiPlatform recomputes byte9 before installation. Actual installed tables not captured; general AML fixups unproven.",
+    "parser_warning": "Modern iasl reads fields beyond these legacy40-byte GICC records before warning; only bounded legacy fields are evidence."
+  },
+  "camera_declarations": {
+    "CAMP": {
+      "hid": "QCOM0775",
+      "regions": [
+        [
+          372244480,
+          32
+        ],
+        [
+          372768768,
+          1032
+        ],
+        [
+          8396984,
+          4
+        ]
+      ],
+      "raw_gio0_pins": [
+        107,
+        76,
+        1,
+        2
+      ],
+      "gsbi_candidate": 4,
+      "raw_tlmm_pair": [
+        20,
+        21
+      ]
+    },
+    "CAMS": {
+      "hid": "QCOM0710",
+      "regions": [
+        [
+          75497472,
+          1024
+        ],
+        [
+          75500544,
+          1024
+        ]
+      ],
+      "raw_irq": [
+        115
+      ]
+    },
+    "CAMF": {
+      "hid": "QCOM0715",
+      "regions": [
+        [
+          75498496,
+          1024
+        ],
+        [
+          75501568,
+          1024
+        ]
+      ],
+      "raw_irq": [
+        116
+      ]
+    },
+    "VFE0": {
+      "hid": "QCOM0700",
+      "regions": [
+        [
+          72351744,
+          1888
+        ],
+        [
+          75499520,
+          1024
+        ]
+      ],
+      "raw_irq": [
+        80,
+        199
+      ]
+    },
+    "raw_csi_clock_tuple": 9600000,
+    "module_codenames": [
+      "RFC_Galileo2",
+      "FFC_SkypeHd"
+    ],
+    "unknown": "Sensor silicon, I2C address/registers and CSI lane map absent; codenames are not silicon proof."
+  },
+  "selection_search": {
+    "CDPI": "SSDT SystemMemory0x015ff000+0x1000, VMAJ/VMIN/PRID/DPAN/TST2 fields; not referenced elsewhere in inspected tables",
+    "result": "No Load operations, _STA, _INI, complete RAM map or panel/table selector found in inspected tables; external/runtime selection remains unresolved"
+  },
+  "verified_static": {
+    "provenance": {
+      "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+      "method": "Original factual findings reported by authorized Mac Mini static inspection of this FFU; no firmware/driver execution; binaries and disassembly private; cloud independently checks arithmetic only",
+      "driver_files": {
+        "qcpmicgpio8960.sys": {
+          "bytes": 107008,
+          "sha256": "6b21dc1c1bd884cd95751140c7db5c5526a1e613f6fb9609cfd26ac14362892c"
+        },
+        "SynapticsTouch.sys": {
+          "bytes": 507392,
+          "sha256": "2b3907b0402783ce18ba1048f2efbf7504e86387a3cc346e32ed99fdafb82b5a"
+        },
+        "QCpep8960.sys": {
+          "bytes": 900896,
+          "sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642"
+        }
+      },
+      "rm877_corroboration": {
+        "record": "rm877-comparison.json",
+        "target_ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+        "scope": "Shared table resource facts, PMIC whole-file equality, PEP declared-raw-section equality; changed UEFI needs direct target review and touch data not carried"
+      }
+    },
+    "pmio": {
+      "arguments": [
+        0,
+        8921,
+        44,
+        192,
+        0,
+        0,
+        272,
+        64,
+        0,
+        256,
+        0,
+        0,
+        0,
+        12,
+        128,
+        0,
+        0
+      ],
+      "schema_argument_count": 17,
+      "field_indices": {
+        "pmic_selector": 0,
+        "model_value": 1,
+        "physical_gpio_count": 2,
+        "physical_gpio_base": 3,
+        "slot_count": 6,
+        "bank_width": 7,
+        "irq_count": 9,
+        "mpp_count": 13,
+        "mpp_base": 14
+      },
+      "ignored_by_this_parser": [
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        15,
+        16
+      ],
+      "linear_pin_rule": "bank * bank_width + pin",
+      "operation_namespaces": "GPIO/MPP I/O ranges and IRQ0..255 are distinct; no global subtraction",
+      "linux_binding_status": "unresolved"
+    },
+    "gpio_dsm": {
+      "guid": "4f248f40-d5e2-499f-834c-27758ea1cd3f",
+      "function0_buffer": [
+        3
+      ],
+      "function1_package": [
+        51
+      ],
+      "arg1_checked": false,
+      "arg3_checked": false,
+      "meaning": "Controller-relative ActiveBoth pins initially asserted logic high; no physical pin mapping"
+    },
+    "acpi_install": {
+      "product_path": "fs0:\\Nokia\\product.dat",
+      "type_literal": "RM-877",
+      "hwid_literals": [
+        "2000",
+        "2100",
+        "2005",
+        "2110"
+      ],
+      "match_branch": "2SDT",
+      "default_branch": "DSDT",
+      "comparison": "Uses parsed value length; not proven strict exact matching",
+      "actual_product_dat_read": false,
+      "checksum_byte_recomputed": 9,
+      "tpm2_control_area_adjustment": true,
+      "general_aml_fixups_proven": false
+    },
+    "display_dispatch": {
+      "embedded_tanya_id_low_byte": 194,
+      "other_id_bits_ignored": true,
+      "platform_value5": "Performs three DSI reads and constructs ID",
+      "external_xml": "GetPanelConfig fallback with low-byte record matching and first-record fallback",
+      "embedded_external_precedence": "unresolved",
+      "physical_panel_observed": false,
+      "traced_branch": {
+        "operation": 0,
+        "platform": 5,
+        "sequence": "GetProductInfo; three DSI reads; compiled XML dispatch",
+        "calls_GetPanelConfig": false,
+        "scope": "Bounded branch only; no general external-file override established"
+      },
+      "productcfg_guid_scan": {
+        "guid": "6357e21c-f8d6-438a-8b8d-af0c1d9476ac",
+        "selected_pe_count": 14,
+        "occurrences": [
+          "ProductCfgDxe",
+          "DisplayDxe"
+        ],
+        "scope": "Selected files only, not universal absence"
+      }
+    },
+    "shared_data_layouts": {
+      "productcfg": {
+        "base": 2220883968,
+        "version_byte_offsets": [
+          0,
+          1
+        ],
+        "product_id_offset": 4,
+        "panel_id_offset": 8,
+        "detection_result_offset": 128
+      },
+      "ssdt_cdpi": {
+        "base": 23064576,
+        "product_id_offset": 2,
+        "panel_id_offset": 6
+      },
+      "runtime_or_alternate_consumer_chain": "unresolved; no address/layout patch justified",
+      "boot_loader_search": {
+        "modules": [
+          "BOOTARM.EFI",
+          "winload.efi"
+        ],
+        "nokia_cdpi_edit_observed": false,
+        "winload_optional_acpitabl_dat_option": "0x16000049",
+        "bcd_read_or_changed": false,
+        "acpitabl_dat_found_in_three_checked_mainos_directories": false,
+        "scope": "Bounded stock System32 traversal and optional loader path; BCD not read; no CDPI mismatch resolution",
+        "winload_constructed_path": "<configured system root>\\system32\\acpitabl.dat",
+        "system_root_option": "0x22000002",
+        "checked_stock_system32_entries": 1975,
+        "matching_acpitabl_dat_found": false
+      }
+    },
+    "pep": {
+      "device_packages": 35,
+      "action_groups": 418,
+      "clock_names": 72,
+      "clock_opcodes": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "clock_opcode_semantics": "static_operations_resolved_policy_subenum_unresolved",
+      "power_units": "corroborated_static",
+      "display": {
+        "raw_smps4_level": 1800000,
+        "raw_load_fields": [
+          40000,
+          20000
+        ],
+        "d0_vote_order": [
+          "SMPS4",
+          "LVS4"
+        ],
+        "d3_vote_order": [
+          "LVS4",
+          "SMPS4"
+        ]
+      },
+      "touch": {
+        "rails": [
+          "SMPS4",
+          "LVS4",
+          "LDO9"
+        ],
+        "raw_ldo9_level": 2850000,
+        "gio0_pin": 50
+      },
+      "consumer_semantics": "Clock operation map and per-client PMIC vote aggregation decoded statically; clock policy sub-enum, other regulator flags and runtime state unresolved",
+      "clock_operations": {
+        "1": "enable",
+        "2": "disable",
+        "3": "set_frequency",
+        "4": "invert_with_argument_1",
+        "5": "assert_then_deassert_reset",
+        "6": "external_source_selection",
+        "7": "set_divider_when_nonzero",
+        "8": "enable_then_set_frequency",
+        "9": "configuration_policy_subenum_unresolved",
+        "10": "assert_reset",
+        "11": "deassert_reset"
+      },
+      "clock_policy_subenum": "stock_CSI_subset_resolved_other_values_unresolved",
+      "frequency_selectors": {
+        "1-4": "Hz",
+        "5-8": "kHz",
+        "9-12": "MHz",
+        "within_each_group": [
+          "at_least",
+          "at_most",
+          "closest",
+          "exact"
+        ],
+        "closest_tie": "lower",
+        "runtime_rates_observed": false
+      },
+      "tlmm_tuple_order": [
+        "pin",
+        "output",
+        "function",
+        "direction",
+        "pull",
+        "drive"
+      ],
+      "vreg_votes": {
+        "second_item": "resource_type; not enable/disable",
+        "parameter_counts_after_type": {
+          "1": 7,
+          "2": 10,
+          "7": 1
+        },
+        "transport_bytes": 60,
+        "transport_ioctl": "0x80060fd4",
+        "aggregation_types1_2": {
+          "first_field": "maximum per-client value",
+          "next_two_fields": "independently sum; round (sum+500)//1000; clamp1023",
+          "packed_widths": [
+            23,
+            10,
+            10
+          ]
+        },
+        "units_status": "corroborated_static",
+        "units_inference": "Microvolt/peak-microamp/average-microamp field labels corroborated by stock consumer and pinned upstream RPM layout; physical aggregate/runtime state unobserved",
+        "other_mode_flags": "literal; unresolved",
+        "type7": "CXO_CLOCK one-bit client OR vote; clearing one client does not prove physical oscillator off"
+      },
+      "stock_csi_policy": {
+        "tuple_count": 10,
+        "output_count": 5,
+        "scope": "All stock RM-876 operation9 tuples inspected; not all possible API sub-enums",
+        "preceding_slots_11_12": "generic slots, not MHz",
+        "selector_values": {
+          "1": [
+            0,
+            0
+          ],
+          "2": [
+            1,
+            0
+          ],
+          "3": [
+            0,
+            1
+          ]
+        },
+        "linux_parent_indices": {
+          "1": 0,
+          "2": 1,
+          "3": 2
+        },
+        "CAMF_requested": "CSI1",
+        "CAMS_requested": "CSI0",
+        "fitted_sensor": "unobserved",
+        "mmcc_fields": {
+          "pixel": [
+            [
+              88,
+              25
+            ],
+            [
+              568,
+              13
+            ]
+          ],
+          "pixel1": [
+            [
+              568,
+              8
+            ],
+            [
+              568,
+              9
+            ]
+          ],
+          "RDI": [
+            [
+              88,
+              12
+            ],
+            [
+              568,
+              12
+            ]
+          ],
+          "RDI1": [
+            [
+              568,
+              0
+            ],
+            [
+              568,
+              1
+            ]
+          ],
+          "RDI2": [
+            [
+              568,
+              4
+            ],
+            [
+              568,
+              5
+            ]
+          ]
+        }
+      },
+      "regulator_field_layout": {
+        "type1_LDO": [
+          "microvolts",
+          "peak_microamps",
+          "average_microamps",
+          "force_mode",
+          "pin_control_mask",
+          "pin_function",
+          "pull_down"
+        ],
+        "type2_SMPS_extra": [
+          "power_mode",
+          "switching_frequency_selector",
+          "frequency_clock_source_selector"
+        ],
+        "type4_LVS": [
+          "enable",
+          "pull_down",
+          "pin_control_mask",
+          "pin_function",
+          "optional_HPM"
+        ],
+        "force2": "auto where supported",
+        "force3": "high-power for this corroborated3-bit encoding; not universal across PMICs",
+        "SMPS_power0": "hysteretic",
+        "frequency_selector6_hz": 3200000,
+        "LVS_enable_pull_down_aggregation": "per-client OR",
+        "EOS_specific_pin_routing_source_values": "unresolved"
+      },
+      "rm876_power_snapshots": {
+        "scope": "Reported per-client prefixes only, not full packages or physical aggregate measurements",
+        "prefix_field_order": [
+          "microvolts",
+          "peak_microamps",
+          "average_microamps",
+          "force_mode_if_reported"
+        ],
+        "DISP_D0_SMPS4": [
+          1800000,
+          40000,
+          20000,
+          3
+        ],
+        "DISP_D3_SMPS4": [
+          1800000,
+          100,
+          100,
+          2
+        ],
+        "TCH1_D0_SMPS4": [
+          1800000,
+          25000,
+          25000
+        ],
+        "TCH1_D0_LDO9": [
+          2850000,
+          18000,
+          12000
+        ],
+        "TCH1_D3_LDO9": [
+          2850000,
+          5000,
+          5000
+        ],
+        "DISP_D0_LVS4_enable": true,
+        "TCH1_D0_LVS4_enable": true,
+        "TCH1_D3_own_LVS4_enable": false,
+        "TCH1_D3_own_SMPS4_voltage_current_vote": "cleared; not physical rail off"
+      }
+    },
+    "touch_configuration": {
+      "package": "Synaptics3400_EOS",
+      "binds_hid": "NOKIA_TOUCH",
+      "configured_vendors": [
+        3,
+        8
+      ],
+      "configured_products": [
+        "PLG0150-01",
+        "PLG0150-02"
+      ],
+      "function_labels": [
+        "F01",
+        "F11",
+        "F51",
+        "F54"
+      ],
+      "observed_silicon": false,
+      "observed_function_table": false,
+      "linux_compatible": "unassigned",
+      "source_scope": "RM-876 origin; exact RM-877 target comparison corroborates HID/service/vendor/product selectors, config-write flags and compared power settings; no blanket rdata/pdata inheritance or live PDT observation"
+    },
+    "tlmm": {
+      "pin_count": 152,
+      "config_base": 8392704,
+      "register_stride": 16,
+      "io_offset": 4,
+      "input_bit": 0,
+      "output_bit": 1,
+      "new_format_selector_bit": 29,
+      "new_fields": {
+        "function": [
+          0,
+          4
+        ],
+        "pin": [
+          4,
+          10
+        ],
+        "direction": [
+          14,
+          1
+        ],
+        "pull": [
+          15,
+          2
+        ],
+        "drive": [
+          17,
+          4
+        ],
+        "output": [
+          21,
+          4
+        ]
+      },
+      "legacy_fields": {
+        "function": [
+          0,
+          4
+        ],
+        "pin": [
+          8,
+          8
+        ],
+        "direction": [
+          16,
+          1
+        ],
+        "pull": [
+          17,
+          2
+        ],
+        "drive": [
+          19,
+          3
+        ],
+        "output": [
+          4,
+          4
+        ]
+      },
+      "output_nibble_actions": {
+        "2": "clear",
+        "3": "set"
+      },
+      "writer_positions": {
+        "pull": 0,
+        "function": 2,
+        "drive": 6,
+        "direction": 9
+      },
+      "readback_drive_bits": [
+        6,
+        3
+      ],
+      "electrical_semantics": "unverified; new4-bit drive high bit overlaps direction9 in writer; do not repair/mask or use for pin writes"
+    }
+  },
+  "variant_gate": {
+    "source_rm": "RM-876",
+    "source_product_code": "059T3B3",
+    "intended_target_rm": "RM-877",
+    "actual_handset_rm_product_code_verified": false,
+    "board_equivalence": "unverified",
+    "target_configuration_emitted": false,
+    "target_firmware_identity_verified": true,
+    "selected_asset_comparison": "byte_identical_for_two_exact_ffus",
+    "touch_configuration_carry_forward": false,
+    "firmware_behavior_equivalence": "unverified"
+  },
+  "target_comparison_record": "rm877-comparison.json"
+}

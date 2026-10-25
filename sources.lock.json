@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "reviewed_on": "2026-10-25",
+  "sources": [
+    {
+      "id": "linux-lumia920",
+      "repository": "UEFI-code/linux-6.6-lumia920",
+      "revision": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+      "ref_observed": "try",
+      "role": "compile-reference",
+      "license": "GPL-2.0-only WITH Linux-syscall-note; additional per-file licenses",
+      "license_path": "COPYING",
+      "download": true,
+      "url": "https://codeload.github.com/UEFI-code/linux-6.6-lumia920/tar.gz/9872e9316212490b7db8e3371fa1d63bd3394cc5",
+      "sha256": "30e9a71b6f3816b26c46abec906a644bfc947872980e3d145a824c324ff31cd6",
+      "archive_root": "linux-6.6-lumia920-9872e9316212490b7db8e3371fa1d63bd3394cc5",
+      "device": "Lumia 920 only; EOS adaptation unimplemented"
+    },
+    {
+      "id": "lumiatoy",
+      "repository": "UEFI-code/LumiaToy",
+      "revision": "2a256c84102e33a15f0d93e069f1b8b21ad93c3e",
+      "ref_observed": "main",
+      "role": "reference-only",
+      "license": "README restricts commercial use; no general redistribution grant established",
+      "license_path": "README.md",
+      "download": false,
+      "device": "Lumia 920 loader; no import or binary download"
+    },
+    {
+      "id": "nexusq-notes",
+      "repository": "petronijus/nexusQ-reloaded",
+      "revision": "d310161beb7d145be083fbfae0bc022ac24f8ca7",
+      "ref_observed": "main",
+      "role": "reference-only",
+      "license": "Repository reports GPL-2.0; not audited for reuse",
+      "license_path": "LICENSE",
+      "download": false,
+      "device": "Nexus Q; HANDOVER.md mentions separate Lumia USB network; not EOS source"
+    },
+    {
+      "id": "mainline-quickstart",
+      "repository": "Mainline4Lumia/LumiaQuickStart",
+      "revision": "4ecbfb8c93ef8789207f470126825e3ac91090c3",
+      "ref_observed": "master",
+      "role": "reference-only",
+      "license": "Not audited; no import",
+      "license_path": null,
+      "download": false,
+      "device": "Generic project; not evidence of EOS support"
+    },
+    {
+      "id": "android4lumia-notes",
+      "repository": "Android4Lumia/notes",
+      "revision": "281fbd5ff1e2bf1500921ca69bd888238e552b3d",
+      "ref_observed": "master",
+      "role": "reference-only",
+      "license": "Not audited; no import",
+      "license_path": null,
+      "download": false,
+      "device": "Other Lumia platforms; not an EOS Android tree"
+    },
+    {
+      "id": "android950-board",
+      "repository": "Android4Lumia950/android_device_msft_talkman",
+      "revision": "085f931c7b2cb5e7c8f21a64f60d753699b83b42",
+      "ref_observed": "lineage-18.1-talkman",
+      "role": "incompatible-reference",
+      "license": "Not audited; no import",
+      "license_path": null,
+      "download": false,
+      "device": "BoardConfig.mk: arm64/armv8-a, MSM8992; not MSM8960"
+    },
+    {
+      "id": "mainline-talkman",
+      "repository": "Mainline4Lumia/android_device_msft_talkman",
+      "revision": "007e905bffa4c178bac27e42ba710005377309b9",
+      "ref_observed": "lineage-22.2",
+      "role": "incompatible-reference",
+      "license": "Not audited; no import",
+      "license_path": null,
+      "download": false,
+      "device": "Talkman is not EOS; no Android version selected"
+    },
+    {
+      "id": "actions-checkout",
+      "repository": "actions/checkout",
+      "revision": "11d5960a326750d5838078e36cf38b85af677262",
+      "ref_observed": "v4",
+      "role": "ci-action-reference",
+      "license": "MIT; LICENSE reviewed at pinned commit",
+      "license_path": "LICENSE",
+      "download": false,
+      "device": "GitHub Actions host checkout only"
+    }
+  ]
+}

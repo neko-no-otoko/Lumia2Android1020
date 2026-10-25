@@ -1,0 +1,242 @@
+{
+  "date": "2026-10-25",
+  "scope": "Executed generic ARM32 Linux/userspace smoke tests only; not Lumia boot, private firmware execution or Android framework",
+  "environment": {
+    "host": "Debian13 x86_64",
+    "cpu_quota": 4,
+    "memory_limit_bytes": 17179869184,
+    "disk_free_after_bytes": 24997781504,
+    "kvm_device_present": false
+  },
+  "source": {
+    "repository": "torvalds/linux",
+    "revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "tag": "v6.6",
+    "url": "https://codeload.github.com/torvalds/linux/tar.gz/ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "sha256": "2fa48537a32d233ec8f8f0ba36fdd19c07a9ee78a574034876b39939429ced84",
+    "archive_root": "linux-ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "license": "GPL-2.0-only WITH Linux-syscall-note; per-file notices apply"
+  },
+  "qemu": {
+    "version": "10.0.13",
+    "debian_version": "1:10.0.13+ds-0+deb13u1",
+    "machine": "virt-10.0,highmem=off,gic-version=2",
+    "cpu": "cortex-a15",
+    "accelerator": "tcg,thread=multi",
+    "cpus": 2,
+    "guest_ram_mib": 256,
+    "packages": 91,
+    "package_download_bytes": 40695600,
+    "guest_disk_network_external_firmware": "none"
+  },
+  "commands": [
+    {
+      "command": "python3 scripts/virtual_smoke.py setup",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/virtual_smoke.py machines",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/virtual_smoke.py build",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/virtual_smoke.py run",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "first_guest_failure": {
+    "result": "Correctly rejected despite QEMU exit0",
+    "log_sha256": "88d617fa7e694d0337083ae36df706928f922025b2d39351b8aff39318df2910",
+    "passed_groups": [
+      "identity",
+      "mounts",
+      "memory",
+      "fork_pipe",
+      "smp_affinity",
+      "namespace"
+    ],
+    "failed_groups": [
+      "clock_epoll",
+      "binder_abi"
+    ],
+    "causes": [
+      "Missing COMPAT_32BIT_TIME caused ENOSYS from default ARM glibc timerfd_settime",
+      "Original assertion incorrectly expected EFAULT for BINDER_VERSION null pointer; Linux6.6 explicitly returnsEINVAL"
+    ],
+    "corrections": [
+      "Enable and check generic COMPAT_32BIT_TIME; additionally exercise time64",
+      "Correct VERSION assertion and separately check WRITE_READ invalid commandEINVAL and bufferEFAULT"
+    ],
+    "kernel_driver_modified": false
+  },
+  "final": {
+    "scope": "Generic ARMv7 Linux on QEMU virt, not Lumia or Android framework",
+    "runs": [
+      {
+        "name": "smoke",
+        "command": [
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "--library-path",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib/x86_64-linux-gnu:/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/bin/qemu-system-arm",
+          "-L",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/share/qemu",
+          "-machine",
+          "virt-10.0,highmem=off,gic-version=2",
+          "-cpu",
+          "cortex-a15",
+          "-accel",
+          "tcg,thread=multi",
+          "-smp",
+          "2",
+          "-m",
+          "256",
+          "-display",
+          "none",
+          "-serial",
+          "stdio",
+          "-monitor",
+          "none",
+          "-nic",
+          "none",
+          "-no-reboot",
+          "-kernel",
+          "/workspace/Lumia2Android1020/.work/emulation/build/arch/arm/boot/zImage",
+          "-initrd",
+          "/workspace/Lumia2Android1020/.work/emulation/initramfs.cpio.gz",
+          "-append",
+          "console=ttyAMA0 panic=-1 rdinit=/init"
+        ],
+        "emulator_exit": 0,
+        "result": "PASS",
+        "log_sha256": "a2606cb3055247dc4ff6fd976f414f48cf2519c5d097bc0938eaa400674418b0"
+      },
+      {
+        "name": "missing-init",
+        "command": [
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+          "--library-path",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib/x86_64-linux-gnu:/workspace/Lumia2Android1020/.work/emulation/runtime/usr/lib",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/bin/qemu-system-arm",
+          "-L",
+          "/workspace/Lumia2Android1020/.work/emulation/runtime/usr/share/qemu",
+          "-machine",
+          "virt-10.0,highmem=off,gic-version=2",
+          "-cpu",
+          "cortex-a15",
+          "-accel",
+          "tcg,thread=multi",
+          "-smp",
+          "2",
+          "-m",
+          "256",
+          "-display",
+          "none",
+          "-serial",
+          "stdio",
+          "-monitor",
+          "none",
+          "-nic",
+          "none",
+          "-no-reboot",
+          "-kernel",
+          "/workspace/Lumia2Android1020/.work/emulation/build/arch/arm/boot/zImage",
+          "-initrd",
+          "/workspace/Lumia2Android1020/.work/emulation/initramfs.cpio.gz",
+          "-append",
+          "console=ttyAMA0 panic=-1 rdinit=/missing-init"
+        ],
+        "emulator_exit": 0,
+        "result": "expected panic rejected",
+        "log_sha256": "269fc28c59279ef81e98c98c83f36330e015266a92d9dedbe899875f77298f2a"
+      }
+    ],
+    "artifacts": {
+      "build/arch/arm/boot/zImage": {
+        "bytes": 1919424,
+        "sha256": "dabba50930afec2b2da99ea41bc265ba481b0fecad102ac86f1496e3d27e2da9"
+      },
+      "build/.config": {
+        "bytes": 35737,
+        "sha256": "4944a752409b4d01448e210ebd7813336038d4e37ee3f4b03cbbf6de21742525"
+      },
+      "init": {
+        "bytes": 495032,
+        "sha256": "ab8f19d1ab09db98ea1318cd01f6283cd7339cf4dd67c24609ce4e9149598cfe"
+      },
+      "initramfs.cpio.gz": {
+        "bytes": 241440,
+        "sha256": "6322601887d4ec924ae5aa7548e57f04ed4355a5408533ff9d9a83dd6f5979c7"
+      }
+    }
+  },
+  "guest_passed_groups": [
+    "identity",
+    "mounts",
+    "memory",
+    "fork_pipe",
+    "smp_affinity",
+    "clock_epoll",
+    "namespace",
+    "binder_abi"
+  ],
+  "guest_binder_protocol": 8,
+  "host_tests": {
+    "passed": 72,
+    "new_harness_tests": 7
+  },
+  "negative_control": {
+    "requested_init": "/missing-init",
+    "observed": "VFS root-mount kernel panic after missing initramfs init",
+    "emulator_exit": 0,
+    "harness": "Rejected as expected, not counted as successful Linux boot",
+    "panic_line": "Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)"
+  },
+  "warnings": {
+    "compiler": [],
+    "guest": [
+      "Strict kernel memory protection not selected by this minimal fixture",
+      "Virtual CPU Spectre mitigation diagnostics; not a security certification"
+    ],
+    "expected_binder_logs": [
+      "Bad-pointer/unknown-command -EINVAL and -EFAULT diagnostics are deliberate tests"
+    ]
+  },
+  "coverage_limits": [
+    "Cortex-A15 generic ARMv7 is not Qualcomm Krait/MSM8960/MSM8974 hardware",
+    "QEMU direct Linux boot is not EFI/SecureBoot/EBS/GOP/parking validation",
+    "Binder ABI checks are not Binder service-manager transactions, bionic, Android framework or HAL tests",
+    "No modem/camera/charging/thermals/eMMC integrity or physical panel/PMIC validation",
+    "No SELinux/Android app-sandbox claim"
+  ],
+  "android_boundary": {
+    "full_aosp_official_floor": "x86_64Linux,400GBfree disk,64GBRAM",
+    "current_full_build": "Insufficient space/RAM; no tree downloaded",
+    "prebuilt_cuttlefish": "Documented KVM dependency unavailable here; requires usable/dev/kvm and matching pinned image/host package plus host integration",
+    "prebuilt_image_size": "Not selected/downloaded; no footprint invented"
+  },
+  "publication": "Original software, public-source/dependency hashes and synthetic results only; binaries/logs stay ignored; no new proprietary firmware content",
+  "rm937_build_status": "Not started in this executor. Pinned public README/APKBUILD/license metadata inspected only; no1520source archive or kernel build performed.",
+  "ci_initial_failure": {
+    "run_id": 40187785221,
+    "stage": "generic-arm-virtual setup, before guest execution",
+    "error": "libncursesw6/copyright symlink target libtinfo6 was not yet unpacked",
+    "cause": "Immediate per-package notice verification depended on extraction order; warm local cache hid it",
+    "fix": "Extract the entire pinned closure before checking retained notices; synthetic forward-symlink fresh-setup regression added"
+  }
+}

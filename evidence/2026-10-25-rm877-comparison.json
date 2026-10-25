@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-25",
+  "scope": "Attributed exact RM-877 input comparison and cloud host validation; no raw target firmware locally acquired or executed",
+  "target": {
+    "rm": "RM-877",
+    "product_code": "059T019",
+    "description": "AT&T US yellow",
+    "software": "3051.50009.1451.1001",
+    "os": "8.10.14226.359",
+    "variant": "3805",
+    "platform": "Nokia.MSM8960.P5217_ATT",
+    "ffu_filename": "RM877_3051.50009.1451.1_RETAIL_nam_att_205_01_473928_prd_signed.ffu",
+    "ffu_bytes": 1684013056,
+    "ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+    "ffu_crc32": "7346f0cb",
+    "crc_matches_vpl": true,
+    "chunk_hashes_passed": 12844,
+    "gpt_and_header_checks": "pass as reported by Mini",
+    "vendor_signature_trust": "unverified"
+  },
+  "reference_ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
+  "comparison_record": "rm877-comparison.json",
+  "comparison_gate": {
+    "result": "PASS",
+    "comparison_scope": "two_exact_ffus",
+    "target_rm": "RM-877",
+    "target_product_code": "059T019",
+    "target_ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+    "table_resource_facts": "corroborated for this exact target image",
+    "pmic_decoder": "whole-file equality",
+    "pep_decoder": "declared raw-section equality corroborates static decoder",
+    "touch_configuration": "selected registry settings directly compared unchanged; other data not inherited",
+    "target_loader_review": "bounded static pass complete; no runtime BCD/GOP/EFI observations",
+    "general_uefi_behavior": "unverified",
+    "signature_trust": "unverified",
+    "runtime_enablement": "none"
+  },
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s tests -v",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/eos_resources.py --check-kernel",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/compare_pe_sections.py .work/regression/debug-on/arch/arm/boot/zImage .work/regression/debug-off/arch/arm/boot/zImage",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 scripts/lumia.py check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "tests": {
+    "passed": 65,
+    "new_cases": 8,
+    "coverage": [
+      "Header difference versus whole-file equality",
+      "Changed non-executable data despite matching executable payloads",
+      "Declared layout/flags versus section payload equality",
+      "Malformed/truncated/overlapping/unsupported PE bounds",
+      "Empty executable set does not claim matching code",
+      "Exact-pair comparison cannot become all-variant or runtime proof",
+      "Changed touch/UEFI cannot acquire blanket configuration/behavior equivalence",
+      "Target static loader trace cannot become actual BCD/GOP state or observer authorization"
+    ]
+  },
+  "actual_pe_tool_inputs": {
+    "scope": "Preserved open-source reference kernel images only; no actual target PE input available in cloud",
+    "reference_sha256": "6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd",
+    "target_sha256": "a678672622b528e18e37b32d8a43a9d048c0f5f4f310010f629db3d34dbe8e3b",
+    "whole_file_equal": false,
+    "declared_raw_payloads_equal": false,
+    "executable_payloads_equal": false,
+    "declared_layout_equal": true,
+    "behavioral_equivalence": "not established"
+  },
+  "compile": {
+    "scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
+    "diagnostics": [
+      "Existing /memory unit_address_vs_reg warning retained"
+    ],
+    "kernel_patch_or_image_changed": false,
+    "full_relink": "Not repeated; previous baseline/on/off results preserved"
+  },
+  "limit": "Cloud validates source fingerprints, recorded scope and synthetic/compiled-image tooling. Mini reports target FFU/table/driver checks. Vendor trust and runtime hardware support remain unverified. No proprietary binaries/disassembly published.",
+  "remaining_static": [],
+  "remaining_runtime": [
+    "Actual installed tables/CDPI",
+    "Panel ID and fitted touch/PDT",
+    "EFI memory/GOP/trust/DT delivery and CPU parking state",
+    "Aggregate rails and physical peripheral behavior"
+  ],
+  "android": "No verified target kernel/device/HAL/PureView compatibility case or Android release chosen",
+  "bounded_static_status": "Identified target loader/touch routes complete; remaining specific observations require runtime facts. Not a universal claim that every static possibility is impossible.",
+  "target_loader_review": {
+    "status": "bounded identified static pass complete",
+    "source": "Direct Mini tracing of the exact hashed target BOOTARM.EFI/winload.efi",
+    "override": {
+      "boolean_gate_option": "0x16000049",
+      "system_root_option": "0x22000002",
+      "constructed_path": "<configured system root>\\system32\\acpitabl.dat",
+      "checked_stock_system32_entries": 1997,
+      "file_found": false,
+      "missing_file_nonfatal": true,
+      "table_validation": [
+        "length",
+        "bounds",
+        "checksum"
+      ],
+      "bcd_inspected": false,
+      "actual_option_root_values": "unobserved"
+    },
+    "acpi": {
+      "efi_guid_preference": [
+        "ACPI2.0",
+        "ACPI1.0"
+      ],
+      "traversed_roots": [
+        "XSDT",
+        "RSDT"
+      ],
+      "cdpi_patch_observed_in_selected_paths": false,
+      "universal_absence_claim": false,
+      "installed_runtime_tables_observed": false
+    },
+    "memory_and_exit": {
+      "memory_map_collection": "directly statically traced",
+      "exit_boot_services_retry": "up to4 times as reported; no live calls observed",
+      "alternative_image_acceptance": "not inferred"
+    },
+    "graphics": {
+      "copies_current_mode_index": true,
+      "copied_mode_information_bytes": 36,
+      "preferred_mode_logic_in_callers": true,
+      "stock_initialization_passive": false,
+      "live_mode_observed": false
+    },
+    "live_observer_route_accepted": false,
+    "live_observer_execution_authorized": false
+  },
+  "target_touch_review": {
+    "comparison": "executable_sections_identical_rdata_pdata_differ",
+    "reference_package_version": "3051.50009.4070.57",
+    "target_package_version": "3051.50009.4071.17",
+    "configuration_carry_forward": false,
+    "target_configuration_review": "Bounded target pass complete; compared registry differences only package identity/path/version",
+    "configuration_carry_forward_meaning": "No blanket inheritance of rdata/pdata or all configuration; explicitly compared registry subset below is corroborated",
+    "compared_registry_settings": "unchanged_except_package_identity_path_version",
+    "compared_unchanged_fields": [
+      "HID",
+      "service",
+      "vendor selectors",
+      "product selectors",
+      "configuration-write flags",
+      "compared power settings"
+    ],
+    "fitted_touch_identity": "unobserved"
+  },
+  "minimum_user_help": [
+    "Confirm ownership/availability of exact RM-877 and/or separate RM-937 handset; no purchase requested",
+    "If already owned, report normal stock model/RM, OS/firmware and condition; hide unique identifiers",
+    "Report available Windows host/data cable; no tool installation, mode switching or live observer requested"
+  ],
+  "not_a_bootable_target": "No validated RM-877/Android deliverable. Existing kernels remain preserved920 reference artifacts, not an exact-device test proposal."
+}
