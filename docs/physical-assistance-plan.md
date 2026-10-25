@@ -2,35 +2,25 @@
 
 This is a future evidence checklist, not an instruction to unlock or modify a
 phone. Ownership of a Lumia 1020 has not been established. No equipment purchase
-is proposed. First exhaust the [offline data route](eos-offline-research.md): the
-current blocker is cloud HTTP 403 for exact indexed EOS CABs, not demonstrated
-need for a handset.
+is proposed. Actual stock FFU board facts are now available; the earlier CAB
+acquisition request is superseded. Continue the [handoff source matrix](arm32-handoff.md)
+and [board evidence](eos-board-evidence.md) before proposing a handset test.
 
 ## Smallest useful help now
 
-Start with legitimate access to the exact **ACPI** package URL in
-[firmware-references.json](../firmware-references.json), or provide that file
-privately for static inspection. Keep it outside public git. This could
-supply EOS ACPI resources/product configuration without a phone. No success or
-particular contents are promised before byte inspection.
+No new upload or physical action is requested. The existing Mac Mini task can
+inspect exact stock PMIC GPIO/touch driver metadata and decoder/configuration
+logic, and firmware template/panel selection evidence, through the parent.
+This remains private static analysis: no bundled tool or device binary is run,
+and no personal Data, DPP, NVI, simlock or provisioning material is processed.
+No further work is requested on the MacBook.
 
-The first requested file is
-`nokia.acpi.eos.spkg_129775a9e855a9d032ef62bd03922668ef6286d4.cab`
-from the exact Microsoft-hosted URL in that inventory. Save it as data, without
-opening/installing it. Record the original URL, UTC retrieval time, byte count,
-SHA-256 and SHA-1. The expected indexed SHA-1 is
-`129775a9e855a9d032ef62bd03922668ef6286d4`. A mismatch or an HTML/error page must
-stop inspection. A match identifies the indexed input; it does not independently
-verify the vendor signature. Existing Windows PowerShell `Get-FileHash` can
-calculate both digests without installing tools or connecting a phone.
-
-If ACPI is obtainable, the next useful input is the indexed EFI productconfig
-CAB (expected SHA-1 `4ed82cf4962e37e38ac1e1df01b40926951fd371`). The UEFI package
-is a later candidate if necessary; a full FFU is not the first request. Use only
-ordinary legitimate access. If access is denied there too, report the status
-and stop; no authorization spoofing, security-setting changes or mirrors are
-requested. This cloud can resume private static analysis once the first exact
-input is available.
+The generic upstream ARM32 EFI stub is a reusable licensed source path. The
+remaining runtime questions include live EFI memory descriptors, GOP mode/stride,
+entry state, executable trust policy and installed CPU/mailbox information.
+Normal-mode Info cannot supply all of these. A read-only EFI collector still
+requires an approved delivery/execution path; do not treat a boot-chain change
+as read-only merely because its payload would only read state.
 
 ## If an already-owned target is available later
 
@@ -90,6 +80,7 @@ path or a separately approved later plan. Static ACPI facts alone cannot prove
 charging, thermal, eMMC-write or modem safety. A functional PureView photo in the
 stock OS provides a baseline, not a Linux sensor/ISP driver or Android HAL.
 
-The next action remains obtaining offline package bytes. There is no evidence
-at this checkpoint that buying equipment, unlocking a phone or moving the build
-to a Mac Mini would resolve that network/data dependency.
+The next actions are the remaining source questions in the handoff matrix, using
+the existing Mac Mini for further local inspection. No device purchase, unlock,
+partition write or firmware execution is proposed. Runtime collection must wait
+for a concrete exact-device access and recovery decision.

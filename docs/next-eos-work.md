@@ -85,3 +85,11 @@ An original typed fact inventory, compiled generic-SoC property audit and four
 fresh ARM controller-driver object builds now pass. Use its six targeted static
 questions before defining an EOS board or enabling peripherals. Memory/handoff,
 GPIO translation, mode/power semantics and panel/table selection remain unresolved.
+
+## Licensed handoff source checkpoint
+
+[ARM32 handoff research](arm32-handoff.md) identifies the existing upstream GPL
+EFI stub as a primary-core source path and a GPL Surface-specific ARM32 parking
+reference. Actual EOS compliance, live memory/GOP state and a reviewed secondary
+backend remain unverified. Follow its static/runtime matrix; further local
+inspection is on the Mac Mini via the parent, with no new upload requested.

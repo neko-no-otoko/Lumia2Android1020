@@ -92,3 +92,8 @@ authentication remains unverified; no proprietary AML/ASL/XML or firmware is
 imported. Source/binding hashes and their original GPL/BSD notices remain in the
 pinned Linux tree. The audit and bounded legacy parser are original utilities,
 not translations of proprietary firmware code. No project-wide license is selected.
+
+[handoff-references.json](../handoff-references.json) pins the original upstream
+EFI/ARM source comparison and the GPL ARM32 parking reference. Restricted
+LumiaToy and proprietary Windows driver code are not imported. Public Windows
+INF files and Microsoft/UEFI specifications are cited as references only.

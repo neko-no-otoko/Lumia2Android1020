@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 32 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 37 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |
@@ -19,7 +19,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | EOS stock board facts | Static analysis available | Parent/local FFU extraction and AML disassembly supplied actual RM-876 facts. Cloud independently cross-checks original factual inventory against pinned Linux. Vendor trust and runtime selections unresolved; raw data private. |
 | EOS resource audit / SoC driver objects | Passed host checks | Five controller bases/IRQs and four candidate GSBI pinmux groups cross-checked; four ARM objects freshly rebuilt. No Linux board bindings or hardware enablement inferred. |
 | EOS kernel / device tree | Blocked | Partial actual RM-876 board facts now recorded; usable/reserved memory, handoff, controller translation and power/selection semantics still unresolved. No EOS DTS emitted. |
-| EOS UEFI loader / kernel handoff | Blocked | No reviewed reusable EOS handoff implementation. LumiaToy remains reference-only due to its license restriction; no loader was imported or built. |
+| EOS UEFI loader / kernel handoff | Blocked | Upstream GPL ARM32 EFI stub identified and existing PE images checked; actual EOS UEFI services/trust, board DT and parking contract remain unverified. LumiaToy is not imported. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
 | Android product/image build | Blocked | No verified EOS device tree, compatible kernel configuration, full HAL/vendor provenance or justified Android release; cloud also below current full-AOSP resources. |
@@ -61,3 +61,7 @@ useful now and which later operations require separate authorization.
 Actual stock EOS facts and targeted next static questions are now recorded in
 [eos-board-evidence.md](eos-board-evidence.md). This supersedes the earlier lack
 of board-description input; it does not establish boot or runtime support.
+
+[ARM32 handoff research](arm32-handoff.md) separates the reusable upstream EFI
+contract from unresolved EOS static mappings and required runtime observations.
+Existing images pass host PE checks; no new image or device test was performed.

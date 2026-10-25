@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-25",
+  "purpose": "Original source-based handoff research; no firmware code or restricted loader imported",
+  "linux_upstream": {
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "files": [
+      {
+        "path": "Documentation/arch/arm/booting.rst",
+        "official_sha256": "0f1ec9a2107b070e4758cddc640ff6ae227b2b68f3f6782446271dbb0b117b47",
+        "reference_sha256": "0f1ec9a2107b070e4758cddc640ff6ae227b2b68f3f6782446271dbb0b117b47",
+        "identical": true
+      },
+      {
+        "path": "Documentation/arch/arm/uefi.rst",
+        "official_sha256": "eee4a7b8d6928fdd02c5b350c4fd6fa91be85fdfbe38332ad6a11a5cd0bb5e27",
+        "reference_sha256": "eee4a7b8d6928fdd02c5b350c4fd6fa91be85fdfbe38332ad6a11a5cd0bb5e27",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/arm32-stub.c",
+        "official_sha256": "6046bd6948b677207653d5a98abdd8788abb1dde099926330857e59ccb2dae8b",
+        "reference_sha256": "6046bd6948b677207653d5a98abdd8788abb1dde099926330857e59ccb2dae8b",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/efi-stub-entry.c",
+        "official_sha256": "27dee435b30455c9c73f393aeecc16d1e0f17549ce620990a66d2247612010eb",
+        "reference_sha256": "27dee435b30455c9c73f393aeecc16d1e0f17549ce620990a66d2247612010eb",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/fdt.c",
+        "official_sha256": "7a16765949c89cf3e48f383876be8c7607aa2f4d83b5dd3fd9101c55b0974cc0",
+        "reference_sha256": "61611354f7b7b59a1573fa4fd51e9d61377f4bcabede1382bc733ec90fa44047",
+        "identical": false
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/gop.c",
+        "official_sha256": "048a8a966f82ecc38a6c1f8c32a5383a092668a7f5fee66bd6a4c67a0b724d20",
+        "reference_sha256": "048a8a966f82ecc38a6c1f8c32a5383a092668a7f5fee66bd6a4c67a0b724d20",
+        "identical": true
+      },
+      {
+        "path": "drivers/firmware/efi/libstub/screen_info.c",
+        "official_sha256": "df604a7e5bbce12a35152c310764cd04c2b231f22bf7b58a61e74c77d86d93bf",
+        "reference_sha256": "df604a7e5bbce12a35152c310764cd04c2b231f22bf7b58a61e74c77d86d93bf",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/boot/compressed/head.S",
+        "official_sha256": "f58ea39b9d2d64f6b985a3be842ddb340365521a782dcb0c15e6183804bf3d82",
+        "reference_sha256": "f58ea39b9d2d64f6b985a3be842ddb340365521a782dcb0c15e6183804bf3d82",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/boot/compressed/efi-header.S",
+        "official_sha256": "ba0cf0ae6a8d6fb066c784f11723e9d4d0c0cb58abc4973347125a6f24106683",
+        "reference_sha256": "ba0cf0ae6a8d6fb066c784f11723e9d4d0c0cb58abc4973347125a6f24106683",
+        "identical": true
+      },
+      {
+        "path": "arch/arm/Kconfig",
+        "official_sha256": "ba026ac05f7ed53a73c4e0083c3993987d9751db56515191aa949cfae0ef49f9",
+        "reference_sha256": "ba026ac05f7ed53a73c4e0083c3993987d9751db56515191aa949cfae0ef49f9",
+        "identical": true
+      },
+      {
+        "path": "drivers/acpi/Kconfig",
+        "official_sha256": "7bf3d46ea92f15146df3cf64e4124c73785b8abd78bbea24cdcb1346ff7c3037",
+        "reference_sha256": "7bf3d46ea92f15146df3cf64e4124c73785b8abd78bbea24cdcb1346ff7c3037",
+        "identical": true
+      },
+      {
+        "path": "arch/arm64/kernel/acpi_parking_protocol.c",
+        "official_sha256": "5c974d63ac37be68ddb477ce072c964a017ca0b2e3c1113ef6d06e7065949938",
+        "reference_sha256": "5c974d63ac37be68ddb477ce072c964a017ca0b2e3c1113ef6d06e7065949938",
+        "identical": true
+      },
+      {
+        "path": "drivers/pinctrl/qcom/pinctrl-ssbi-gpio.c",
+        "official_sha256": "56f42ca1c1546446daebdb329737ceed67a86ff57d3806db3c4f8e80e0607b20",
+        "reference_sha256": "56f42ca1c1546446daebdb329737ceed67a86ff57d3806db3c4f8e80e0607b20",
+        "identical": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/pinctrl/qcom,pmic-gpio.yaml",
+        "official_sha256": "7785ccf1eb7fb19264ef02f4a07cf5be5523df6af8695f0075b8802fe748c938",
+        "reference_sha256": "7785ccf1eb7fb19264ef02f4a07cf5be5523df6af8695f0075b8802fe748c938",
+        "identical": true
+      }
+    ]
+  },
+  "licenses": {
+    "linux_efi_stub": "GPL-2.0/GPL-2.0-only file notices; root Linux COPYING applies",
+    "grate_arm32_parking": "GPL-2.0-only source header and Linux COPYING reviewed; reference only, not imported",
+    "windows_inf": "All rights reserved notices; text reference only; no payload/code import"
+  },
+  "parking_port": {
+    "repository": "grate-driver/linux",
+    "revision": "33fad3cba453102214138ed957ea35cd94601abc",
+    "paths": [
+      "arch/arm/kernel/acpi_parking_protocol.c",
+      "arch/arm/include/asm/acpi_parking_protocol.h",
+      "arch/arm/kernel/setup.c",
+      "arch/arm/kernel/Makefile",
+      "COPYING"
+    ],
+    "finding": "ARM32 port exists but hardcodes four Surface RT CPU/mailbox entries at0x82001000..0x82004000 and selects only microsoft,surface-rt-efi. Not EOS support or drop-in backend.",
+    "wire_protocol_caveat": "ARM32 port changes64-bit entry accesses to32-bit. Must establish EOS mailbox layout/cache/order/wakeup semantics before reuse."
+  },
+  "specifications": [
+    {
+      "url": "https://uefi.org/specs/UEFI/2.10/02_Overview.html#aarch32-platforms",
+      "role": "AArch32 PE machine/subsystem, calling convention and EFI entry environment"
+    },
+    {
+      "url": "https://uefi.org/specs/UEFI/2.10/12_Protocols_Console_Support.html#graphics-output-protocol",
+      "role": "GOP active mode, stride, pixel format and framebuffer metadata"
+    },
+    {
+      "url": "https://uefi.org/acpi",
+      "role": "Original parking-document index; linked ACPICA DOCX redirects to Intel404 and was not reviewed"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/general-purpose-i-o--gpio-",
+      "role": "Controller-relative/bank-relative GPIO namespaces"
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/bringup/gpio-controller-device-specific-method---dsm-",
+      "role": "Standard GPIO DSM function1 package gives controller-relative ActiveBoth-high pins, not pin count"
+    }
+  ],
+  "pmio": {
+    "public_source_query_results": "No documented Qualcomm PMIO tuple schema verified in bounded exact QCOM2038/PMIO searches; indexed search coverage is incomplete.",
+    "windows_driver_reference": "vizPilot/MSM8x60-NT-ARM-Drivers@ba5627f1bb42b174583b14ea225b80c8684a5ca5/msm8x60/Drivers/SOC/PMIC/qcpmicgpio8960.inf",
+    "finding": "QCOM2038 binds Qualcomm PMIC GPIO client qcpmicgpio8960.sys, version1.0.3051.0000. This identifies a driver family, not PMIO tuple fields or exact PMIC silicon.",
+    "linux_boundary": "pm8921 GPIO binding uses physical pins1..44; SSBI GPIO xlate subtracts1. Windows offsets are not Linux GPIO cells.",
+    "next_static_question": "On the Mac Mini, confirm standard DSM GUID/revision/package type and inspect the exact stock PMIC GPIO decoder/config without executing it."
+  },
+  "touch": {
+    "candidate": "Synaptics RMI4 is a supported research hypothesis, not a verified EOS Linux compatible or silicon model.",
+    "evidence": [
+      "Pinned EOS-ATT aftermarket INF labels Synaptics RMI4 F12",
+      "samcday/nokia-fame-mainlining@d7920b332a8c26a40cc9d998351081796c15c76b notes stock fame NOKIA_TOUCH at0x4b; other model, not proof",
+      "edk2-porting/WOA-Drivers@524346372da2091e905164841317f35c35947a82 OnePlus5 INF reuses NOKIA_TOUCH for SynapticsS3320, showing identifier is not model-specific"
+    ],
+    "next_static_question": "On the Mac Mini, identify exact stock touch driver/INF/product/function data for this FFU; do not run drivers or force firmware updates."
+  },
+  "local_execution_policy": "All new local inspection uses Mac Mini via parent; cloud work remains here. No MacBook work requested."
+}

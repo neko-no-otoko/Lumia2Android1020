@@ -214,3 +214,11 @@ groups and clock IDs. It does not emit an EOS DTS. `python3 scripts/lumia.py bui
 --target soc-objects --jobs 4` compiles QUP I2C, GSBI, MSM8960 GCC and pinctrl
 objects under the reference configuration. See [eos-board-evidence.md](eos-board-evidence.md)
 for results, diagnostic limits and remaining source questions.
+
+## Existing ARM32 EFI image inspection
+
+`python3 scripts/check_efi_image.py .work/build/linux-lumia920/arch/arm/boot/zImage`
+checks the bounded PE/COFF structure of an existing artifact without executing it.
+Baseline, reference-on and debug-off images all pass; hashes remain unchanged.
+It does not authenticate an image or establish firmware acceptance/boot safety.
+See [arm32-handoff.md](arm32-handoff.md) for the source contract and limitations.
