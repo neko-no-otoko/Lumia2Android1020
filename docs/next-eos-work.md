@@ -94,11 +94,16 @@ reference. Actual EOS compliance, live memory/GOP state and a reviewed secondary
 backend remain unverified. Follow its static/runtime matrix; further local
 inspection is on the Mac Mini via the parent, with no new upload requested.
 
-## Stock decoder checkpoint
+## Current target and decoder checkpoint
 
-[Typed decoder checks](eos-static-decoders.md) now resolve PMIO I/O versus IRQ
-namespaces, DALTLMM fields, GPIO DSM semantics, conditional embedded panel
-dispatch and stock touch configuration. The next static work is remaining PEP policy/mode fields, panel branch
-coverage and shared-data fixup/consumer tracing on the Mini. Clock operations
-and per-client vote arithmetic are now decoded. Intended RM-875 target evidence
-must be compared with this RM-876 dataset before emitting a configuration. Actual runtime memory/handoff and active hardware remain unobserved.
+[Typed decoder checks](eos-static-decoders.md) resolve PMIO I/O versus IRQ
+namespaces, DALTLMM fields, stock PEP operations/vote arithmetic and conditional
+panel dispatch. The identified RM-876 static routes in the bounded Mini pass are
+complete; physical selections, shared-data runtime behavior and EFI state remain
+unobserved.
+
+The user now selected RM-877. Verify the supplied target FFU on the Mini, then
+compare selected board facts against this historical RM-876 dataset before
+emitting a target configuration. Do not relabel old findings. RM-875 acquisition
+is stopped; the separate RM-937 effort stays outside this repo. No new user
+upload or hardware action is requested.

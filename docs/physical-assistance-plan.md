@@ -8,11 +8,10 @@ and [board evidence](eos-board-evidence.md) before proposing a handset test.
 
 ## Smallest useful help now
 
-No new upload or physical action is requested. The existing Mac Mini task can
-continue the [targeted decoder questions](eos-static-decoders.md): remaining PEP policy/mode fields,
-panel branch coverage, shared-data layout consumers and stock product.dat
-selection/parser bounds. PMIO namespaces and stock touch configuration are now
-resolved statically.
+No new upload or physical action is requested. The bounded RM-876 static pass
+is complete. The Mini is verifying the user's newly supplied RM-877 candidate;
+its exact metadata/integrity and selected board facts are the next input. Compare
+those with historical RM-876 observations before any target configuration.
 This remains private static analysis: no bundled tool or device binary is run,
 and no personal Data, DPP, NVI, simlock or provisioning material is processed.
 No further work is requested on the MacBook.
@@ -26,7 +25,7 @@ as read-only merely because its payload would only read state.
 
 ## If an already-owned target is available later
 
-The intended international target is RM-875, still to verify. Current RM-876
+The current user-selected target is RM-877, still to verify. Current RM-876
 China Unicom firmware is research input only; compare variant evidence before
 any target configuration or later exact-device proposal.
 
@@ -90,3 +89,9 @@ The next actions are the remaining source questions in the handoff matrix, using
 the existing Mac Mini for further local inspection. No device purchase, unlock,
 partition write or firmware execution is proposed. Runtime collection must wait
 for a concrete exact-device access and recovery decision.
+
+Current target update: the user selected RM-877. All RM-876 observations remain
+historical reference only; no RM-877 equivalence is established. The identified
+RM-876 static routes in the bounded Mini pass are complete. Await verification
+of the supplied RM-877 FFU and compare its board facts before target configuration.
+RM-875 acquisition is stopped; the separate RM-937 effort stays outside this repo.

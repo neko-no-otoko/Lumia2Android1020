@@ -19,7 +19,7 @@ DSDT, 2SDT and SSDT using official ACPICA 20260930, with each iasl exit 0 and no
 AML execution. This cloud did not materialize that private bundle: its Library
 transfer failed. The factual inventory explicitly attributes the source findings
 to the parent/local inspection; cloud checks below independently use the pinned
-Linux source. The intended target is international RM-875, still to verify; this input is
+Linux source. The current user-selected target is RM-877, still to verify; this input is
 RM-876 China Unicom. No parity is inferred. Variant comparison must precede
 any target configuration.
 
@@ -168,8 +168,14 @@ nor those Windows declarations supply a PureView Linux/Android stack.
 
 The [decoder milestone](eos-static-decoders.md) supersedes the previous missing
 PMIO schema, DSM GUID, stock touch configuration and absence of firmware selector
-logic. PEP clock operations and per-client vote arithmetic are now decoded, while
-units remain inferred and other flags unresolved. Actual product.dat/table
-selection, panel branch coverage and shared-data consumers remain unresolved. Its targeted Mini questions take priority;
-no new upload or physical test is requested. Runtime EFI memory/GOP and CPU
-handoff remain separate needs, followed by Android HAL/camera/modem dependencies.
+logic. Clock operations, the stock CSI mux subset, per-client vote arithmetic
+and regulator field labels are statically corroborated. Physical aggregate rails,
+actual table/panel/touch selections and shared-data consumers remain unobserved.
+The identified RM-876 routes in the bounded Mini pass are complete.
+
+The current user-selected target is RM-877. RM-876 observations remain historical
+reference; no RM-877 equivalence is established. Await verification of the supplied
+RM-877 FFU and compare its board facts before target configuration. RM-875
+acquisition is stopped; the separate RM-937 effort stays outside this repo.
+Runtime EFI memory/GOP and CPU handoff remain separate needs, followed by Android
+HAL/camera/modem dependencies. No new upload or physical test is requested.
