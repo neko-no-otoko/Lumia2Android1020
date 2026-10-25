@@ -8,11 +8,29 @@ need for a handset.
 
 ## Smallest useful help now
 
-Obtain legitimate access to the three exact package URLs in
-[firmware-references.json](../firmware-references.json), or provide those files
-privately for static inspection. They must stay outside public git. This could
+Start with legitimate access to the exact **ACPI** package URL in
+[firmware-references.json](../firmware-references.json), or provide that file
+privately for static inspection. Keep it outside public git. This could
 supply EOS ACPI resources/product configuration without a phone. No success or
 particular contents are promised before byte inspection.
+
+The first requested file is
+`nokia.acpi.eos.spkg_129775a9e855a9d032ef62bd03922668ef6286d4.cab`
+from the exact Microsoft-hosted URL in that inventory. Save it as data, without
+opening/installing it. Record the original URL, UTC retrieval time, byte count,
+SHA-256 and SHA-1. The expected indexed SHA-1 is
+`129775a9e855a9d032ef62bd03922668ef6286d4`. A mismatch or an HTML/error page must
+stop inspection. A match identifies the indexed input; it does not independently
+verify the vendor signature. Existing Windows PowerShell `Get-FileHash` can
+calculate both digests without installing tools or connecting a phone.
+
+If ACPI is obtainable, the next useful input is the indexed EFI productconfig
+CAB (expected SHA-1 `4ed82cf4962e37e38ac1e1df01b40926951fd371`). The UEFI package
+is a later candidate if necessary; a full FFU is not the first request. Use only
+ordinary legitimate access. If access is denied there too, report the status
+and stop; no authorization spoofing, security-setting changes or mirrors are
+requested. This cloud can resume private static analysis once the first exact
+input is available.
 
 ## If an already-owned target is available later
 

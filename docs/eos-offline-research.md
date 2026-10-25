@@ -94,3 +94,53 @@ A legitimate EOS firmware data route is still uninspected because of the access
 blocker. Accordingly this project cannot yet conclude physical handset access is
 necessary. Android release/HAL/ISP compatibility remains independently unresolved;
 Windows camera packages would not become Linux/Android drivers through extraction.
+
+## Follow-up: legitimate upstream alternatives
+
+The official [Microsoft Update Catalog EOS ACPI query](https://www.catalog.update.microsoft.com/Search.aspx?q=nokia%20acpi%20eos)
+was attempted separately from the denied package downloads. The web reader could
+not access the catalog queries; one ordinary bounded curl GET also failed with
+exit 22, a reported 403 and HTTP response-code field 000, with no saved page.
+That is consistent with denial on this cloud network path, not an inspected
+catalog result or proof Microsoft has removed the update. Search-engine queries
+restricted to the official catalog found no exact indexed EOS result. No update
+UUID or alternate signed metadata was obtained. Catalog contents require separate
+legitimate access; this avenue is access-blocked, not demonstrated empty. No
+ActiveX/security-setting changes or alternate download routing were attempted.
+
+A substantive public-text route was inspected in
+[vizPilot/MSM8x60-NT-ARM-Drivers](https://github.com/vizPilot/MSM8x60-NT-ARM-Drivers/tree/ba5627f1bb42b174583b14ea225b80c8684a5ca5).
+Its complete, non-truncated tree has 822 entries and an EOS-ATT-specific directory.
+This route supplies some configuration facts, but not the required board map:
+
+| Text inspected at that commit | Useful observation | What it cannot supply |
+| --- | --- | --- |
+| [Panel INF](https://github.com/vizPilot/MSM8x60-NT-ARM-Drivers/blob/ba5627f1bb42b174583b14ea225b80c8684a5ca5/configurations/devices/specifics-eosatt/Drivers/Graphics/oempanel.inf) | Binds the Windows panel service to `ACPI\NOKIA_PANEL`; contains Windows display/brightness configuration. | No physical framebuffer address/stride, DSI wiring, reserved memory or Linux power sequence was established. |
+| [Touch extension INF](https://github.com/vizPilot/MSM8x60-NT-ARM-Drivers/blob/ba5627f1bb42b174583b14ea225b80c8684a5ca5/configurations/devices/specifics-eosatt/Drivers/Touch/eos_SynapticsTouch.inf) | Names EOS Synaptics RMI4 F12 and `ACPI\NOKIA_TOUCH`; its display dimensions decode to 768 by 1280. | Windows configuration is not an EOS I2C/GPIO resource description or proof of the component installed in an unknown target variant. It also contains touch-firmware reprogramming settings: installing it is outside this static investigation. |
+| [Rear camera INF](https://github.com/vizPilot/MSM8x60-NT-ARM-Drivers/blob/ba5627f1bb42b174583b14ea225b80c8684a5ca5/configurations/devices/specifics-eosatt/Drivers/Camera/Back/qccamsensor8960.inf) | Binds a Windows service to `ACPI\QCOM0710` and references an external proprietary driver. | No sensor register implementation, Linux driver, Android HAL or PureView ISP/calibration licensing chain. |
+
+The full listing contains no `.asl`, `.dsl`, `.aml`, `.dts`, `.dtsi`, `.c` or `.h`
+files. Only the named text files and README were read; no driver, calibration or
+firmware payload was fetched or executed. The README's notice does not establish
+a blanket license for Qualcomm/Nokia/Microsoft components; the panel text itself
+has an all-rights-reserved copyright. These files are references only, not copied
+into this repository or translated into a board patch. The tree is an aftermarket
+Windows driver collection, not independently vendor-authenticated stock evidence.
+
+The original [SynapticsTouch source](https://github.com/imbushuo/SynapticsTouch/tree/72c55f10fa151eeddcf6bbb76fd9df8e3d73a7f0)
+was also read: README identifies Lumia 950 XL, and `src/device.c` obtains I2C
+connection identifiers from the OS-translated hardware-resource list. It does
+not supply EOS bus/pin assignments. A complete permissive reuse grant was not
+established there; no code was imported or run, and no 950 values were used.
+
+Further repository searches for `MSM8960 Nokia`, `Lumia1020 kernel`, `Lumia EOS
+UEFI` and `EOS ACPI Lumia` found no verified source candidate. Code searches
+included `eosatt PCFG`, `RM-875 MemoryMap` and `NOKIA_PANEL Buffer`; observed hits
+were unrelated or for other models. Crucially, indexed search missed the known
+EOS-ATT directory that direct tree inspection found. Search absence is therefore
+weak evidence and is not called exhaustive coverage of public GitHub.
+
+For this follow-up, the NT driver's named EOS text route has been examined and
+shown insufficient for boot-critical facts. Catalog metadata remains access-
+blocked. The exact original CAB contents remain uninspected. No lawfully reusable
+EOS board/handoff source was verified; this does not prove none exists.

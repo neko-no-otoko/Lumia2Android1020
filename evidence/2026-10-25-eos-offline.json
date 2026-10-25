@@ -93,5 +93,40 @@
     "No EOS memory/GPIO/panel/clock/PMIC values recovered",
     "No EOS Linux/Android boot/camera/modem/safety validation",
     "Bounded public-source searches do not prove universal absence"
-  ]
+  ],
+  "legitimate_alternatives_followup": {
+    "catalog": {
+      "url": "https://www.catalog.update.microsoft.com/Search.aspx?q=nokia%20acpi%20eos",
+      "web_reader": "inaccessible",
+      "ordinary_curl_exit": 22,
+      "curl_http_response_code": "000",
+      "curl_error_status": 403,
+      "page_saved": false,
+      "interpretation": "Cloud network-path denial; actual catalog contents not examined"
+    },
+    "nt_arm_text": {
+      "repository": "vizPilot/MSM8x60-NT-ARM-Drivers",
+      "commit": "ba5627f1bb42b174583b14ea225b80c8684a5ca5",
+      "complete_tree_entries": 822,
+      "tree_truncated": false,
+      "read": [
+        "README.md",
+        "configurations/devices/specifics-eosatt/Drivers/Graphics/oempanel.inf",
+        "configurations/devices/specifics-eosatt/Drivers/Touch/eos_SynapticsTouch.inf",
+        "configurations/devices/specifics-eosatt/Drivers/Camera/Back/qccamsensor8960.inf"
+      ],
+      "finding": "EOS Windows ACPI identifiers and touch/display settings; no required boot memory/resource/handoff map",
+      "payloads_fetched": false,
+      "code_imported_or_executed": false,
+      "license": "Blanket reusable grant not established; reference only"
+    },
+    "synaptics_source": {
+      "repository": "imbushuo/SynapticsTouch",
+      "commit": "72c55f10fa151eeddcf6bbb76fd9df8e3d73a7f0",
+      "finding": "950 XL source obtains I2C identifiers from OS resources; no EOS wiring facts",
+      "code_imported_or_executed": false
+    },
+    "smallest_request": "Exact indexed EOS ACPI CAB privately, original URL/time/size/SHA256/SHA1; productconfig second if available",
+    "coverage_limit": "Indexed code search missed directly verified EOS-ATT directory; no global source-absence claim"
+  }
 }
