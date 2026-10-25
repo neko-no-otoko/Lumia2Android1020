@@ -26,6 +26,9 @@ TARGETS = {
     "debug-objects": ["arch/arm/kernel/head.o", "arch/arm/kernel/setup.o",
                       "arch/arm/mm/mmu.o", "init/main.o",
                       "drivers/firmware/efi/libstub/fdt.stub.o", "kernel/panic.o"],
+    "soc-objects": ["drivers/i2c/busses/i2c-qup.o", "drivers/soc/qcom/qcom_gsbi.o",
+                    "drivers/clk/qcom/gcc-msm8960.o",
+                    "drivers/pinctrl/qcom/pinctrl-msm8960.o"],
 }
 
 
@@ -295,7 +298,7 @@ def build(target, jobs, profile="baseline", debug_mode="reference"):
                     report["exit_code"] = 1
                     break
     if report["exit_code"] == 0:
-        relative = TARGETS[target] if target in {"objects", "debug-objects"} else (
+        relative = TARGETS[target] if target in {"objects", "debug-objects", "soc-objects"} else (
             ["arch/arm/boot/zImage"] if target == "kernel" else
             ["arch/arm/boot/dts/" + t for t in TARGETS[target]])
         for path in relative:

@@ -144,3 +144,11 @@ For this follow-up, the NT driver's named EOS text route has been examined and
 shown insufficient for boot-critical facts. Catalog metadata remains access-
 blocked. The exact original CAB contents remain uninspected. No lawfully reusable
 EOS board/handoff source was verified; this does not prove none exists.
+
+## Superseding input milestone
+
+The parent/local task has now validated the exact stock FFU and disassembled its
+board descriptions privately. The previous source-input gap is superseded by
+[actual EOS board facts and cloud cross-checks](eos-board-evidence.md). Historical
+network/transfer results above remain accurate for their attempts; they are no
+longer the reason to halt source-level work. Raw firmware/disassembly remains private.

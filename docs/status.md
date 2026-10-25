@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 21 local tests cover host safety, patch preconditions and static data formats; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 32 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |
@@ -16,8 +16,9 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | Compiled | Exit 0 after about 21 minutes; 8,667,648-byte ARM image. One unused-function warning; see the kernel report for hashes. A zImage alone is not an OS image. |
 | GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
-| EOS offline ACPI/config inspection | Input acquisition blocked | Exact EOS index/URLs verified; actual GETs return HTTP 403 here. Pinned native tools and synthetic round trip pass; no EOS bytes or parameters inspected. |
-| EOS kernel / device tree | Blocked | No validated EOS board description or source/build provenance chain. The 920 source cannot be relabeled as EOS. |
+| EOS stock board facts | Static analysis available | Parent/local FFU extraction and AML disassembly supplied actual RM-876 facts. Cloud independently cross-checks original factual inventory against pinned Linux. Vendor trust and runtime selections unresolved; raw data private. |
+| EOS resource audit / SoC driver objects | Passed host checks | Five controller bases/IRQs and four candidate GSBI pinmux groups cross-checked; four ARM objects freshly rebuilt. No Linux board bindings or hardware enablement inferred. |
+| EOS kernel / device tree | Blocked | Partial actual RM-876 board facts now recorded; usable/reserved memory, handoff, controller translation and power/selection semantics still unresolved. No EOS DTS emitted. |
 | EOS UEFI loader / kernel handoff | Blocked | No reviewed reusable EOS handoff implementation. LumiaToy remains reference-only due to its license restriction; no loader was imported or built. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
@@ -56,3 +57,7 @@ Expanded source/data investigation and its exact access blocker are recorded in
 [eos-offline-research.md](eos-offline-research.md). The staged
 [physical assistance plan](physical-assistance-plan.md) explains what help is
 useful now and which later operations require separate authorization.
+
+Actual stock EOS facts and targeted next static questions are now recorded in
+[eos-board-evidence.md](eos-board-evidence.md). This supersedes the earlier lack
+of board-description input; it does not establish boot or runtime support.

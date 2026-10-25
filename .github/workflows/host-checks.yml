@@ -42,8 +42,10 @@ jobs:
       - run: python3 scripts/lumia.py inventory
       - run: python3 scripts/lumia.py setup
       - run: python3 scripts/lumia.py fetch
+      - run: python3 scripts/eos_resources.py --check-kernel
       - run: python3 scripts/lumia.py build --target dtbs --jobs 2
       - run: python3 scripts/lumia.py build --target objects --jobs 2
+      - run: python3 scripts/lumia.py build --target soc-objects --jobs 2
       - run: python3 scripts/lumia.py build --target debug-objects --jobs 2
       - run: python3 scripts/lumia.py prepare
       - run: python3 scripts/lumia.py build --profile patched --target dtbs --jobs 2

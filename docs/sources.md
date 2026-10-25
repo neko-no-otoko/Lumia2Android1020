@@ -82,3 +82,13 @@ and [research-tools.lock.json](../research-tools.lock.json) extend this inventor
 [firmware-references.json](../firmware-references.json) records proprietary input
 candidates only: no redistribution grant, downloaded firmware or Android driver
 is implied. The original host-side parser is not a copy of another device port.
+
+## Stock EOS facts and original host utilities
+
+[eos-board-evidence.md](eos-board-evidence.md) and [eos-resources.json](../eos-resources.json)
+record the exact private FFU identity and parent/local static-analysis provenance.
+Only selected facts and original host code/tests are published. Vendor trust-chain
+authentication remains unverified; no proprietary AML/ASL/XML or firmware is
+imported. Source/binding hashes and their original GPL/BSD notices remain in the
+pinned Linux tree. The audit and bounded legacy parser are original utilities,
+not translations of proprietary firmware code. No project-wide license is selected.

@@ -205,3 +205,12 @@ An older release needs its own justified kernel/HAL/toolchain/resource assessmen
 This session stays on the cloud environment. Moving to a Mac Mini requires an
 inventory and a supported Linux build plan, and would not supply missing EOS
 drivers. No MacBook is part of this workflow.
+
+## EOS factual resource audit and controller prerequisites
+
+`python3 scripts/eos_resources.py --check-kernel` compiles the unmodified generic
+MSM8960 DTSI and cross-checks recorded EOS facts, source hashes, candidate pinmux
+groups and clock IDs. It does not emit an EOS DTS. `python3 scripts/lumia.py build
+--target soc-objects --jobs 4` compiles QUP I2C, GSBI, MSM8960 GCC and pinctrl
+objects under the reference configuration. See [eos-board-evidence.md](eos-board-evidence.md)
+for results, diagnostic limits and remaining source questions.

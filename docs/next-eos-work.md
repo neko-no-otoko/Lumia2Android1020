@@ -77,3 +77,11 @@ tools on synthetic data. Actual package acquisition is blocked by HTTP 403 in
 this environment. No EOS board facts have been extracted. Obtain those inputs
 before concluding a live phone is necessary; see the staged
 [assistance plan](physical-assistance-plan.md).
+
+## Actual stock EOS evidence milestone
+
+The source-input gap above is superseded by [eos-board-evidence.md](eos-board-evidence.md).
+An original typed fact inventory, compiled generic-SoC property audit and four
+fresh ARM controller-driver object builds now pass. Use its six targeted static
+questions before defining an EOS board or enabling peripherals. Memory/handoff,
+GPIO translation, mode/power semantics and panel/table selection remain unresolved.
