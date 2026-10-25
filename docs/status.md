@@ -13,7 +13,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Lumia 920 simple DTB | Compiled | No target-specific diagnostics observed; not hardware validation. |
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | In progress | See the build report for the final outcome. A zImage alone is not an OS image. |
-| GitHub CI | Pending | Workflow checks host safety plus the two 920 DTBs and driver objects; actual run state must be verified. |
+| GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
 | EOS kernel / device tree | Blocked | No validated EOS board description or source/build provenance chain. The 920 source cannot be relabeled as EOS. |
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
@@ -35,6 +35,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 4. Establish the Android kernel/userspace/HAL ABI case. The saved 920 configuration
    has `CONFIG_ANDROID_BINDER_IPC`, `CONFIG_NAMESPACES` and `CONFIG_SECURITY` disabled.
    Merely enabling them would not supply an EOS Android product or camera stack.
+   The source also comments out normal init-memory freeing and read-only marking.
 5. Once those dependencies support a specific Android target, budget a suitable
    Linux builder. Current AOSP guidance is 400 GB free disk and 64 GB RAM; the
    present cloud needs roughly 370 GB more free disk and 48 GiB more RAM to meet

@@ -19,7 +19,10 @@ The 920 kernel README at the pinned August 11, 2026 revision reports boot,
 framebuffer, eMMC, USB networking and SSH, and unresolved RPM/clock power use.
 Those are upstream reports; this project has verified host compilation only.
 The source hard-codes the 920 framebuffer address and includes a polling eMMC
-driver. Similar silicon does not validate EOS memory regions, panel, regulators,
+driver. `init/main.c` also comments out `free_initmem()` and `mark_readonly()`;
+the full build reports `mark_readonly` as unused. This baseline bypasses those
+normal kernel initialization/hardening steps and is not Android-ready.
+Similar silicon does not validate EOS memory regions, panel, regulators,
 reserved memory, USB role/power, storage access, modem or camera behavior.
 
 The separate RM-875 claim appears in the
@@ -62,3 +65,6 @@ Bison, Flex, m4, dtc, libc and libelf retain their individual terms and exceptio
 No claim is made that all packages have one license. The binaries are downloaded
 for local use, not republished in this repository. Recheck source-offer and
 license obligations before any future redistribution.
+
+CI pins `actions/checkout` at `11d5960a326750d5838078e36cf38b85af677262` (v4).
+Its MIT `LICENSE` was reviewed at that commit; it runs only on the host CI runner.

@@ -70,5 +70,28 @@
     "CONFIG_SECURITY disabled"
   ],
   "hardware_tests": "None",
-  "full_kernel": "In progress; separate final report to follow"
+  "full_kernel": "In progress; separate final report to follow",
+  "fresh_extraction": {
+    "result": "PASS",
+    "comparison": [
+      "COPYING",
+      "arch/arm/configs/lumia920_defconfig",
+      "drivers/video/fbdev/lumiafb.c",
+      "drivers/mmc/host/easy_mmc.c"
+    ],
+    "copying_sha256": "fb5a425bd3b3cd6071a3a9aff9909a859e7c1158d54d32e07658398cd67eb6a0"
+  },
+  "ci": {
+    "head": "4a0f2ba00e08884602f115c7a6f32b626983969a",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40148596975",
+    "safety": "success",
+    "reference_compile": "success",
+    "artifact_comparison": "All four DTB/driver-object hashes match the local cloud results",
+    "verified_on": "2026-10-25"
+  },
+  "source_review_findings": [
+    "init/main.c comments out free_initmem() and mark_readonly(); full build warns mark_readonly is unused",
+    "920 framebuffer physical address hard-coded",
+    "Experimental eMMC driver polls with direct I/O; never executed on hardware here"
+  ]
 }

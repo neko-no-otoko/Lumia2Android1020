@@ -1,7 +1,6 @@
 """Synthetic tests; these do not establish handset safety or hardware support."""
 import importlib.util
 import io
-import json
 from pathlib import Path
 import subprocess
 import sys
@@ -69,10 +68,11 @@ class SafetyTests(unittest.TestCase):
                 self.assertFalse((Path(tmp) / "out").exists())
 
     def test_archive_escaping_symlink_rejected(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            archive = self.archive(tmp, "source/link", tarfile.SYMTYPE, "../../escape")
-            with self.assertRaises(tarfile.FilterError):
-                lumia.extract_source(archive, Path(tmp) / "out", "source")
+        for link in ("../../escape", "../outside", "/dev/sda"):
+            with self.subTest(link=link), tempfile.TemporaryDirectory() as tmp:
+                archive = self.archive(tmp, "source/link", tarfile.SYMTYPE, link)
+                with self.assertRaises((ValueError, tarfile.FilterError)):
+                    lumia.extract_source(archive, Path(tmp) / "out", "source")
 
     def test_archive_internal_symlink_supported(self):
         with tempfile.TemporaryDirectory() as tmp:

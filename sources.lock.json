@@ -81,6 +81,17 @@
       "license_path": null,
       "download": false,
       "device": "Talkman is not EOS; no Android version selected"
+    },
+    {
+      "id": "actions-checkout",
+      "repository": "actions/checkout",
+      "revision": "11d5960a326750d5838078e36cf38b85af677262",
+      "ref_observed": "v4",
+      "role": "ci-action-reference",
+      "license": "MIT; LICENSE reviewed at pinned commit",
+      "license_path": "LICENSE",
+      "download": false,
+      "device": "GitHub Actions host checkout only"
     }
   ]
 }

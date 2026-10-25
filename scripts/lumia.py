@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import posixpath
 import re
 import shlex
 import shutil
@@ -66,6 +67,8 @@ def validate_locks():
         if source["download"] and source["id"] != "linux-lumia920":
             raise ValueError("Only the reviewed kernel may be fetched")
     kernel = next(s for s in sources if s["id"] == "linux-lumia920")
+    if kernel["download"] is not True or kernel["role"] != "compile-reference":
+        raise ValueError("Kernel download permission or review role is missing")
     for entry in [kernel] + packages:
         if not re.fullmatch(r"[0-9a-f]{64}", entry["sha256"]):
             raise ValueError("Missing SHA-256")
@@ -86,14 +89,17 @@ def download(entry, destination):
         if digest(destination) != entry["sha256"]:
             raise ValueError(f"Checksum mismatch: {destination}; cache was not reused")
         return
-    partial = destination.with_suffix(destination.suffix + ".part")
-    subprocess.run(["curl", "--fail", "--location", "--retry", "2",
-                    "--max-time", "600", "--max-filesize", "536870912",
-                    "--output", str(partial), entry["url"]], check=True)
-    if digest(partial) != entry["sha256"]:
-        partial.unlink()
-        raise ValueError("Downloaded dependency checksum mismatch")
-    partial.replace(destination)
+    with tempfile.NamedTemporaryFile(dir=destination.parent, delete=False) as tmp:
+        partial = Path(tmp.name)
+    try:
+        subprocess.run(["curl", "--fail", "--location", "--retry", "2",
+                        "--max-time", "600", "--max-filesize", "536870912",
+                        "--output", str(partial), entry["url"]], check=True)
+        if digest(partial) != entry["sha256"]:
+            raise ValueError("Downloaded dependency checksum mismatch")
+        partial.replace(destination)
+    finally:
+        partial.unlink(missing_ok=True)
 
 
 def extract_source(archive, destination, archive_root):
@@ -111,6 +117,13 @@ def extract_source(archive, destination, archive_root):
                         or not (member.isfile() or member.isdir()
                                 or member.issym() or member.islnk())):
                     raise ValueError(f"Unsafe source archive member: {member.name}")
+                if member.issym() or member.islnk():
+                    target = posixpath.normpath(
+                        posixpath.join(posixpath.dirname(member.name), member.linkname)
+                        if member.issym() else member.linkname)
+                    if (Path(target).is_absolute() or not Path(target).parts
+                            or Path(target).parts[0] != archive_root):
+                        raise ValueError(f"Source link escapes its final root: {member.name}")
             tar.extractall(tmp, filter="data")
         (Path(tmp) / archive_root).rename(destination)
 
