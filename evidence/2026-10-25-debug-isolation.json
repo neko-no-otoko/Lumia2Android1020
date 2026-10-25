@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-25",
+  "scope": "Lumia 920 source isolation and compiled ARM objects; no EOS or hardware validation",
+  "source": "9872e9316212490b7db8e3371fa1d63bd3394cc5",
+  "patches": [
+    {
+      "path": "patches/0001-lumia920-cpu-cells.patch",
+      "sha256": "195f8937312890aedf1fb6afe2d08cfe26413298b6dc8ee0b1b834053ff6c8a6",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "arch/arm/boot/dts/qcom/lumia920.dts",
+          "before_sha256": "61b680efec4fe95eb731c4a43d829f18caf09bd940196235969c5437e56b55b9",
+          "after_sha256": "2c6ed800e2b94e274f940d604720b7965c1a66f8de29ec20cfc7edb40b666f26"
+        }
+      ]
+    },
+    {
+      "path": "patches/0002-lumia920-debug-option.patch",
+      "sha256": "423d469d37d3f82aa062faa4ad7c9718b365b8b1236e30271190119e4b4b17d0",
+      "license": "GPL-2.0-only",
+      "files": [
+        {
+          "path": "arch/arm/Kconfig.debug",
+          "before_sha256": "3af5c1371cd0a9d0707edb38086a808450b3241a8453dda0aa1d4dcfe2385254",
+          "after_sha256": "2ccd4a659d7c4a1b162651d3897db341099188308ba26929caf980f2b080a123"
+        },
+        {
+          "path": "arch/arm/configs/lumia920_defconfig",
+          "before_sha256": "2b3fc44de487e65d484ac9085408fbd7e012b56f1ffa43adff0e2d5c6f3a72cd",
+          "after_sha256": "e2aa56c7fc68afeec56fbde40f599072a2a74942fde7047ad47831de4cbbcc1c"
+        },
+        {
+          "path": "arch/arm/kernel/head.S",
+          "before_sha256": "5f0cdd51ff5cd28a8190559d77a435827dec5582877d91bc4954f4df8be81559",
+          "after_sha256": "5df6ff118ea1993b305d53707f2f9700d2796c9db4d5446010829d07ed5062ee"
+        },
+        {
+          "path": "arch/arm/mm/mmu.c",
+          "before_sha256": "1248e53af38e7b5904b79ef15475f486d8252e6b6de0aa3416f093dc51f09518",
+          "after_sha256": "5c9e19e15f78f2319d5e22448b01fda8215f4352b1679906b0047c40ef0c029d"
+        },
+        {
+          "path": "arch/arm/kernel/setup.c",
+          "before_sha256": "ecff1a8ffeac23ad99a915ad5656556f9539094731b68bf69388f476cf88dbe8",
+          "after_sha256": "83be11a423448e54470ee935c4e3e978198c5ee71411e288075944a16aea8338"
+        },
+        {
+          "path": "init/main.c",
+          "before_sha256": "b632c1c43a8ffdcaf11dca9f231071627a381617c2f6e14151658a97f75c0e06",
+          "after_sha256": "7e887fa72589c094047cc8f3195fba154874fd5bad6bdd267be62161d0e450bc"
+        },
+        {
+          "path": "drivers/firmware/efi/libstub/fdt.c",
+          "before_sha256": "61611354f7b7b59a1573fa4fd51e9d61377f4bcabede1382bc733ec90fa44047",
+          "after_sha256": "f129b1cea0bca02657b0813801010dfa0c677a672940a783b1c66107f8c105f3"
+        },
+        {
+          "path": "drivers/video/fbdev/Makefile",
+          "before_sha256": "b9dd52261357a150ab14147a2cb78ef216585b78b70acc782a2303d5ea7a779e",
+          "after_sha256": "9e632544cf8bc88ad30d87d455691f3620c67940c1a515b4c31a0609ca76478a"
+        }
+      ]
+    }
+  ],
+  "ci": {
+    "commit": "dadae0e2fa1a13996267273c3c01faf9d18231d3",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40151088213",
+    "conclusion": "success",
+    "tests": 16
+  },
+  "object_regression": {
+    "result": "PASS",
+    "scope": "Compiled-object regression only; no EOS or hardware validation",
+    "object_sha256": {
+      "baseline": {
+        "arch/arm/kernel/head.o": "f33e5c1d7444305331e5f384515b06b545f3df8e0037326dc66d4d79b924f6eb",
+        "arch/arm/kernel/setup.o": "03856f744cc4d1aad9b64b520385d2a22893e3b1bef72f9c0e6d7dced47871ce",
+        "arch/arm/mm/mmu.o": "5b3ca92491dc9da034595a824eb494608164e32c5163b6b6757939dd1f8dda46",
+        "init/main.o": "9874ebafa2925d32e10ed4f89bdf800d02c9ae8d9b5a6381b55ea87af33a21dd",
+        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee"
+      },
+      "reference": {
+        "arch/arm/kernel/head.o": "f33e5c1d7444305331e5f384515b06b545f3df8e0037326dc66d4d79b924f6eb",
+        "arch/arm/kernel/setup.o": "cd73f9f6e1dbbbecf9d5fa182326febd48090e13004949ae2d74bcd8b5dbce57",
+        "arch/arm/mm/mmu.o": "5b3ca92491dc9da034595a824eb494608164e32c5163b6b6757939dd1f8dda46",
+        "init/main.o": "380a3e063784ebe3b85ba2519350d8a7ef03e037b7c89755be878fe2cfc991b6",
+        "drivers/firmware/efi/libstub/fdt.stub.o": "c4f52564b9bffb2d342d6bb8a74f4b3f57b166c643b1fb944bdeaa96f5d3daee"
+      },
+      "off": {
+        "arch/arm/kernel/head.o": "d16dd067109b1f53f61a5ece3772b4f65fa3130018d5e9082a345534e65b7033",
+        "arch/arm/kernel/setup.o": "65605f1bda1c6a42bcb8ff01368a7dc20b0b20d11642d29e366b401184bccc57",
+        "arch/arm/mm/mmu.o": "7c308e2d3fc2dcc0e548e8ea5a1a68e7c3439203343865c2f61430f5be0a1e0c",
+        "init/main.o": "0a9020b4ef56e885a89034388ba80a65e49bd2fa48ae0a57dc39815fe91d81d2",
+        "drivers/firmware/efi/libstub/fdt.stub.o": "8cd1a9e09ac78e7f890499a50c7cd5bdbb8d811a64cd6451c80cb9da03d2c65f"
+      }
+    },
+    "reference_byte_identical_objects": [
+      "arch/arm/kernel/head.o",
+      "arch/arm/mm/mmu.o",
+      "drivers/firmware/efi/libstub/fdt.stub.o"
+    ],
+    "setup_change": "Only BUG source line metadata / non-allocated symbol strings",
+    "init_change": "Only verified WARN source-line immediates",
+    "warn_line_changes": [
+      {
+        "before": 1254,
+        "after": 1260
+      },
+      {
+        "before": 950,
+        "after": 954
+      },
+      {
+        "before": 1212,
+        "after": 1218
+      },
+      {
+        "before": 1000,
+        "after": 1004
+      }
+    ],
+    "debug_off_checks": [
+      "console calls absent",
+      "early framebuffer map literal absent",
+      "PMD preservation marker absent",
+      "all three EFI color constants absent"
+    ],
+    "init_memory_and_readonly_overrides": "Unchanged; still unresolved in both modes",
+    "linked_kernels": "Not checked in this focused object run"
+  },
+  "cloud_comparison": "All five original and five reference-on object hashes match CI",
+  "config_default": "PASS: original baseline config does not enable the new option when all dependencies are satisfied",
+  "scope_limit": "Init-memory/read-only finalization overrides, 920 DTS ranges and other upstream research modifications remain unchanged",
+  "full_kernel_reference": {
+    "state": "running at checkpoint preparation",
+    "log": ".work/logs/patched-reference-kernel-1792891645543618529.log",
+    "result_when_finished": ".work/logs/patched-reference-kernel-1792891645543618529.json"
+  },
+  "next_eos_dependency": "Reusable, exact-device board/UEFI provenance establishing EOS memory/reserved regions, framebuffer handoff and power/clock constraints before an EOS DTS can be written"
+}

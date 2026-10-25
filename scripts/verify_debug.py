@@ -84,6 +84,29 @@ def normalized_init_disassembly(path, reference):
     return lines, changed
 
 
+def default_off():
+    source = lumia.workpath("sources/linux-lumia920-patched")
+    output = lumia.workpath("build/linux-lumia920-default-check")
+    output.mkdir(parents=True, exist_ok=True)
+    baseline = lumia.workpath("build/linux-lumia920/.config").read_text()
+    if "LUMIA920_EARLY_DEBUG" in baseline:
+        raise ValueError("Default check requires the unmodified baseline config")
+    (output / ".config").write_text(baseline)
+    with lumia.workpath("logs/debug-default.log").open("w") as log:
+        subprocess.run(["make", "-C", str(source), f"O={output}", "ARCH=arm",
+                        "CROSS_COMPILE=arm-linux-gnueabihf-", "olddefconfig"],
+                       env=lumia.build_environment(), stdout=log,
+                       stderr=subprocess.STDOUT, check=True)
+    config = (output / ".config").read_text()
+    for required in ("CONFIG_ARCH_QCOM=y", "CONFIG_MMU=y", "CONFIG_FB=y", "CONFIG_FONT_8x16=y",
+                     "# CONFIG_ARM_LPAE is not set"):
+        if required + "\n" not in config:
+            raise ValueError("Default check did not satisfy option dependencies")
+    if "# CONFIG_LUMIA920_EARLY_DEBUG is not set\n" not in config:
+        raise ValueError("Research hooks were enabled by default")
+    return "PASS: old baseline config plus new option defaults off with dependencies satisfied"
+
+
 def verify():
     base = lumia.workpath("build/linux-lumia920")
     on = lumia.workpath("regression/debug-on")
@@ -134,6 +157,7 @@ def verify():
     if finalization(original) != finalization(patched):
         raise ValueError("Init-memory/read-only overrides were changed")
     result = dict(result="PASS", scope="Compiled-object regression only; no EOS or hardware validation",
+                  default_off=default_off(),
                   object_sha256=hashes, reference_byte_identical_objects=identical,
                   setup_change="Only BUG source line metadata / non-allocated symbol strings",
                   init_change="Only verified WARN source-line immediates", warn_line_changes=old_lines,
