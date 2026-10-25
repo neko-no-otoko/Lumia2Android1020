@@ -59,3 +59,18 @@ jobs:
       - name: Show compiler diagnostics
         if: always()
         run: tail -n 60 .work/logs/*.log 2>/dev/null || true
+  generic-arm-virtual:
+    needs: safety
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - run: python3 scripts/lumia.py setup
+      - run: python3 scripts/virtual_smoke.py setup
+      - run: python3 scripts/virtual_smoke.py build
+      - run: python3 scripts/virtual_smoke.py run
+      - name: Show virtual test diagnostics
+        if: always()
+        run: tail -n 50 .work/emulation/*.log .work/logs/*.log 2>/dev/null || true
