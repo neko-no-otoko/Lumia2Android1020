@@ -135,6 +135,10 @@ def verify():
     new, new_lines = normalized_init_disassembly(on / "init/main.o", True)
     if old != new or old_lines != new_lines or not old_lines:
         raise ValueError("Reference init code changed beyond verified WARN line immediates")
+    a, b = sections(base / "init/main.o"), sections(on / "init/main.o")
+    for name, (data, flags) in a.items():
+        if flags & 2 and not flags & 4 and b[name][0] != data:
+            raise ValueError(f"Reference init allocated data changed: {name}")
     for path, symbol in [("arch/arm/kernel/setup.o", "lumiafb_early_init"),
                          ("init/main.o", "lumiafb_early_deinit")]:
         if symbol not in tool("nm", "-u", on / path) or symbol in tool("nm", "-u", off / path):
@@ -168,8 +172,9 @@ def verify():
     if all(s["full_kernel"] for s in snapshots):
         for label, root in [("reference", on), ("off", off)]:
             symbols = tool("nm", root / "vmlinux")
-            if ("lumiafb_early_init" in symbols) != (label == "reference"):
-                raise ValueError("Linked-kernel console inclusion mismatch")
+            for symbol in ("lumiafb_early_init", "lumiafb_early_deinit"):
+                if (symbol in symbols) != (label == "reference"):
+                    raise ValueError("Linked-kernel console inclusion mismatch")
         result["linked_kernels"] = {label: {p: lumia.digest(root / p)
             for p in ("vmlinux", "arch/arm/boot/zImage")} for label, root in [("reference", on), ("off", off)]}
     else:
