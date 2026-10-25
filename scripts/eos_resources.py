@@ -12,6 +12,7 @@ import struct
 import subprocess
 import lumia
 import firmware_facts
+import variant_evidence
 from verify_dtbs import tree
 
 
@@ -20,8 +21,18 @@ def validate(data):
     if data['variant_gate'] != dict(source_rm='RM-876', source_product_code='059T3B3',
                                     intended_target_rm='RM-877',
                                     actual_handset_rm_product_code_verified=False,
-                                    board_equivalence='unverified', target_configuration_emitted=False):
+                                    board_equivalence='unverified', target_configuration_emitted=False,
+                                    target_firmware_identity_verified=True,
+                                    selected_asset_comparison='byte_identical_for_two_exact_ffus',
+                                    touch_configuration_carry_forward=False,
+                                    firmware_behavior_equivalence='unverified'):
         raise ValueError('RM-876 research cannot establish RM-877 board equivalence')
+    comparison = lumia.load_json('rm877-comparison.json')
+    variant_evidence.validate(comparison)
+    if (data['target_comparison_record'] != 'rm877-comparison.json'
+            or data['provenance']['ffu_sha256'] != comparison['reference_ffu_sha256']
+            or data['verified_static']['provenance']['rm877_corroboration']['target_ffu_sha256'] != comparison['target']['ffu_sha256']):
+        raise ValueError('Resource facts require an explicit exact-image provenance chain')
     if data['schema'] != 1 or data['runtime_enablement'] != 'none':
         raise ValueError('This inventory authorizes no runtime enablement')
     buses = {c['name']: c for c in data['i2c_controllers']}
@@ -176,6 +187,7 @@ def main():
     report = dict(result='PASS', scope='Host resource audit only; no EOS DTS emitted or hardware enabled',
                   source_ffu=data['provenance']['ffu_sha256'],
                   variant_gate=data['variant_gate'],
+                  target_comparison=variant_evidence.validate(lumia.load_json('rm877-comparison.json')),
                   static_decoders=firmware_facts.validate(data['verified_static']),
                   shared_addresses=shared_addresses(data), runtime_enablement='none')
     if args.check_kernel:

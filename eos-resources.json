@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "Original factual inventory from private stock RM-876 static analysis; no proprietary AML/ASL/XML copied; no runtime enablement or validated Linux bindings",
+  "scope": "Original RM-876 factual resource inventory, corroborated for selected byte-identical assets in exact RM-877 comparison; no firmware copied or runtime enablement",
   "runtime_enablement": "none",
   "provenance": {
     "ffu_sha256": "200c402351e7b488fd320bc944a7ab8f1dde2522eac5e7c203584852f541ef08",
@@ -666,6 +666,11 @@
           "bytes": 900896,
           "sha256": "f1ce114dab7a543b92e14d4ed5361127ba220440ec754f1403c92a2bf90a9642"
         }
+      },
+      "rm877_corroboration": {
+        "record": "rm877-comparison.json",
+        "target_ffu_sha256": "26b69b84a0e5e529f8dcb696c43625a040e79fa3ec3e96fc7328a7c9bd6faa97",
+        "scope": "Shared table resource facts, PMIC whole-file equality, PEP declared-raw-section equality; changed UEFI needs direct target review and touch data not carried"
       }
     },
     "pmio": {
@@ -1069,7 +1074,8 @@
       ],
       "observed_silicon": false,
       "observed_function_table": false,
-      "linux_compatible": "unassigned"
+      "linux_compatible": "unassigned",
+      "source_scope": "RM-876 origin; exact RM-877 target comparison corroborates HID/service/vendor/product selectors, config-write flags and compared power settings; no blanket rdata/pdata inheritance or live PDT observation"
     },
     "tlmm": {
       "pin_count": 152,
@@ -1154,6 +1160,11 @@
     "intended_target_rm": "RM-877",
     "actual_handset_rm_product_code_verified": false,
     "board_equivalence": "unverified",
-    "target_configuration_emitted": false
-  }
+    "target_configuration_emitted": false,
+    "target_firmware_identity_verified": true,
+    "selected_asset_comparison": "byte_identical_for_two_exact_ffus",
+    "touch_configuration_carry_forward": false,
+    "firmware_behavior_equivalence": "unverified"
+  },
+  "target_comparison_record": "rm877-comparison.json"
 }
