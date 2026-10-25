@@ -328,7 +328,8 @@ def check():
         patch_entries()
     files = subprocess.check_output(["git", "ls-files", "--cached", "--others",
                                      "--exclude-standard", "-z"], cwd=ROOT).split(b"\0")
-    prohibited = {".img", ".bin", ".ffu", ".hex", ".elf", ".dtb", ".deb", ".pem", ".key"}
+    prohibited = {".img", ".bin", ".ffu", ".hex", ".elf", ".dtb", ".deb", ".pem", ".key",
+                  ".cab", ".spkg", ".aml", ".dsl", ".cat"}
     secret = re.compile(rb"-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----|"
                         rb"gh[pousr]_[A-Za-z0-9]{30,}|AKIA[0-9A-Z]{16}")
     for raw in filter(None, files):

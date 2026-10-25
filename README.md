@@ -15,6 +15,8 @@ or safe flashing procedure is claimed. No hardware has been flashed or tested by
 - [Source provenance and license review](docs/sources.md)
 - [Reviewed build evidence](evidence/)
 - [Next source-level work and EOS evidence gaps](docs/next-eos-work.md)
+- [Offline EOS data investigation](docs/eos-offline-research.md)
+- [Staged assistance plan and recovery limits](docs/physical-assistance-plan.md)
 
 Quick start on x86_64 Linux (Python 3.12+, native GCC/Make/curl/dpkg-deb; 8 GiB free):
 

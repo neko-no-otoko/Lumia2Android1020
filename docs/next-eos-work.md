@@ -68,3 +68,12 @@ board evidence for each missing field. The separate RM-875 pmOS mention remains
 a research lead, not that evidence. Android also needs a justified kernel/config,
 device product and HAL/vendor ABI/license case. More host storage or a framework
 emulator would not supply those dependencies.
+
+## Offline investigation checkpoint
+
+The expanded [offline investigation](eos-offline-research.md) located exact EOS
+ACPI/configuration/UEFI package references and validated native static-analysis
+tools on synthetic data. Actual package acquisition is blocked by HTTP 403 in
+this environment. No EOS board facts have been extracted. Obtain those inputs
+before concluding a live phone is necessary; see the staged
+[assistance plan](physical-assistance-plan.md).

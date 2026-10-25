@@ -74,3 +74,11 @@ LumiaToy code.
 
 CI pins `actions/checkout` at `11d5960a326750d5838078e36cf38b85af677262` (v4).
 Its MIT `LICENSE` was reviewed at that commit; it runs only on the host CI runner.
+
+## Offline firmware-analysis references
+
+The pinned source/method/license table in [eos-offline-research.md](eos-offline-research.md)
+and [research-tools.lock.json](../research-tools.lock.json) extend this inventory.
+[firmware-references.json](../firmware-references.json) records proprietary input
+candidates only: no redistribution grant, downloaded firmware or Android driver
+is implied. The original host-side parser is not a copy of another device port.

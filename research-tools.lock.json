@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "purpose": "Native data-only CAB/ACPI static analysis; never run acpiexec or device binaries",
+  "packages": [
+    {
+      "package": "cabextract",
+      "version": "1.11-2",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/c/cabextract/cabextract_1.11-2_amd64.deb",
+      "filename": "cabextract_1.11-2_amd64.deb",
+      "sha256": "f66dfa011a39a82c1c601b308ef031ef65b29c856cd13a3d3eb194b947c5326d",
+      "license": "GPL according to packaged copyright"
+    },
+    {
+      "package": "libmspack0t64",
+      "version": "0.11-1.1+b1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/libm/libmspack/libmspack0t64_0.11-1.1+b1_amd64.deb",
+      "filename": "libmspack0t64_0.11-1.1+b1_amd64.deb",
+      "sha256": "b6039006e2758fa91a0e02ea1cbeded53ae0a5955298e1b0dddbe5a91784b510",
+      "license": "LGPL-2.1-or-later"
+    },
+    {
+      "package": "acpica-tools",
+      "version": "20250404-1",
+      "architecture": "amd64",
+      "url": "https://deb.debian.org/debian/pool/main/a/acpica-unix/acpica-tools_20250404-1_amd64.deb",
+      "filename": "acpica-tools_20250404-1_amd64.deb",
+      "sha256": "eea598bdb5d10ae51801f7c586a51f33335c60d964f5f18203cdda47fd5ab069",
+      "license": "GPL-2.0 or ACPICA license; packaged copyright reviewed"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-25",
+  "scope": "Data acquisition and synthetic static-analysis tooling; no EOS bytes inspected",
+  "index": "https://github.com/thaihoangduylinh/WPCabLinks/blob/fd913b6e1f683e6ae9c737583da53e386b5294d9/WP-Special-CAB-Links/RM-875_eu_spain_367-Firmware-3051.50009.1451.1004.html",
+  "packages": [
+    {
+      "id": "acpi-eos",
+      "url": "https://download.windowsupdate.com/c/msdownload/update/software/dflt/2014/12/nokia.acpi.eos.spkg_129775a9e855a9d032ef62bd03922668ef6286d4.cab",
+      "expected_sha1": "129775a9e855a9d032ef62bd03922668ef6286d4",
+      "model_index": "RM-875, Spain 367, firmware 3051.50009.1451.1004",
+      "downloaded": false
+    },
+    {
+      "id": "productconfig-eos",
+      "url": "https://download.windowsupdate.com/c/msdownload/update/software/dflt/2014/12/nokia.efiproductconfig.eos.spkg_4ed82cf4962e37e38ac1e1df01b40926951fd371.cab",
+      "expected_sha1": "4ed82cf4962e37e38ac1e1df01b40926951fd371",
+      "model_index": "RM-875, Spain 367, firmware 3051.50009.1451.1004",
+      "downloaded": false
+    },
+    {
+      "id": "uefi-eos",
+      "url": "https://download.windowsupdate.com/c/msdownload/update/software/dflt/2014/12/nokia.uefi.eos.spkg_5566d20aef1accf2bc5b8e3621f51b9eefda6b83.cab",
+      "expected_sha1": "5566d20aef1accf2bc5b8e3621f51b9eefda6b83",
+      "model_index": "RM-875, Spain 367, firmware 3051.50009.1451.1004",
+      "downloaded": false
+    }
+  ],
+  "observed_requests": [
+    {
+      "package": "acpi-eos",
+      "method": "HEAD",
+      "scheme": "HTTPS",
+      "status": 403
+    },
+    {
+      "package": "productconfig-eos",
+      "method": "HEAD",
+      "scheme": "HTTPS",
+      "status": 403
+    },
+    {
+      "package": "acpi-eos",
+      "method": "GET",
+      "scheme": "HTTPS",
+      "status": 403,
+      "additional_network_permission": false
+    },
+    {
+      "package": "acpi-eos",
+      "method": "GET",
+      "scheme": "HTTPS",
+      "status": 403,
+      "additional_network_permission": true
+    },
+    {
+      "package": "acpi-eos",
+      "method": "GET",
+      "scheme": "HTTP",
+      "status": 403
+    },
+    {
+      "package": "productconfig-eos",
+      "method": "GET",
+      "scheme": "HTTPS",
+      "status": 403
+    },
+    {
+      "package": "uefi-eos",
+      "method": "GET",
+      "scheme": "HTTPS",
+      "status": 403
+    }
+  ],
+  "files_acquired": 0,
+  "outcome": "Blocked by HTTP 403 from this cloud network path; not an automatic approval rejection or global unavailability finding",
+  "native_tools": {
+    "cabextract": "1.11",
+    "iasl": "20250404",
+    "lock": "research-tools.lock.json",
+    "setup_exit_code": 0
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "exit_code": 0,
+    "total": 21,
+    "static_format_tests": 5,
+    "native_synthetic_roundtrip": "PASS",
+    "actual_EOS_extraction": "NOT RUN: no input bytes"
+  },
+  "remaining_dependency": "Legitimate access to the exact public CAB files or private delivery; no handset change needed to attempt offline analysis",
+  "limits": [
+    "No vendor signature verification of absent bytes",
+    "No EOS memory/GPIO/panel/clock/PMIC values recovered",
+    "No EOS Linux/Android boot/camera/modem/safety validation",
+    "Bounded public-source searches do not prove universal absence"
+  ]
+}
