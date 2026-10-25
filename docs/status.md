@@ -8,7 +8,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Existing public GitHub repository | Verified | Expected initial main commit `dde83f8d393a75ef7fd37acc8eed56fef31a798c`; work is on a development branch and draft PR. |
 | Cloud resources | Tested | Debian 13 x86_64, CPU quota 4 cores, 16 GiB RAM, about 30 GiB initially free. Enough for this kernel work. |
 | Dependency setup | Tested | 23 hash-pinned Debian packages, including GNU patch; rootless extraction with no credentials or system installation. |
-| Host safety tests | Tested | 65 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
+| Host safety tests | Tested | 71 local tests cover host safety, patch preconditions, static formats and EOS resource interpretation; native synthetic CAB/iasl integration also passes. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
 | 920 early-debug isolation | Both full links and paired object regression passed | Full off link found and fixed a panic-path caller; six affected objects now covered per mode. Default-off resolution is checked. Console symbols are absent from off vmlinux. Baseline and init-finalization overrides are retained. |
@@ -24,7 +24,9 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | EOS Linux boot / USB / SSH | Untested | Upstream 920 claims and separate RM-875 notes do not establish support here. |
 | EOS storage integrity / charging / thermals | Untested, blocking hardware work | Needs exact-device source review, memory/power mapping and recovery evidence. No partition writes are authorized. |
 | Android product/image build | Blocked | No verified EOS device tree, compatible kernel configuration, full HAL/vendor provenance or justified Android release; cloud also below current full-AOSP resources. |
-| Android framework/emulator tests | Not attempted | Would not establish EOS modem, camera, charging or boot safety. |
+| Generic ARM32 QEMU guest | Passed | Pristine Linux6.6 on virt/Cortex-A15, eight userspace groups plus rejected bad-boot control. No Lumia or Android framework hardware coverage. |
+| Android Binder ABI in generic guest | Passed | binderfs/protocol8/mmap/error handling; no service-manager transactions, framework or HAL. |
+| Full Android framework emulator | Not attempted / resource boundary | No KVM device for documented Cuttlefish path; full AOSP build exceeds disk/RAM. This does not establish that prebuilt Android needs full-build resources. |
 | PureView camera / ISP / calibration / Android HAL | Blocked | No verified compatible, lawfully reusable Linux/Android stack found. Windows files do not fill this gap. |
 | Modem / graphics / audio / sensors | Untested / missing dependencies | No end-to-end EOS driver/HAL evidence. |
 
@@ -35,9 +37,10 @@ code verification. The exact RM-877 / 059T019 input is now verified and selected
 with RM-876 / 059T3B3. This proves the selected static subset, not whole-board
 behavior or cross-flash compatibility. Changed firmware requires target review.
 
-1. Establish ownership/availability and exact normal-mode handset/build/condition
-   using the minimum steps in the assistance plan. The bounded target static
-   pass is complete; no target configuration follows from unobserved runtime facts.
+1. No handset is available. Use the bounded [virtual validation](virtual-validation.md)
+   for generic software coverage; it cannot supply physical target observations.
+   The bounded target static pass is complete and no target configuration follows
+   from unobserved runtime facts.
 2. Compare EOS memory/reserved ranges, UEFI handoff, panel, GPIO, PMIC/regulators,
    clocks, thermal controls and storage controller against the 920 reference.
    Remove hard-coded 920 assumptions only with evidence; do not invent addresses.
@@ -76,5 +79,5 @@ Existing images pass host PE checks; no new image or device test was performed.
 [exact RM-877 comparison](rm877-evidence.md) separate shared tables/decoders from
 changed UEFI/touch data. The target input is verified, with vendor trust still
 unverified. The bounded target loader/touch pass is complete; minimum next help
-is ownership/normal stock identity/condition, not a live observer or firmware
-upload; the separate RM-937 effort stays outside this repo.
+would be actual device context for any later hardware plan. The current route
+is generic virtual testing, with no purchase, observer or firmware upload; the separate RM-937 effort stays outside this repo.

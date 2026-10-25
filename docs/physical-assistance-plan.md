@@ -1,17 +1,19 @@
 # Physical assistance plan and approval gates
 
 This is a future evidence checklist, not an instruction to unlock or modify a
-phone. Ownership of a Lumia 1020 has not been established. No equipment purchase
+phone. No handset is currently available for validation. No equipment purchase
 is proposed. Actual stock FFU board facts are now available; the earlier CAB
 acquisition request is superseded. Continue the [handoff source matrix](arm32-handoff.md)
 and [board evidence](eos-board-evidence.md) before proposing a handset test.
 
-## Minimum help needed now
+## Current route and future device context
 
 The exact RM-877 FFU is verified, selected shared assets are compared, and the
 bounded target loader/touch static pass is complete. No firmware reupload or
 further identified local static route is pending. Ownership of either target
-handset is still unknown. The next useful information is:
+handset is now known to be absent. The [virtual pass](virtual-validation.md)
+provides useful generic software coverage without purchasing one. The following
+is a future checklist only, not a current request to obtain hardware:
 
 1. Confirm whether an RM-877 Lumia 1020 is already owned/available. The separate
    RM-937/1520 effort needs its own identity; this repository remains 1020-only.
@@ -93,7 +95,8 @@ path or a separately approved later plan. Static ACPI facts alone cannot prove
 charging, thermal, eMMC-write or modem safety. A functional PureView photo in the
 stock OS provides a baseline, not a Linux sensor/ISP driver or Android HAL.
 
-The next action is the minimal ownership/identity/condition report above, not
-more speculative board code or a collector launch. Hardware-specific execution
+Current work uses generic virtual validation. The identity/condition checklist
+above applies only if a handset becomes available later; no purchase or collector
+launch is requested. Hardware-specific execution
 must wait for an exact-device access and recovery decision. The supplied target
 FFU and scoped comparison are recorded in [RM-877 evidence](rm877-evidence.md).

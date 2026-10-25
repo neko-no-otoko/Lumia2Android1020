@@ -6,13 +6,16 @@ Experimental research toward Linux and Android bring-up on Nokia Lumia 1020 hard
 
 Host build foundations are in place: pinned source/license and dependency inventories,
 rootless setup, synthetic safety tests, and successful Lumia **920** reference
-DTB, driver and full-kernel cross-compilation.
+DTB, driver and full-kernel cross-compilation. A separate pristine upstream
+ARM32 kernel now boots a QEMU virt guest and passes eight userspace smoke groups;
+this is generic Linux coverage, not a phone or Android framework boot.
 The RM-877 target FFU is verified by private Mini static inspection. Selected
 ACPI/PEP assets match the exact RM-876 reference; changed UEFI/touch data remain
 separate, and general board/runtime equivalence is unverified.
 No working Lumia 1020 Linux/Android image, PureView camera support, cellular support,
 or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
 
+- [Executed generic ARM32 virtual tests](docs/virtual-validation.md)
 - [Tested / untested / blocked matrix](docs/status.md)
 - [Reproduce the host builds and inspect debugging notes](docs/build.md)
 - [Source provenance and license review](docs/sources.md)
