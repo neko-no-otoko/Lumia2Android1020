@@ -133,9 +133,43 @@
   "config_default": "PASS: original baseline config does not enable the new option when all dependencies are satisfied",
   "scope_limit": "Init-memory/read-only finalization overrides, 920 DTS ranges and other upstream research modifications remain unchanged",
   "full_kernel_reference": {
-    "state": "running at checkpoint preparation",
-    "log": ".work/logs/patched-reference-kernel-1792891645543618529.log",
-    "result_when_finished": ".work/logs/patched-reference-kernel-1792891645543618529.json"
+    "state": "completed",
+    "exit_code": 0,
+    "reproduction_command": "python3 scripts/lumia.py build --profile patched --target kernel --jobs 4",
+    "resolved_config_sha256": "579fede7e4b3ea0479678ead719faf821c032964a1b9227ac1b65fcaab743699",
+    "artifacts": [
+      {
+        "path": "arch/arm/boot/zImage",
+        "bytes": 8667648,
+        "sha256": "6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd"
+      },
+      {
+        "path": "vmlinux",
+        "bytes": 26824116,
+        "sha256": "4ce1bbef3c2e9ece20849a1af0e640e614d64d9ea116eab492686dc658ed6eb0"
+      }
+    ],
+    "approx_elapsed_seconds": 1490.609,
+    "finished_utc": "2026-10-25T01:52:16Z",
+    "raw_log": ".work/logs/patched-reference-kernel-1792891645543618529.log",
+    "raw_log_sha256": "20bdb414d5519140acdc1ce4f96f07aec6e03d1dbd33c15dd117c379db35e4cb",
+    "linked_console_symbols": "lumiafb_early_init and lumiafb_early_deinit present as expected",
+    "warning_context": [
+      ".work/sources/linux-lumia920-patched/init/main.c:1411:13: warning: \u2018mark_readonly\u2019 defined but not used [-Wunused-function]"
+    ],
+    "full_build_log_warning_count": 0,
+    "original_baseline_image": "Retained unchanged at ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565"
   },
-  "next_eos_dependency": "Reusable, exact-device board/UEFI provenance establishing EOS memory/reserved regions, framebuffer handoff and power/clock constraints before an EOS DTS can be written"
+  "next_eos_dependency": "Reusable, exact-device board/UEFI provenance establishing EOS memory/reserved regions, framebuffer handoff and power/clock constraints before an EOS DTS can be written",
+  "full_kernel_off": {
+    "state": "not built at requested bounded checkpoint",
+    "scope": "Off-mode affected objects and default-off resolver passed CI",
+    "next_host_command": "python3 scripts/lumia.py build --profile patched --debug-mode off --target kernel --jobs 4"
+  },
+  "ci_current_source": {
+    "commit": "327191e066022105f661d34cdff05d015d14634f",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40151825377",
+    "conclusion": "success",
+    "scope": "16 safety tests; DTBs; reference/off objects; default-off; allocated data checks"
+  }
 }

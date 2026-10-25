@@ -11,7 +11,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Host safety tests | Tested | 16 tests cover host safety, patch hashes/preconditions/paths and baseline configuration protection. |
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Patched 920 tiny DTB | Compiled without the reproduced warnings | Only two CPU-cell properties added; all 28 nodes and 126 original properties preserved. Baseline retained separately. |
-| 920 early-debug isolation | Under regression test | A separate pinned patch adds an explicit reference-on/default-off option. Original baseline source/artifacts and init-finalization overrides are retained. |
+| 920 early-debug isolation | Object regression and reference-on full link passed | Both option modes pass focused CI; default-off resolution is checked. Reference-on zImage compiled with exit 0; full off-mode image remains a next bounded host step. Baseline and init-finalization overrides are retained. |
 | Lumia 920 simple DTB | Compiled | No target-specific diagnostics observed; not hardware validation. |
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
 | Lumia 920 full zImage | Compiled | Exit 0 after about 21 minutes; 8,667,648-byte ARM image. One unused-function warning; see the kernel report for hashes. A zImage alone is not an OS image. |

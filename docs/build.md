@@ -136,6 +136,19 @@ or `off --kernel` preserves its linked artifacts only after checking that the
 successful build report matches the current config and image hash. The comparator
 then also checks linked console inclusion and records both kernel hashes.
 
+At the source-isolation checkpoint, reference-on full compilation exited 0 and
+retained an 8,667,648-byte zImage with SHA-256
+`6edd1907771994e8670d33ac699ba6cf861f522fb96b1a5d19cd7db181185ffd`.
+The original baseline image remains unchanged. The reference-on head, MMU and EFI
+stub objects are byte-identical to baseline; setup/init differences are verified
+diagnostic line metadata only. Both modes pass the affected-object CI checks.
+
+The full off-mode image was not started before the requested bounded checkpoint.
+Its next host step is the documented `--debug-mode off --target kernel` command,
+followed by `verify_debug.py off --kernel` and `verify_debug.py verify`. This is
+not a hardware-test proposal. All measured hashes and limits are in
+[`2026-10-25-debug-isolation.json`](../evidence/2026-10-25-debug-isolation.json).
+
 Relocated Bison first failed with `m4 subprocess failed: No such file or directory`.
 Setting both `M4` and `BISON_PKGDATADIR` fixed its data/executable paths. The next
 configuration failed with `unknown assembler invoked`: the relocated ARM binutils
