@@ -2,7 +2,7 @@
 
 Review date: 2026-10-25. No handset was used. No proprietary firmware bytes were
 obtained, executed or published. This work prepares data-only inspection; it has
-not recovered any actual EOS board parameters.
+not recovered an EOS boot-critical memory/resource map or kernel handoff.
 
 ## Concrete data dependency
 

@@ -90,7 +90,7 @@
   "remaining_dependency": "Legitimate access to the exact public CAB files or private delivery; no handset change needed to attempt offline analysis",
   "limits": [
     "No vendor signature verification of absent bytes",
-    "No EOS memory/GPIO/panel/clock/PMIC values recovered",
+    "No EOS boot memory/GPIO/clock/PMIC map recovered; follow-up Windows text provides identifiers/display dimensions only",
     "No EOS Linux/Android boot/camera/modem/safety validation",
     "Bounded public-source searches do not prove universal absence"
   ],
