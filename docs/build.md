@@ -94,6 +94,32 @@ The tiny DTB emits CPU `reg_format` / default address-size warnings because its
 `cpus` node omits address/size cell declarations. They remain visible; a successful
 DTB compile is not device-tree binding validation. No warnings were suppressed.
 
+## Recorded full-kernel milestone
+
+The existing full build completed on 2026-10-25 at 01:12:49 UTC with exit 0:
+
+```sh
+python3 scripts/lumia.py build --target kernel --jobs 4
+```
+
+It took about 1,269 seconds on the saved cloud allocation and produced an
+8,667,648-byte `zImage` plus a 26,824,116-byte ELF32 little-endian ARM EABI5
+`vmlinux`. The source and saved defconfig were not patched for this build. Its only
+compiler warning was `init/main.c:1405: mark_readonly defined but not used`,
+consistent with the commented-out call already recorded in the source review.
+No source workaround or weakened compiler flags were needed.
+
+SHA-256 values, the resolved configuration hash, fixed KBUILD metadata and the
+exact make arguments are recorded in
+[`2026-10-25-kernel.json`](../evidence/2026-10-25-kernel.json). Both DTB and driver
+checks were rerun incrementally after the full build and retained their prior
+hashes. The image was inspected as a file; it was not executed, booted or deployed.
+
+Checkpoint commit `516def15fc829808c5fcff1557335968bc5eb47b` passed
+[fresh CI run 3](https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40149458747),
+including all 11 safety tests and focused DTB/driver builds. Full zImage compilation
+was performed in this cloud environment, not in CI.
+
 ## Android resource gate
 
 ```sh

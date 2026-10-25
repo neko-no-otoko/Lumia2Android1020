@@ -4,8 +4,9 @@ Experimental research toward Linux and Android bring-up on Nokia Lumia 1020 hard
 
 ## Status
 
-Host build foundations are underway: pinned source/license and dependency inventories,
-rootless setup, synthetic safety tests, and Lumia **920** reference cross-compilation.
+Host build foundations are in place: pinned source/license and dependency inventories,
+rootless setup, synthetic safety tests, and successful Lumia **920** reference
+DTB, driver and full-kernel cross-compilation.
 No working Lumia 1020 Linux/Android image, PureView camera support, cellular support,
 or safe flashing procedure is claimed. No hardware has been flashed or tested by this project.
 
@@ -13,6 +14,7 @@ or safe flashing procedure is claimed. No hardware has been flashed or tested by
 - [Reproduce the host builds and inspect debugging notes](docs/build.md)
 - [Source provenance and license review](docs/sources.md)
 - [Reviewed build evidence](evidence/)
+- [Next source-level work and EOS evidence gaps](docs/next-eos-work.md)
 
 Quick start on x86_64 Linux (Python 3.12+, native GCC/Make/curl/dpkg-deb; 8 GiB free):
 

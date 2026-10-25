@@ -71,14 +71,12 @@
   ],
   "hardware_tests": "None",
   "full_kernel": {
-    "state": "running at requested checkpoint",
-    "command": "python3 scripts/lumia.py build --target kernel --jobs 4",
-    "make_target": "zImage",
-    "log": ".work/logs/kernel-1792889499746423310.log",
-    "result_when_finished": ".work/logs/kernel-1792889499746423310.json",
-    "objects_compiled_at_checkpoint": 2369,
-    "compile_errors_observed": 0,
-    "warning_observed": "init/main.c: mark_readonly defined but not used",
+    "state": "completed",
+    "exit_code": 0,
+    "bytes": 8667648,
+    "sha256": "ec08937a6c6acf804958606b979b6666c903064a4f169f86e5c1f3ca28753565",
+    "report": "evidence/2026-10-25-kernel.json",
+    "warnings": "One unused mark_readonly function warning; no source patch needed",
     "hardware_operations": "None"
   },
   "fresh_extraction": {
@@ -162,5 +160,11 @@
     "safety": "success",
     "reference_compile": "success",
     "verified_on": "2026-10-25"
+  },
+  "ci_checkpoint_latest": {
+    "head": "516def15fc829808c5fcff1557335968bc5eb47b",
+    "url": "https://github.com/neko-no-otoko/Lumia2Android1020/actions/runs/40149458747",
+    "conclusion": "success",
+    "scope": "11 synthetic safety tests and fresh focused DTB/driver compile; no full kernel CI"
   }
 }

@@ -12,7 +12,7 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 | Lumia 920 tiny DTB | Compiled with warnings | CPU address/size-cell diagnostics remain; not binding-schema or hardware validation. |
 | Lumia 920 simple DTB | Compiled | No target-specific diagnostics observed; not hardware validation. |
 | Lumia 920 framebuffer/eMMC objects | Compiled | ELF32 little-endian ARM EABI5 objects. No device code was executed. |
-| Lumia 920 full zImage | In progress | See the build report for the final outcome. A zImage alone is not an OS image. |
+| Lumia 920 full zImage | Compiled | Exit 0 after about 21 minutes; 8,667,648-byte ARM image. One unused-function warning; see the kernel report for hashes. A zImage alone is not an OS image. |
 | GitHub CI | Passed at recorded commit | Fresh Ubuntu 24.04 setup, safety tests, both DTBs and both objects passed; see evidence for run/head. Latest PR checks remain the authority for subsequent commits. |
 | EOS kernel / device tree | Blocked | No validated EOS board description or source/build provenance chain. The 920 source cannot be relabeled as EOS. |
 | EOS UEFI loader / kernel handoff | Blocked | No reviewed reusable EOS handoff implementation. LumiaToy remains reference-only due to its license restriction; no loader was imported or built. |
@@ -45,3 +45,8 @@ Linux port or Android distribution. No handset was connected, booted or flashed.
 Compile results, exact commands, hashes and debugging notes are in
 [`evidence/`](../evidence/) and [`build.md`](build.md). Raw sources, packages,
 logs and binaries stay under ignored `.work/`. No binary releases are published.
+
+The next bounded source-only changes are described in
+[`next-eos-work.md`](next-eos-work.md): fix the reproduced CPU-cell metadata
+warnings, then isolate 920-specific boot debugging before attempting an EOS board
+port. Neither change has been applied in this compile milestone.
