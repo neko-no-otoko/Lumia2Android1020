@@ -93,6 +93,13 @@ def kernel_check(data):
         path = lumia.confined(source, source / name)
         if lumia.digest(path) != expected:
             raise ValueError('Pinned reference changed: ' + name)
+    official = data['linux_source']['official_v6_6']
+    matched = []
+    for entry in official['files']:
+        if entry['identical_to_official_v6_6']:
+            if data['linux_source']['files'][entry['path']] != entry['official_sha256']:
+                raise ValueError('Recorded official upstream fingerprint mismatch')
+            matched.append(entry['path'])
     env = lumia.build_environment()
     out = lumia.workpath('eos-resource-audit')
     out.mkdir(parents=True, exist_ok=True)
@@ -145,7 +152,9 @@ def kernel_check(data):
         serial.append(dict(firmware_controller=c['name'], candidate_gsbi=number,
                            pinmux_group_contains_raw_pair=True, linux_clock_names=names,
                            limitation='Corroboration only; GPIO translation, GSBI mode, rates and electrical settings unresolved'))
-    return dict(commands=commands, compiled_scope='Unmodified generic MSM8960 SoC description, not EOS DTS',
+    return dict(commands=commands, compiled_scope='Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS',
+                official_revision=official['official_revision'], official_identical_files=matched,
+                fork_dtsi_differences=official['dtsi_differences'],
                 dtb_sha256=lumia.digest(dtb), compiler_log_sha256=lumia.digest(log),
                 compiler_diagnostics=log.read_text().splitlines(),
                 controller_comparisons=comparisons, serial_candidates=serial)

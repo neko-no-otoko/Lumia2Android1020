@@ -41,7 +41,22 @@
         ".work/eos-resource-audit/msm8960-reference.dts"
       ]
     ],
-    "compiled_scope": "Unmodified generic MSM8960 SoC description, not EOS DTS",
+    "compiled_scope": "Unchanged pinned reference-fork MSM8960 DTSI, not official upstream or EOS DTS",
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "official_identical_files": [
+      "drivers/pinctrl/qcom/pinctrl-msm8960.c",
+      "drivers/clk/qcom/gcc-msm8960.c",
+      "drivers/irqchip/irq-gic.c",
+      "include/dt-bindings/clock/qcom,gcc-msm8960.h",
+      "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml",
+      "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml",
+      "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml"
+    ],
+    "fork_dtsi_differences": [
+      "Adds ssbi label and removes upstream PM8921 interrupt-controller subtree, power key/keypad/RTC children",
+      "Removes USB controller core/iface clocks, assigned rate and core reset",
+      "Removes USB PHY sleep/ref clocks and POR reset"
+    ],
     "dtb_sha256": "b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d",
     "compiler_log_sha256": "8d60543c20fceee50110a27974127fa0da2497fc4101d9816e11a5e4d1e6ddbe",
     "compiler_diagnostics": [
@@ -216,5 +231,58 @@
     ]
   },
   "legacy_parser": "Synthetic regression only in cloud; actual EOS table observations supplied by parent/local bounded parsing; no raw tables published.",
-  "template_caveat": "Firmware static templates are not runtime-installed tables or a complete RAM map; no CPU enable method assigned."
+  "template_caveat": "Firmware static templates are not runtime-installed tables or a complete RAM map; no CPU enable method assigned.",
+  "official_source_comparison": {
+    "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+    "files": [
+      {
+        "path": "arch/arm/boot/dts/qcom/qcom-msm8960.dtsi",
+        "official_sha256": "eee3d6cf051009705137e727943970246ab572bf19cabf85a3139cd1fdd6f63e",
+        "reference_sha256": "448cfaa18888cd40704fa9f76dec3b3e4e65cb284c9945f36f58247af7030074",
+        "identical_to_official_v6_6": false
+      },
+      {
+        "path": "drivers/pinctrl/qcom/pinctrl-msm8960.c",
+        "official_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+        "reference_sha256": "d38cfa59d6f9d2a5a6c69f89c323689cc2f90c79d4bec587884a018fe4543e78",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "drivers/clk/qcom/gcc-msm8960.c",
+        "official_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+        "reference_sha256": "5c2a7b18505dfe72169d239c20cb569f6379b2b587c4d677b5ef68d94f5e0103",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "drivers/irqchip/irq-gic.c",
+        "official_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+        "reference_sha256": "a25007b79cd1357627a3cde136bf9cbf3a5062ae0025043fa70e365cf0b01af3",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "include/dt-bindings/clock/qcom,gcc-msm8960.h",
+        "official_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+        "reference_sha256": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml",
+        "official_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+        "reference_sha256": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml",
+        "official_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+        "reference_sha256": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
+        "identical_to_official_v6_6": true
+      },
+      {
+        "path": "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml",
+        "official_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+        "reference_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+        "identical_to_official_v6_6": true
+      }
+    ]
+  }
 }

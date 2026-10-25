@@ -50,7 +50,7 @@ literal observations only, not regulator bindings, voltage values or safe sequen
 
 ## Independent Linux audit
 
-The checker compiles the **unmodified generic MSM8960 SoC description**, reads its
+The checker compiles the **unchanged pinned reference-fork MSM8960 DTSI**, reads its
 actual DTB properties, verifies per-file source hashes and compares selected facts
 against Linux source/bindings at commit
 [9872e9316212490b7db8e3371fa1d63bd3394cc5](https://github.com/UEFI-code/linux-6.6-lumia920/tree/9872e9316212490b7db8e3371fa1d63bd3394cc5).
@@ -75,6 +75,25 @@ and [pinmux implementation](https://github.com/UEFI-code/linux-6.6-lumia920/blob
 The QUP binding lists v1.1.1 for MSM8960. No source or raw firmware was copied
 into a new driver. Native compilation artifacts remain ignored.
 
+## Official upstream comparison and fork limitations
+
+Eight files were independently retrieved from official
+[Linux v6.6](https://github.com/torvalds/linux/tree/ffc253263a1375a65fa6c9f62a893e9767fbebfa).
+Pinmux, GCC, GIC translation, the clock IDs and all three audited bindings match
+the fork byte-for-byte. Their official hashes are recorded in the inventory and
+checked against the pinned source in CI. This is a fingerprint check against
+recorded upstream observations; CI does not re-download official files.
+
+The [official MSM8960 DTSI](https://github.com/torvalds/linux/blob/ffc253263a1375a65fa6c9f62a893e9767fbebfa/arch/arm/boot/dts/qcom/qcom-msm8960.dtsi)
+is **not** byte-identical to the 920 fork. The fork removes the PM8921 interrupt
+controller and power-key/keypad/RTC subtree and adds an SSBI label. It also removes
+USB controller clock/reset/assigned-rate properties and PHY clock/POR reset
+properties. The five compared resource fields are unchanged, but those stripped
+dependencies must not silently become an EOS configuration. No restoration patch
+was applied: baseline behavior stays preserved pending an exact-device review.
+The official PM8921 interrupt-parent pin104 corroborates the firmware resource
+association; it does not prove the proposed PM01 pin-number encoding.
+
 ## Host implementation and measured result
 
 ```sh
@@ -83,7 +102,7 @@ python3 scripts/lumia.py build --target soc-objects --jobs 4
 python3 -m unittest discover -s tests -v
 ```
 
-The audit passes. The generic SoC DTB has SHA-256
+The audit passes. The reference-fork SoC DTB has SHA-256
 `b246be3a2f0ed834fbde1c727ddc1378b8e0599a995d44a4df8d72c34c74095d`.
 Its existing `/memory` unit-address warning is retained and recorded, not suppressed.
 It contains upstream generic placeholder memory; it is not an EOS board description.

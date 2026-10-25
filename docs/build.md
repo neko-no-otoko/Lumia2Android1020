@@ -208,7 +208,7 @@ drivers. No MacBook is part of this workflow.
 
 ## EOS factual resource audit and controller prerequisites
 
-`python3 scripts/eos_resources.py --check-kernel` compiles the unmodified generic
+`python3 scripts/eos_resources.py --check-kernel` compiles the unchanged pinned reference-fork
 MSM8960 DTSI and cross-checks recorded EOS facts, source hashes, candidate pinmux
 groups and clock IDs. It does not emit an EOS DTS. `python3 scripts/lumia.py build
 --target soc-objects --jobs 4` compiles QUP I2C, GSBI, MSM8960 GCC and pinctrl
