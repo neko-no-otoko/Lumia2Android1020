@@ -23,7 +23,9 @@
       "include/dt-bindings/clock/qcom,gcc-msm8960.h": "cd2b1e9db936f2d707389796652c37bf4b1f0861a553694d457b1d2e6c68ff80",
       "Documentation/devicetree/bindings/i2c/qcom,i2c-qup.yaml": "0d450ed20585b64836747d0464f235470522750af257a79ecdc9887579ef8572",
       "Documentation/devicetree/bindings/soc/qcom/qcom,gsbi.yaml": "94f617c7def1239307f75b274910fce99ad84d2ff78c462467c8c6796aa578b7",
-      "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24"
+      "Documentation/devicetree/bindings/interrupt-controller/arm,gic.yaml": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
+      "drivers/clk/qcom/mmcc-msm8960.c": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+      "drivers/regulator/qcom_rpm-regulator.c": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6"
     },
     "official_v6_6": {
       "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
@@ -75,6 +77,16 @@
           "official_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
           "reference_sha256": "9d61305a9dc96a1129924ed228ff8b8fd80ab28bcc0cefd99196ba0a5f634e24",
           "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/clk/qcom/mmcc-msm8960.c",
+          "official_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "identical_to_official_v6_6": true
+        },
+        {
+          "path": "drivers/regulator/qcom_rpm-regulator.c",
+          "official_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "identical_to_official_v6_6": true
         }
       ],
       "comparison_scope": "Eight original source/binding files independently retrieved from official torvalds/linux v6.6; seven byte-identical; reference-fork DTSI differs as documented.",
@@ -85,6 +97,24 @@
       ],
       "resource_fields": "The five compared controller bases/apertures/IRQs are unchanged between official and fork DTSI; no board enablement implied.",
       "license": "Existing upstream GPL/BSD file notices; no upstream files vendored."
+    },
+    "pep_official_v6_6": {
+      "official_revision": "ffc253263a1375a65fa6c9f62a893e9767fbebfa",
+      "files": [
+        {
+          "path": "drivers/clk/qcom/mmcc-msm8960.c",
+          "official_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "reference_sha256": "fa5305166dd83db25c79fbeb0d39753e7b285fe75f4067fb08eeb5d74c8f63cf",
+          "identical": true
+        },
+        {
+          "path": "drivers/regulator/qcom_rpm-regulator.c",
+          "official_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "reference_sha256": "3d1fc255638e16e2c91c2b03588b5ebd16466c6e5b8499678e4099d3c26202f6",
+          "identical": true
+        }
+      ],
+      "interpretation": "Byte-identical MMCC CSI mux fields, RPM8960 masks/units, mode and selector mappings corroborate selected consumer facts; no hardware enablement"
     }
   },
   "i2c_controllers": [
@@ -394,7 +424,7 @@
     "embedded_rule": "ID low byte0xc2 selects Tanya if supplied to embedded dispatcher; external XML caller precedence and physical panel unresolved"
   },
   "power": {
-    "semantics": "Static PEP operations and per-client voting decoded; microvolt/microamp units remain strongly supported inference; other flags/runtime behavior unresolved",
+    "semantics": "RM-876 stock consumer and pinned upstream corroborate parameter labels, clock mux subset and per-client vote arithmetic; EOS pin routing/source values and physical runtime state unobserved",
     "touch": [
       "SMPS4",
       "LVS4",
@@ -763,7 +793,11 @@
         "winload_optional_acpitabl_dat_option": "0x16000049",
         "bcd_read_or_changed": false,
         "acpitabl_dat_found_in_three_checked_mainos_directories": false,
-        "scope": "Exact remaining directory and alternate/fixup consumers unresolved"
+        "scope": "Bounded stock System32 traversal and optional loader path; BCD not read; no CDPI mismatch resolution",
+        "winload_constructed_path": "<configured system root>\\system32\\acpitabl.dat",
+        "system_root_option": "0x22000002",
+        "checked_stock_system32_entries": 1975,
+        "matching_acpitabl_dat_found": false
       }
     },
     "pep": {
@@ -782,20 +816,20 @@
         11
       ],
       "clock_opcode_semantics": "static_operations_resolved_policy_subenum_unresolved",
-      "power_units": "strongly_supported_inference",
+      "power_units": "corroborated_static",
       "display": {
-        "on_rail_order": [
-          "SMPS4",
-          "LVS4"
-        ],
-        "off_rail_order": [
-          "LVS4",
-          "SMPS4"
-        ],
         "raw_smps4_level": 1800000,
         "raw_load_fields": [
           40000,
           20000
+        ],
+        "d0_vote_order": [
+          "SMPS4",
+          "LVS4"
+        ],
+        "d3_vote_order": [
+          "LVS4",
+          "SMPS4"
         ]
       },
       "touch": {
@@ -821,7 +855,7 @@
         "10": "assert_reset",
         "11": "deassert_reset"
       },
-      "clock_policy_subenum": "unresolved",
+      "clock_policy_subenum": "stock_CSI_subset_resolved_other_values_unresolved",
       "frequency_selectors": {
         "1-4": "Hz",
         "5-8": "kHz",
@@ -861,10 +895,159 @@
             10
           ]
         },
-        "units_status": "strongly_supported_inference",
-        "units_inference": "microvolt/microamp strongly supported; not proven",
+        "units_status": "corroborated_static",
+        "units_inference": "Microvolt/peak-microamp/average-microamp field labels corroborated by stock consumer and pinned upstream RPM layout; physical aggregate/runtime state unobserved",
         "other_mode_flags": "literal; unresolved",
         "type7": "CXO_CLOCK one-bit client OR vote; clearing one client does not prove physical oscillator off"
+      },
+      "stock_csi_policy": {
+        "tuple_count": 10,
+        "output_count": 5,
+        "scope": "All stock RM-876 operation9 tuples inspected; not all possible API sub-enums",
+        "preceding_slots_11_12": "generic slots, not MHz",
+        "selector_values": {
+          "1": [
+            0,
+            0
+          ],
+          "2": [
+            1,
+            0
+          ],
+          "3": [
+            0,
+            1
+          ]
+        },
+        "linux_parent_indices": {
+          "1": 0,
+          "2": 1,
+          "3": 2
+        },
+        "CAMF_requested": "CSI1",
+        "CAMS_requested": "CSI0",
+        "fitted_sensor": "unobserved",
+        "mmcc_fields": {
+          "pixel": [
+            [
+              88,
+              25
+            ],
+            [
+              568,
+              13
+            ]
+          ],
+          "pixel1": [
+            [
+              568,
+              8
+            ],
+            [
+              568,
+              9
+            ]
+          ],
+          "RDI": [
+            [
+              88,
+              12
+            ],
+            [
+              568,
+              12
+            ]
+          ],
+          "RDI1": [
+            [
+              568,
+              0
+            ],
+            [
+              568,
+              1
+            ]
+          ],
+          "RDI2": [
+            [
+              568,
+              4
+            ],
+            [
+              568,
+              5
+            ]
+          ]
+        }
+      },
+      "regulator_field_layout": {
+        "type1_LDO": [
+          "microvolts",
+          "peak_microamps",
+          "average_microamps",
+          "force_mode",
+          "pin_control_mask",
+          "pin_function",
+          "pull_down"
+        ],
+        "type2_SMPS_extra": [
+          "power_mode",
+          "switching_frequency_selector",
+          "frequency_clock_source_selector"
+        ],
+        "type4_LVS": [
+          "enable",
+          "pull_down",
+          "pin_control_mask",
+          "pin_function",
+          "optional_HPM"
+        ],
+        "force2": "auto where supported",
+        "force3": "high-power for this corroborated3-bit encoding; not universal across PMICs",
+        "SMPS_power0": "hysteretic",
+        "frequency_selector6_hz": 3200000,
+        "LVS_enable_pull_down_aggregation": "per-client OR",
+        "EOS_specific_pin_routing_source_values": "unresolved"
+      },
+      "rm876_power_snapshots": {
+        "scope": "Reported per-client prefixes only, not full packages or physical aggregate measurements",
+        "prefix_field_order": [
+          "microvolts",
+          "peak_microamps",
+          "average_microamps",
+          "force_mode_if_reported"
+        ],
+        "DISP_D0_SMPS4": [
+          1800000,
+          40000,
+          20000,
+          3
+        ],
+        "DISP_D3_SMPS4": [
+          1800000,
+          100,
+          100,
+          2
+        ],
+        "TCH1_D0_SMPS4": [
+          1800000,
+          25000,
+          25000
+        ],
+        "TCH1_D0_LDO9": [
+          2850000,
+          18000,
+          12000
+        ],
+        "TCH1_D3_LDO9": [
+          2850000,
+          5000,
+          5000
+        ],
+        "DISP_D0_LVS4_enable": true,
+        "TCH1_D0_LVS4_enable": true,
+        "TCH1_D3_own_LVS4_enable": false,
+        "TCH1_D3_own_SMPS4_voltage_current_vote": "cleared; not physical rail off"
       }
     },
     "touch_configuration": {
@@ -968,7 +1151,7 @@
   "variant_gate": {
     "source_rm": "RM-876",
     "source_product_code": "059T3B3",
-    "intended_target_rm": "RM-875",
+    "intended_target_rm": "RM-877",
     "actual_handset_rm_product_code_verified": false,
     "board_equivalence": "unverified",
     "target_configuration_emitted": false

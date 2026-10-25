@@ -121,9 +121,9 @@ def validate(facts):
             or display['embedded_external_precedence'] != 'unresolved'):
         raise ValueError('Conditional panel dispatch is not observed selection')
     pep = facts['pep']
-    if pep['power_units'] != 'strongly_supported_inference' or pep['clock_opcode_semantics'] != 'static_operations_resolved_policy_subenum_unresolved':
+    if pep['power_units'] != 'corroborated_static' or pep['clock_opcode_semantics'] != 'static_operations_resolved_policy_subenum_unresolved':
         raise ValueError('Raw PEP numbers cannot acquire inferred units/opcodes')
-    if set(pep['display']) != {'on_rail_order', 'off_rail_order', 'raw_smps4_level', 'raw_load_fields'}:
+    if set(pep['display']) != {'d0_vote_order', 'd3_vote_order', 'raw_smps4_level', 'raw_load_fields'}:
         raise ValueError('Unreviewed interpreted power fields')
     touch = facts['touch_configuration']
     if (touch['observed_silicon'] is not False or touch['observed_function_table'] is not False
@@ -139,7 +139,7 @@ def validate(facts):
                 pep=pep_facts.validate(facts),
                 display_io=decode_io_pin(schema, 234), dsm_irq=decode_irq(schema, 51),
                 gpio192_io=decode_io_pin(schema, 192), irq192=decode_irq(schema, 192),
-                shared_rails=sorted(set(pep['display']['on_rail_order']) & set(pep['touch']['rails'])),
+                shared_rails=sorted(set(pep['display']['d0_vote_order']) & set(pep['touch']['rails'])),
                 aml_dpid_conditionally_matches_tanya=embedded_tanya_match(0x00fe00c2),
                 shared_data_base_differs=layouts['productcfg']['base'] != layouts['ssdt_cdpi']['base'],
                 shared_data_offsets_differ=any(layouts['productcfg'][key] != layouts['ssdt_cdpi'][key]

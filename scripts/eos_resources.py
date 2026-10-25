@@ -18,10 +18,10 @@ from verify_dtbs import tree
 def validate(data):
     firmware_facts.validate(data['verified_static'])
     if data['variant_gate'] != dict(source_rm='RM-876', source_product_code='059T3B3',
-                                    intended_target_rm='RM-875',
+                                    intended_target_rm='RM-877',
                                     actual_handset_rm_product_code_verified=False,
                                     board_equivalence='unverified', target_configuration_emitted=False):
-        raise ValueError('RM-876 research cannot establish RM-875 board equivalence')
+        raise ValueError('RM-876 research cannot establish RM-877 board equivalence')
     if data['schema'] != 1 or data['runtime_enablement'] != 'none':
         raise ValueError('This inventory authorizes no runtime enablement')
     buses = {c['name']: c for c in data['i2c_controllers']}

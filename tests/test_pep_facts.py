@@ -83,6 +83,42 @@ class PepFactsTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 p.validate(changed)
 
+    def test_csi_policy_subset_is_mux_selection_not_frequency(self):
+        for value, bits in [(1, (0, 0)), (2, (1, 0)), (3, (0, 1))]:
+            result = p.csi_parent_selection(value)
+            self.assertEqual((result['a'], result['b']), bits)
+            self.assertEqual(result['linux_parent_index'], value-1)
+            self.assertEqual(result['fitted_sensor'], 'unobserved')
+        for value in [0, 4, 11, 12, True]:
+            with self.assertRaises(ValueError):
+                p.csi_parent_selection(value)
+
+    def test_lvs_client_clear_is_not_aggregate_off(self):
+        report = p.aggregate_switch_votes([[1, 0, 0, 0], [0, 1, 0, 0, 0]])
+        self.assertEqual((report['enable_vote'], report['pull_down_vote']), (1, 1))
+        self.assertEqual(report['physical_rail_state'], 'unobserved')
+        for rows in [[[1, 0, 0]], [[2, 0, 0, 0]], [[0, 0, 0, 0, 0, 0]]]:
+            with self.assertRaises(ValueError):
+                p.aggregate_switch_votes(rows)
+
+    def test_recorded_rm876_display_d3_retains_voltage_vote(self):
+        facts = json.loads((Path(__file__).resolve().parents[1] / 'eos-resources.json').read_text())['verified_static']
+        snap = facts['pep']['rm876_power_snapshots']
+        display_d3 = snap['DISP_D3_SMPS4']
+        self.assertEqual(display_d3[:4], [1800000, 100, 100, 2])
+        # Sub-mA quantization to zero does not mean the voltage vote is absent.
+        # Unreported trailing fields are synthetic zeros only for this first-three-
+        # field arithmetic test; the inventory does not invent their stock values.
+        def synthetic_row(prefix):
+            return prefix + [0]*(10-len(prefix))
+        report = p.aggregate_votes(2, [synthetic_row(display_d3)])
+        self.assertEqual(report['first_field_max'], 1800000)
+        self.assertEqual(report['summed_rounded_clamped'], [0, 0])
+        combined = p.aggregate_votes(2, [synthetic_row(snap['DISP_D0_SMPS4']),
+                                          synthetic_row(snap['TCH1_D0_SMPS4'])])
+        self.assertEqual(combined['first_field_max'], 1800000)
+        self.assertEqual(combined['summed_rounded_clamped'], [65, 45])
+
 
 if __name__ == '__main__':
     unittest.main()

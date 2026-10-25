@@ -57,6 +57,31 @@ def tlmm_tuple(values):
     return dict(zip(TLMM_TUPLE, values))
 
 
+def csi_parent_selection(value):
+    """Logical two-mux relation only; never an MMCC write sequence."""
+    uint(value)
+    if value not in (1, 2, 3):
+        raise ValueError('Only the statically corroborated CSI subset is modeled')
+    return dict(a=int(value == 2), b=int(value == 3), linux_parent_index=value-1,
+                fitted_sensor='unobserved')
+
+
+def aggregate_switch_votes(client_parameters):
+    """Type4 LVS enable/pull-down OR only; pin routing and HPM stay literal."""
+    rows = []
+    for values in client_parameters:
+        if not isinstance(values, (list, tuple)) or len(values) not in (4, 5):
+            raise ValueError('LVS needs four fields and optional HPM')
+        for value in values:
+            uint(value)
+        if values[0] > 1 or values[1] > 1:
+            raise ValueError('LVS enable/pull-down are one-bit votes')
+        rows.append(values)
+    return dict(enable_vote=int(any(row[0] for row in rows)),
+                pull_down_vote=int(any(row[1] for row in rows)),
+                physical_rail_state='unobserved', pin_routing_and_hpm='literal; not modeled')
+
+
 def parse_vote(package):
     """First item stays an opaque resource identifier; second is resource type."""
     if not isinstance(package, (list, tuple)) or len(package) < 2:
@@ -95,7 +120,7 @@ def aggregate_votes(resource_type, client_parameters):
                 summed_rounded_clamped=[min((value+500)//1000, 1023) for value in sums],
                 packed_field_widths=[23, 10, 10],
                 remaining_mode_flags='literal; not modeled',
-                units='microvolt/microamp strongly supported inference; not proven',
+                units='microvolt/microamp labels statically corroborated; runtime unobserved',
                 runtime_enablement='none')
 
 
@@ -119,10 +144,10 @@ def validate(facts):
                 'next_two_fields': 'independently sum; round (sum+500)//1000; clamp1023',
                 'packed_widths': [23, 10, 10]}):
         raise ValueError('Unreviewed vote transport or aggregation schema')
-    if (pep['clock_policy_subenum'] != 'unresolved' or vote['units_status'] != 'strongly_supported_inference'
+    if (pep['clock_policy_subenum'] != 'stock_CSI_subset_resolved_other_values_unresolved' or vote['units_status'] != 'corroborated_static'
             or vote['other_mode_flags'] != 'literal; unresolved'):
         raise ValueError('Do not promote unresolved/inferred PEP semantics')
     return dict(clock_operation_count=len(CLOCK_OPERATIONS), selector3=frequency_selector(3),
                 tlmm_tuple_order=list(TLMM_TUPLE), vreg_package_lengths={str(k): v+2 for k, v in PARAMETER_COUNTS.items()},
                 vote_transport_bytes=60, vote_transport_ioctl='0x80060fd4',
-                vote_units='strongly supported inference, not proven', runtime_enablement='none')
+                vote_units='statically corroborated labels; runtime unobserved', runtime_enablement='none')

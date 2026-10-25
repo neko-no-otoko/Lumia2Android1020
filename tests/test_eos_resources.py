@@ -35,8 +35,8 @@ class EosResourceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'no runtime enablement'):
             eos.validate(self.data)
 
-    def test_rm876_facts_do_not_establish_rm875_target_equivalence(self):
-        for key, value in [('board_equivalence', 'verified'), ('source_rm', 'RM-875'),
+    def test_rm876_facts_do_not_establish_rm877_target_equivalence(self):
+        for key, value in [('board_equivalence', 'verified'), ('source_rm', 'RM-877'),
                            ('target_configuration_emitted', True)]:
             data = copy.deepcopy(self.data)
             data['variant_gate'][key] = value
